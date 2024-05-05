@@ -34,5 +34,11 @@
 	"reactorgame": [
 		"reactor.css",
 		"reactor.js"
+	],
+	"memes": [
+		"gallium.png",
+		"hp14a.png",
+		"stoney.png",
+		"stoney.gif"
 	]
 }
