@@ -1,0 +1,182 @@
+<html>
+	<head>
+		<title>Chromebook Modding work</title>
+		<link rel='preload' href='https://fonts.googleapis.com/css?family=Ubuntu:300&display=swap' type='text/css' as='style' onload="this.onload=null;this.rel='stylesheet'">
+		<noscript>
+			<link href='https://fonts.googleapis.com/css?family=Ubuntu:300&display=swap' rel='stylesheet' type='text/css'>
+		</noscript>
+		<!--<link href='http://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>-->
+		 <!-- Compiled and minified CSS -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<!-- Compiled and minified JavaScript -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+
+		<link href='../css.css' rel='stylesheet' type='text/css'>
+		<meta name="viewport" content="width=device-width, initial-scale=0.5">
+		<style type="text/css">
+		body {
+			color: white;
+			font-family: "Segoe UI Light", "Ubuntu", "Helvetica Neue Ultralight", "Calibri Light";
+			font-display: swap;
+		}
+		.card {
+			color: black;
+		}
+		.card-title {
+			width: 100%;
+		}
+		.card-title-shadow {
+			text-shadow: 2px 2px rgba(64,64,64,0.5);
+		}
+		.card-title-lightbackground {
+			background-color: rgba(0,0,0,0.4);
+		}
+		.bg {
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			top:0px;
+			left:0px;
+		}
+		.bg-img {
+			background-image: url('/images/wallpaper-chromebook.jpg');
+			@supports (background-image: url('/images/wallpaper-chromebook.webp')) {
+				background-image: url('/images/wallpaper-chromebook.webp');
+			}
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: 50% 50%;
+			will-change: transform;
+		}
+		.blur {
+			-webkit-filter: blur(5px);
+			-moz-filter: blur(5px);
+			-o-filter: blur(5px);
+			-ms-filter: blur(5px);
+			filter: blur(5px);
+		}
+		.overlay {
+			background-color: rgba(0, 0, 0, 0.3);
+		}
+		</style>
+	</head>
+	<body>
+		<div id="bg-img" class="bg bg-img blur" style="display: block;"></div>
+		<div id="bg-overlay" class="bg overlay" style="display: block;"></div>
+		<div style="width: 100%; height: 100%;display: table;text-align: center;">
+			<div style="position:relative;width:700px;height:500px;display: table-cell;">
+				<br>
+				<picture width="800" height="308">
+					<source type="image/webp"
+						srcset="images/chromebooks-2024@3x.webp 3x, images/chromebooks-2024@2x.webp 2x, images/chromebooks-2024.webp 1x"
+					>
+					<img class="headerimg" src="chromebooks-2024.png" width="800" height="308"
+						srcset="images/chromebooks-2024@3x.png 3x, images/chromebooks-2024@2x.png 2x, images/chromebooks-2024.png 1x" />
+				 </picture>
+				<h2>Chromebook Modding work</h2>
+				<h3>(For various Intel and AMD chromebooks)</h3><br />
+				<div class="row" style="width:800px;">
+					<!--<div class="col s12 m7" style="width:400px;">
+						<div class="card">
+							<div class="card-image">
+								<img src="https://www.distroshare.com/media/screenshot_images/screenshot_img_57.png"/>
+								<span class="card-title">Pre-Customized Linux Mint 17.1</span>
+							</div>
+							<div class="card-content">
+								<p>A pre-customized version of Linux Mint 17.1 that works great on the Acer C720!</p>
+							</div>
+							<div class="card-action">
+								<a href="https://www.distroshare.com/distros/get/57/">Download</a>
+							</div>
+						</div>
+					</div>-->
+					<div class="col s12 m7" style="width:400px;">
+						<div class="card">
+							<div class="card-image">
+								<picture>
+									<source type="image/webp"
+										srcset="images/windows11@3x.webp 3x, images/windows11@2x.webp 2x, images/windows11.webp 1x"
+									>
+									<img style="filter: brightness(80%);" src="images/windows11.jpg"
+										srcset="images/windows11@3x.jpg 3x, images/windows11@2x.jpg 2x, images/windows11.jpg 1x" 
+								 	/>
+								</picture>
+								<span class="card-title card-title-shadow" style="color:">Install Windows 10 or 11</span>
+							</div>
+							<div class="card-content">
+								<p>The current status on porting Windows 10 &amp; 11 to various Intel and AMD chromebooks.</p>
+							</div>
+							<div class="card-action">
+								<a href="windows.html">View Status</a>
+							</div>
+							<div class="card-action">
+								<a href="windows-install.html">Install</a>
+							</div>
+							<div class="card-action">
+								<a href="https://forum.chrultrabook.com/">Help and Support</a>
+							</div>
+						</div>
+					</div>
+					<div class="col s12 m7" style="width:400px;">
+						<div class="card">
+							<div class="card-image">
+								<picture>
+									<source type="image/webp"
+										srcset="images/macos@3x.webp 3x, images/macos@2x.webp 2x, images/macos.webp 1x"
+									>
+									<img src="images/macos.jpg"
+										srcset="images/macos@3x.jpg 3x, images/macos@2x.jpg 2x, images/macos.jpg 1x" 
+								 	/>
+								 </picture>
+								<span class="card-title">OS X 10.15.x for Acer C720</span>
+							</div>
+							<div class="card-content">
+								<p>The current status on porting OS X 10.15.x to the Core i3 Acer C720 chromebook.</p>
+							</div>
+							<div class="card-action">
+								<a href="macos.html">View Status</a>
+							</div>
+							<div class="card-action">
+							</div>
+							<div class="card-action">
+								<a href="https://forum.chrultrabook.com/">Discussion</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--<h3>Chrome OS</h3>
+				<div class="row" style="width:800px;">
+					<div class="col s12 m7" style="width:400px;">
+						<div class="card">
+							<div class="card-image">
+								<img src="enterprise.png" style="filter: brightness(80%);" />
+								<span class="card-title">Bypass Enterprise Enrollment</span>
+							</div>
+							<div class="card-content">
+								<p>School put enterprise enrollment on a chromebook you purchased and is restricting you at home too?</p>
+							</div>
+							<div class="card-action">
+								<a href="https://twitter.com/coolstarorg">Contact CoolStar</a>
+							</div>
+						</div>
+					</div>
+					<div class="col s12 m7" style="width:400px;">
+						<div class="card">
+							<div class="card-image">
+								<img src="developer.png" style="filter: brightness(80%);" />
+								<span class="card-title">Bypass Enterprise block on Developer Mode</span>
+							</div>
+							<div class="card-content">
+								<p>Enter developer mode (to install Windows/Linux) regardless of enterprise settings blocking it.</p>
+							</div>
+							<div class="card-action">
+								<a href="https://twitter.com/coolstarorg">Contact CoolStar</a>
+							</div>
+						</div>
+					</div>
+				</div>-->
+			</div>
+		</div>
+	</body>
+</html>

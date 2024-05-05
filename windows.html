@@ -1,0 +1,660 @@
+<html>
+	<head>
+		<title>Windows 10 or 11 on chromebooks</title>
+		<link rel='preload' href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300&display=swap' type='text/css' as='style' onload="this.onload=null;this.rel='stylesheet'">
+		<noscript>
+			<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300&display=swap' rel='stylesheet' type='text/css'>
+		</noscript>
+		<link rel="stylesheet" href="win11.css">
+		<meta name="description" content="Compatibility chart for Windows 10 and Windows 11 on chromebooks.">
+
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.3.slim.js"></script>
+		<script src="win11.js"></script>
+		<style type="text/css">
+		body {
+			background: #007180; /* Old browsers */
+			background: -moz-linear-gradient(top,	#007180 0%, #cbddc8 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#007180), color-stop(100%,#cbddc8)); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(top,	#007180 0%,#cbddc8 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(top,	#007180 0%,#cbddc8 100%); /* Opera 11.10+ */
+			background: -ms-linear-gradient(top,	#007180 0%,#cbddc8 100%); /* IE10+ */
+			background: linear-gradient(to bottom,	#007180 0%,#cbddc8 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#007180', endColorstr='#cbddc8',GradientType=0 ); /* IE6-9 */
+			/*text-shadow: 1px 1px rgba(0,0,0,0.5);*/
+			color: black;
+		}
+		h1 {
+			font-weight: normal;
+		}
+		h3 {
+			font-weight: normal;
+		}
+		h4 {
+			font-weight: normal;
+		}
+		a {
+			text-decoration: none;
+			color: #00AFFF;
+		}
+		.working {
+			background-color: rgba(0,200,0, 0.7);
+		}
+		.paid {
+			background-color: rgba(0,175,175, 0.7);
+		}
+		.partial {
+			background-color: rgba(170,200,0, 0.7);
+			color: black;
+		}
+		.untested {
+			background-color: rgba(200,200,0, 0.7);
+			color: black;
+		}
+		.buggy {
+			background-color: rgba(255,255,0, 0.7);
+			color: black;
+		}
+		.wip {
+			background-color: rgba(255, 153, 0, 0.7);
+			color: white;
+		}
+		.broken {
+			background-color: rgba(200,0,0, 0.7);
+			color: white;
+		}
+		.never {
+			background-color: rgba(0,0,0, 0.7);
+			color: white;
+		}
+
+		.verified {
+			width: 20px;
+			height: 20px;
+			vertical-align: middle;
+			margin-bottom: 2px;
+		}
+
+		table, td, th {
+			border: 1px solid rgb(128, 128, 160);
+			color: white;
+		}
+		th {
+			/*background-color: rgba(128, 128, 160, 0.4);*/
+			/*background-color: rgba(33, 58, 68, 0.8);*/
+			background-color: rgba(0, 0, 0, 0.5);
+		}
+		td {
+			background-color: rgba(0, 0, 0, 0.3);
+			line-height: 24px;
+		}
+		.bg {
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			top:0px;
+			left:0px;
+		}
+		.bg-img {
+			background-image: url('/images/wallpaper-windows.jpg');
+			@supports (background-image: url('/images/wallpaper-windows.webp')) {
+				background-image: url('/images/wallpaper-windows.webp');
+			}
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: 50% 50%;
+			will-change: transform;
+		}
+		.blur {
+			-webkit-filter: blur(5px);
+			-moz-filter: blur(5px);
+			-o-filter: blur(5px);
+			-ms-filter: blur(5px);
+			filter: blur(5px);
+		}
+		.overlay {
+			background-color: rgba(0, 0, 0, 0.3);
+		}
+		th {
+			position: sticky;
+			top: 0px;
+		}
+		.chipset img {
+			width: 32px;
+			height: 32px;
+			vertical-align: middle;
+			border-radius:3px;
+		}
+		.chipset span {
+			vertical-align: middle;
+		}
+
+		.device-types {
+			display: flex;
+			max-width: 180px;
+			width: 180px;
+			position: relative;
+			user-select: none;
+			-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+			position: relative;
+			z-index: 1;
+			margin: 0 auto;
+			font-size: 2em;
+			border: 2px solid rgba(0, 0, 0, 0.5);
+			border-radius: 3px;
+			color: #000;
+		}
+		.device-types > input {
+			display: none;
+		}
+		.device-types > input:checked + label {
+			color: #fff;
+		}
+		.device-types > input:nth-of-type(1):checked ~ label:last-of-type:before {
+			transform: translateX(calc(0% + 0px));
+		}
+		.device-types > input:nth-of-type(2):checked ~ label:last-of-type:before {
+			transform: translateX(calc(100% + 0px));
+		}
+		.device-types label {
+			flex: 1;
+			text-align: center;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			cursor: pointer;
+		}
+		.device-types label:last-of-type:before {
+			content: "";
+			display: block;
+			max-width: calc(50% - 0px);
+			margin: 0px;
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			z-index: -1;
+			transform: translateX(0);
+		}
+		.device-types label {
+			padding: 6px 3px;
+			transition: color 250ms cubic-bezier(0, 0.95, 0.38, 0.98);
+		}
+		.device-types label:before {
+			background: rgba(0, 0, 0, 0.5);
+			transition: all 250ms cubic-bezier(0, 0.95, 0.38, 0.98);
+		}
+		.device-types label:not(:last-child) {
+			border-right: 1px solid rgba(0, 0, 0, 0.5);
+		}
+
+		</style>
+		<script type="text/javascript">
+			function updateSection(){
+				var val = $('input[type=radio][name=device-type]:checked').val();
+				if (val == "book"){
+					$("#chromebooks").show();
+					$("#chromeboxes").hide();
+				} else {
+					$("#chromebooks").hide();
+					$("#chromeboxes").show();
+				}
+			}
+			$(document).ready(function(){
+				updateSection();
+				$('input[type=radio][name=device-type]').click(function() {
+					updateSection();
+				});
+
+				$(".verified").click(function(){
+					createAlert(true, "Verified Device", "This device has been tested and verified<br>for proper operation in Windows by CoolStar.");
+				});
+
+				$("td").each(function(){
+					var tr = this.parentNode;
+					if ($(this).index() == 1){
+						this.innerHTML = "<a href='windows-install.html?device=" + this.innerText + "'>" + this.innerText + "</a>";
+					}
+				});
+			});
+		</script>
+
+		<script defer src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5893310803057886"
+     crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<div id="bg-img" class="bg bg-img blur" style="display: block;"></div>
+		<div id="bg-overlay" class="bg overlay" style="display: block;"></div>
+		<div style="width: 100%; height: 100%;display: table;text-align: center;">
+			<div style="position:relative;width:700px;height:500px;display: table-cell;">
+				<picture width="800" height="308">
+					<source type="image/webp"
+						srcset="images/chromebooks-2024@3x.webp 3x, images/chromebooks-2024@2x.webp 2x, images/chromebooks-2024.webp 1x"
+					>
+					<img class="headerimg" src="chromebooks-2024.png" width="800" height="308"
+						srcset="images/chromebooks-2024@3x.png 3x, images/chromebooks-2024@2x.png 2x, images/chromebooks-2024.png 1x" />
+				 </picture>
+				<div>
+					<h1 style="display: inline-block;">Windows 10 or 11 on Chrome</h1>
+					<div style="display: inline-block;">
+						<div class="device-types">
+							<input type="radio" name="device-type" value="book" id="book" checked />
+							<label for="book">
+							book
+							</label>
+
+							<input type="radio" name="device-type" value="box" id="box" />
+							<label for="box">
+							box
+							</label>
+						</div>
+					</div>
+				</div>
+				<h2>(4 GB RAM and 64 GB or higher SSD Recommended)</h3><br />
+
+				<!--<h3>Video Demo</h3>
+				<br />
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/6CCqGx3LyRY" frameborder="0" allowfullscreen></iframe>-->
+
+				<table align="center" id="chromebooks">
+				<tr><th>Chromebook Name</th><th>Board Name</th><th>Chipset</th><th>Boots</th><th>Trackpad</th><th>Touch Screen</th><th>GPU Accel</th><th>Audio</th><th>Audio (HDMI)</th><th>USB 2 / 3</th><th>USB 4</th><th>SD Card</th><th>Webcam</th></tr>
+
+				<tr height="10"></tr>
+
+				<tr><td>Acer Spin 512</td><td>Craask</td><td class="chipset" rowspan="14"><img src="intel.svg" /> <span>Alder Lake-N</span></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+				<tr><td>Acer Spin 511</td><td>Craaskbowl</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+				<tr><td>Acer Chromebook 511 <img src="verified.svg" class="verified" /></td><td>Craaskvin</td></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td></td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+				<tr><td>Acer Chromebook 314</td><td>Craasneto</td></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td></td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+				<tr><td>Lenovo 500e Yoga Gen 4</td><td>Pujjo</td></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td></td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+				<tr><td>Lenovo 100e Yoga Gen 4</td><td>Pujjo1e</td></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td></td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+				<tr><td>Lenovo Flex 3i</td><td>Pujjoflex</td></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td></td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+				<tr><td>Lenovo 14e Gen 3</td><td>Pujjoteen</td></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td></td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+				<tr><td>Lenovo Ideapad Slim 3i</td><td>Pujjoteen15w</td></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td></td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+				<tr><td>Asus CR11 (CR1102C)</td><td>Xivu</td></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td></td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+				<tr><td>Asus CR11 (CR1102F)</td><td>Xivu360</td></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td></td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+				<tr><td>HP Fortis G10</td><td>Yavilla</td></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td></td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+				<tr><td>HP Fortis G5</td><td>Yavilly</td></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td></td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+				<tr><td>HP Chromebook 15.6" <img src="verified.svg" class="verified" /></td><td>Yaviks</td></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td></td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+
+				<tr height="10"></tr>
+
+				<tr>
+					<td colspan="13" align="center">
+						<ins class="adsbygoogle"
+						style="display:block"
+						data-ad-client="ca-pub-5893310803057886"
+						data-ad-slot="2980587175"
+						data-ad-format="auto"
+						data-full-width-responsive="true"></ins>
+						<script>
+							(adsbygoogle = window.adsbygoogle || []).push({});
+						</script>
+					</td>
+			 	</tr>
+
+				<tr height="10"></tr>
+
+				<tr><td>HP Elite c640 G3</td><td>Anahera</td><td class="chipset" rowspan="17"><img src="intel.svg" /> <span>Alder Lake</span><br><br><img src="intel.svg" /> <span>Raptor Lake</span></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td>N/A</td><td class="working">Yes</td></tr>
+				<tr><td>Framework Chromebook <img src="verified.svg" class="verified" /></td><td>Banshee</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td>N/A</td><td class="working">Yes</td></tr>
+				<tr><td>Dell Latitude 5430</td><td>Crota</td></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td></td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td>N/A</td><td class="working">Yes</td></tr>
+				<tr><td>Asus Chromebook Flip CX5601</td><td>Felwinter</td></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td></td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td>N/A</td><td class="working">Yes</td></tr>
+				<tr><td>HP Chromebook x360 14 inch</td><td>Gimble</td></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td></td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td>N/A</td><td class="working">Yes</td></tr>
+				<tr><td>Asus Chromebook Spin 714</td><td>Kano</td></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td></td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td>N/A</td><td class="broken">No</td></tr>
+				<tr><td>Asus Chromebook Plus CX3402</td><td>Marasov</td></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td></td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td>N/A</td><td class="working">Yes</td></tr>
+				<tr><td>Asus Chromebook Flip CX34</td><td>Mithrax</td></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td></td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td>N/A</td><td class="working">Yes</td></tr>
+				<tr><td>Acer Chromebook 516GE <img src="verified.svg" class="verified" /></td><td>Osiris</td></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td></td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td>N/A</td><td class="working">Yes</td></tr>
+				<tr><td>Acer Chromebook Plus 515</td><td>Omnigul</td></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td></td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td>N/A</td><td class="working">Yes</td></tr>
+				<tr><td>Thinkpad C14 Gen 1</td><td>Primus</td></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td></td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td>N/A</td><td class="working">Yes</td></tr>
+				<tr><td>HP Elite Dragonfly</td><td>Redrix</td></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td></td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td>N/A</td><td class="broken">No</td></tr>
+				<tr><td>Lenovo Flex 5i 14"</td><td>Taeko</td></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td></td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td>N/A</td><td class="working">Yes</td></tr>
+				<tr><td>Ideapad Gaming 16</td><td>Taniks</td></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td></td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td>N/A</td><td class="working">Yes</td></tr>
+				<tr><td>Ideapad 5i 16"</td><td>Tarlo</td></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td></td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td>N/A</td><td class="working">Yes</td></tr>
+				<tr><td>Acer Chromebook Vero 514</td><td>Volmar</td></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td></td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td>N/A</td><td class="working">Yes</td></tr>
+				<tr><td>Acer Chromebook Vero 712</td><td>Zavala</td></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td></td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td>N/A</td><td class="working">Yes</td></tr>
+				
+				<tr height="10"></tr>
+
+				<tr><td>TBD<td>Crystaldrift</td><td class="chipset" rowspan="4"><img src="amd.svg" /> <span>Mendocino</span></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td rowspan="4">N/A</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Asus CM34 Flip <img src="verified.svg" class="verified" /></td></td><td>Frostflow</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Acer Plus 514</td></td><td>Markarth</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Dell 3445</td></td><td>Whiterun</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+
+				<tr height="10"></tr>
+
+				<tr><td>FMV Chromebook 14F</td><td>Chronicler</td><td class="chipset" rowspan="13"><img src="intel.svg" /> <span>Tiger Lake</span></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Asus Chromebook Flip CX3</td><td>Collis</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Asus Chromebook Flip CX5400</td><td>Copano</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>ASUS Chromebook CX5500, CX536</td><td>Delbin</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>ASUS Chromebook CX9400 <img src="verified.svg" class="verified" /></td><td>Drobit</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>HP Chromebook x360 14c</td><td>Eldrid</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>HP Pro c640 G2 Chromebook</td><td>Elemi</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Lenovo IdeaPad Flex 5i</td><td>Lillipup</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Lenovo 5i-14 Chromebook<br>Lenovo Slim 5 Chromebook</td><td>Lindar</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Acer Chromebook Spin 514</td><td>Voema</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Acer Chromebook 515</td><td>Volet</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Acer Chromebook 514</td><td>Volta</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Acer Spin 713 (CP713-3W)</td><td>Voxel</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="broken">No</tr>
+
+				<tr height="10"></tr>
+
+				<tr><td>Acer Spin 514</td><td>Dewatt</td><td class="chipset" rowspan="2"><img src="amd.svg" /> <span>Cezanne</span></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td rowspan="2">N/A</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>HP Elite c645 G2</td><td>Nipperkin</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+
+				<tr height="10"></tr>
+
+				<tr><td>Lenovo Ideapad Flex 5</td><td>Akemi</td><td class="chipset" rowspan="10"><img src="intel.svg" /> <span>Comet Lake</span></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td rowspan="10">N/A</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>HP Chromebook x360 14c</td><td>Dragonair</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Dell 7410 Enterprise <img src="verified.svg" class="verified" /></td><td>Drallion</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>HP Pro c640</td><td>Dratini</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Asus Chromebook Flip C436FA</td><td>Helios</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>HP Elite c1030 <img src="verified.svg" class="verified" /><br>HP Chromebook x360 13c</td><td>Jinlon</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Acer Chromebook 712 (C871)</td><td>Kindred</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Acer Spin 713 (CP713-2W)</td><td>Kled</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Samsung Galaxy Chromebook</td><td>Kohaku</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Samsung Galaxy Chromebook 2</td><td>Nightfury</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+
+				<tr height="10"></tr>
+
+				<tr><td>HP Chromebook C645 <img src="verified.svg" class="verified" /></td><td>Berknip</td><td class="chipset" rowspan="8"><img src="amd.svg" /> <span>Picasso</span><br><br><img src="amd.svg" /> <span>Dali</span></td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td rowspan="3">N/A</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Lenovo Yoga C13</td><td>Morphius</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Asus Flip CM5</td><td>Woomax</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>HP Chromebook 14a</td><td>Dirinboz</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Acer Chromebook Spin 514</td><td>Ezikinil</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>HP Chromebook x360 14a</td><td>Gumboz</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Lenovo 100e Gen3</td><td>Vilboz</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Lenovo 300e Gen3 <img src="verified.svg" class="verified" /><br>NEC Chromebook Y1 Gen 3A</td><td>Vilboz360</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+
+				<tr height="10"></tr>
+
+				<tr><td>Ideapad Flex 3i</td><td>Beetley</td><td class="chipset" rowspan="39"><img src="intel.svg" /> <span>Jasper Lake</span></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td rowspan="39">N/A</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Lenovo 3i-15</td><td>Blipper</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Lenovo 100e Gen 3</td><td>Bookem</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Lenovo 500e Gen 3</td><td>Boten</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Lenovo Flex 3i-11<br>Ideapad Flex 3i</td><td>Botenflex</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Samsung Galaxy Chromebook 2 360</td><td>Bugzzy</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Dell Chromebook 3110</td><td>Cret</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Dell Chromebook 3110 2-in-1</td><td>Cret360</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>HP Chromebook x360 11 G4 EE</td><td>Drawcia</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>HP Chromebook 11 G9 EE</td><td>Drawlat</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>HP Chromebook 14 G7</td><td>Drawman</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>HP Fortis 14 G10</td><td>Drawper</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Asus CX1500CKA</td><td>Galith</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Asus CX1500GKA</td><td>Galith360</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Asus CX1700</td><td>Gallop</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Asus CX1 CX1102</td><td>Galnat</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Asus Flip CX1 CX1102</td><td>Galnat360</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Asus CX1400</td><td>Galtic</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Asus CX1400GKA</td><td>Galtic360</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>CTL NL72</td><td>Kracko</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>CTL NL72T<br>LG 11TC50Q/11TQ50Q</td><td>Kracko360</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>HP x360 14a-ca1</td><td>Landia</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>HP Chromebook 15a-na0</td><td>Landrid</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>HP Chromebook 14a</td><td>Lantis</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>HP x360 14b</td><td>Madoo</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Acer Spin 314</td><td>Magister</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Acer Chromebook C852</td><td>Maglet</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Acer Chromebook C733/C734</td><td>Maglith</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Acer Chromebook 315</td><td>Magma</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Acer Chromebook 314</td><td>Magneto</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Acer Spin 511 [R753T]</td><td>Magolor</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Acer Chromebook 317</td><td>Magpie</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>NEC Chromebook Y3</td><td>Metaknight</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Gateway Chromebook 15</td><td>Pasara</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Axioo Chromebook P11<br>CTL Chromebook PX11E<br>SPC Chromebook Z1 Mini<br>Zyrex Chromebook M432-2</td><td>Pirette</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Axioo Chromebook P14<br>Gateway Chromebook 14</td><td>Pirika</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Samsung Galaxy Chromebook Go</td><td>Sasuke</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>ASUS Chromebook CR1100</td><td>Storo</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>ASUS Chromebook Flip CR1100</td><td>Storo360</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+
+				<tr height="10"></tr>
+
+				<tr>
+					<td colspan="13" align="center">
+						<ins class="adsbygoogle"
+						style="display:block"
+						data-ad-client="ca-pub-5893310803057886"
+						data-ad-slot="2980587175"
+						data-ad-format="auto"
+						data-full-width-responsive="true"></ins>
+						<script>
+							(adsbygoogle = window.adsbygoogle || []).push({});
+						</script>
+					</td>
+			 	</tr>
+
+				<tr height="10"></tr>
+
+				<tr><td>Acer Chromebook 13/Spin 13</td><td>Akali</td><td class="chipset" rowspan="13"><img src="intel.svg" /> <span>Kaby Lake</span></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td rowspan="13">N/A</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Acer Chromebook 715</td><td>Bard</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Acer Chromebook 714</td><td>Ekko</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Asus Chromebook C425</td><td>Leona</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Asus Chromebook Flip C433/C434 <img src="verified.svg" class="verified" /></td><td>Shyvana</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Dell Inspiron Chromebook 14 7460</td><td>Vayne</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Google Pixelbook Go</td><td>Atlas</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="broken">No</tr>
+				<tr><td>Google Pixelbook <img src="verified.svg" class="verified" /></td><td>Eve</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Google Pixel Slate <img src="verified.svg" class="verified" /></td><td>Nocturne</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="broken">No</tr>
+				<tr><td>HP Chromebook x360 14</td><td>Sona</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>HP Chromebook 15 G1</td><td>Syndra</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Lenovo Yoga Chromebook C630 <img src="verified.svg" class="verified" /></td><td>Pantheon</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Samsung Chromebook Plus v2</td><td>Nautilus</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+
+				<tr height="10"></tr>
+
+				<tr><td>Acer Chromebook 315</td><td>Blorb</td><td class="chipset" rowspan="36"><img src="intel.svg" /> <span>Gemini Lake</span></td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td rowspan="36">N/A</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Acer Chromebook 311<br>(CB311, C733)</td><td>Bobba</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Acer Spin 311 (CP311)<br>Acer Spin 511 (R752T, R752TN)</td><td>Bobba360</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Acer Chromebook 314 (CB314)<br>Packard Bell 314 (PCB314)</td><td>Droid</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Acer Chromebook 311</td><td>Glk</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Acer Spin 311</td><td>Glk360</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Acer Chromebook 512 (C851/C851T)</td><td>Sparky</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Acer Spin 512 (R851TN)</td><td>Sparky360</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Asus Chromebook Flip C214/C234</td><td>Ampton</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Asus Chromebook Flip C204</td><td>Apel</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Asus Chromebook C424</td><td>Nospike</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Dell Chromebook 3100</td><td>Fleex</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Dell Chromebook 3100 2-in-1</td><td>Grabbiter</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Dell Chromebook 3400</td><td>Orbatrix</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>HP Chromebook x360 12b</td><td>Bloog</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>HP Chromebook 14a</td><td>Blooglet</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>HP Chromebook x360 14a/14b</td><td>Blooguard</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>HP Chromebook 14 G6</td><td>Dorp</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>HP Chromebook x360 11 G2 EE</td><td>Meep</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>HP Chromebook 11 G7 EE</td><td>Mimrock</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>HP Chromebook 11 G8 EE</td><td>Vorticon</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>HP Chromebook x360 11 G3 EE</td><td>Vortininja</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Lenovo C340</td><td>Laser</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Lenovo S340/Ideapad 3</td><td>Laser14</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Lenovo Ideapad 3</td><td>Lick</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Lenovo 100e 2nd Gen</td><td>Phaser</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Lenovo 300e 2nd Gen<br>Lenovo Ideapad Flex 3<br>NEC Chromebook Y1</td><td>Phaser360</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Lenovo 500e 2nd Gen</td><td>Phaser360S</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Samsung Chromebook 4</td><td>Bluebird</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Samsung Chromebook 4+</td><td>Casta</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>CTL Chromebook VX11/VX11T<br />Poin2 Chromebook 11P</td><td>Foob</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>CTL Chromebook NL81/NL81T</td><td>Garfour</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Poin2 Chromebook 11P</td><td>Foob360</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>NEC Chromebook Y2</td><td>Dood</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>ADVAN Chromebook 116<br>Axioo<br>Baicells Chromebook BB01<br>CTL NL71/CT/LTE<br>EVERCOSS Chromebook CB1<br>Edxis Chromebook 11 (S20-C)<br>JOI Chromebook C100<br>Multilaser M11C-PC914<br>Pixart Rxart<br>Poin2 Chromebook 11A<br>SPC Chromebook X1 Mini<br>Sector 5 E4 LTE<br>WS Chromebook A101<br>Zyrex Chromebook M432</td><td>Garg</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Ascon Chromebook 11A<br>Axioo Chromebook 360<br>Baicells Chromebook BB01<br>CTL Chromebook NL71T/TW/TWB<br>EVERCOSS Chromebook CB1A<br>Edxis Chromebook 11 (S20-X)<br>JOI Chromebook C100<br>Multilaser M11HC-PC915<br>Pixart Rxart<br>Poin2 Chromebook 11A<br>SPC Chromebook X1 Mini<br>WS Chromebook A101<br>Zyrex Chromebook 360</td><td>Garg360</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+
+				<tr height="10"></tr>
+
+				<tr><td>Acer Chromebook 11 C732</td><td>Astronaut</td><td class="chipset" rowspan="19"><img src="intel.svg" /> <span>Apollo Lake</span></td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td rowspan="19">N/A</td><td class="buggy">Buggy</td><td class="working">Yes</tr>
+				<tr><td>Acer Chromebook 13 CB315</td><td>Blue</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="buggy">Buggy</td><td class="working">Yes</tr>
+				<tr><td>Acer Spin 15 CP315</td><td>Bruce</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="buggy">Buggy</td><td class="working">Yes</tr>
+				<tr><td>Acer Spin 11 R751T</td><td>Electro</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="buggy">Buggy</td><td class="working">Yes</tr>
+				<tr><td>Acer Chromebook 514</td><td>Epaulette</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="buggy">Buggy</td><td class="working">Yes</tr>
+				<tr><td>Acer Spin 11 CP311</td><td>Lava</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="buggy">Buggy</td><td class="working">Yes</tr>
+				<tr><td>Acer Chromebook 15 CB515-1HT</td><td>Sand</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="buggy">Buggy</td><td class="working">Yes</tr>
+				<tr><td>Acer Chromebook 11 CB311-8H</td><td>Santa</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="buggy">Buggy</td><td class="working">Yes</tr>
+				<tr><td>Asus Chromebook C223NA</td><td>Babymega</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="buggy">Buggy</td><td class="working">Yes</tr>
+				<tr><td>Asus Chromebook C523NA</td><td>Babytiger</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="buggy">Buggy</td><td class="working">Yes</tr>
+				<tr><td>Asus Chromebook C423</td><td>Rabbid</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="buggy">Buggy</td><td class="working">Yes</tr>
+				<tr><td>Asus Chromebook Flip C213SA</td><td>Reef</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="buggy">Buggy</td><td class="working">Yes</tr>
+				<tr><td>Dell Chromebook 11 5190</td><td>Nasher</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="buggy">Buggy</td><td class="working">Yes</tr>
+				<tr><td>Dell Chromebook 11 5190 2-in-1</td><td>Nasher360</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="buggy">Buggy</td><td class="working">Yes</tr>
+				<tr><td>HP Chromebook x360 11 G1 EE<br>HP Chromebook 11 G6/14 G5</td><td>Snappy</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="buggy">Buggy</td><td class="working">Yes</tr>
+				<tr><td>Lenovo Thinkpad 11e/Yoga 11e (G4)</td><td>Pyro</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="buggy">Buggy</td><td class="working">Yes</tr>
+				<tr><td>Lenovo 100e/500e</td><td>Robo</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="buggy">Buggy</td><td class="working">Yes</tr>
+				<tr><td>CTL Chromebook NL7/NL7T<br>Edxis Chromebook 11/X11<br>Positivo Chromebook N2110/N2112<br>Viglen Chromebook 360C</td><td>Blacktip</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="buggy">Buggy</td><td class="working">Yes</tr>
+				<tr><td>CTL Chromebook J41/J41T <img src="verified.svg" class="verified" /><br>PCmerge AL116<br>Prowise Eduline<br>Sector 5 E3<br>Viglen Chromebook 11C</td><td>Whitetip</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="buggy">Buggy</td><td class="working">Yes</tr>
+
+				<tr height="10"></tr>
+
+				<tr><td>Acer C771/C771T <img src="verified.svg" class="verified" /><br>Acer Chromebook 14 for Work</td><td>Lars</td><td class="chipset" rowspan="6"><img src="intel.svg" /> <span>Skylake</span></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td rowspan="6">N/A</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Asus Chromebook C302CA</td><td>Cave</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>HP Chromebook 13 G1</td><td>Chell</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Dell Chromebook 13 3380</td><td>Asuka</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Lenovo Thinkpad 13</td><td>Sentry</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Samsung Chromebook Pro</td><td>Caroline</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+
+				<tr height="10"></tr>
+
+				<tr><td>Google Pixel 2 <img src="verified.svg" class="verified" /></td><td>Samus</td><td class="chipset" rowspan="5"><img src="intel.svg" /> <span>Broadwell</span></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td rowspan="5">N/A</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Dell Chromebook 13 <img src="verified.svg" class="verified" /></td><td>Lulu</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Toshiba Chromebook 2</td><td>Gandof</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Acer C910/CB5-571</td><td>Yuna</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Acer C740 <img src="verified.svg" class="verified" /></td><td>Paine</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+
+				<tr height="10"></tr>
+
+				<tr><td>Acer C720(P) <img src="verified.svg" class="verified" /></td><td>Peppy</td><td class="chipset" rowspan="4"><img src="intel.svg" /> <span>Haswell</span></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td rowspan="4">N/A</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Hp Chromebook 14</td><td>Falco</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Dell Chromebook 11</td><td>Wolf</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Toshiba Chromebook 1</td><td>Leon</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+
+				<tr height="10"></tr>
+
+				<tr>
+					<td colspan="13" align="center">
+						<ins class="adsbygoogle"
+						style="display:block"
+						data-ad-client="ca-pub-5893310803057886"
+						data-ad-slot="2980587175"
+						data-ad-format="auto"
+						data-full-width-responsive="true"></ins>
+						<script>
+							(adsbygoogle = window.adsbygoogle || []).push({});
+						</script>
+					</td>
+			 	</tr>
+
+				<tr height="10"></tr>
+
+				<tr><td>Acer Chromebook 15 (CB3-532)</td><td>Banon</td><td class="chipset" rowspan="12"><img src="intel.svg" /> <span>Braswell</span></td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td rowspan="12">N/A</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Acer R11 (C738T, CB5-132T) <img src="verified.svg" class="verified" /></td><td>Cyan</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Asus Chromebook 14 (CB3-431)</td><td>Edgar</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Dell Chromebook 11 3180/3189</td><td>Kefka</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Lenovo N22/N42</td><td>Reks</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Acer Chromebook 11 N7 (C731) <img src="verified.svg" class="verified" /><br>CTL NL61 Chromebook<br>Edxis Education (NL6D)<br>HP Chromebook 11 G5 EE<br>Mecer V2 Chromebook<br>Positivo Chromebook C216B</td><td>Relm</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>HP Chromebook 11 G5</td><td>Setzer</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Asus C202S/C202SA</td><td>Terra</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Asus C300SA/C301SA</td><td>Terra13</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Lenovo 11e/Yoga (G3)</td><td>Ultima</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>CTL J5 Chromebook<br>Edugear CMT&nbsp;<br>Haier Chromebook 11 C<br>Multilaser M11C<br>PCMerge PCM-116T-432B<br>Prowise Proline<br>Viglen Chromebook 360</td><td>Wizpig</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Samsung Chromebook 3</td><td>Celes</td><td class="buggy">Buggy</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+
+				<tr height="10"></tr>
+
+				<tr><td>Acer C7/C710 <img src="verified.svg" class="verified" /></td><td>Parrot</td><td class="chipset" rowspan="3"><img src="intel.svg" /> <span>Ivy Bridge</span></td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td rowspan="3">N/A</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Lenovo Thinkpad X131e</td><td>Stout</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Google Pixel 1 <img src="verified.svg" class="verified" /></td><td>Link</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+
+				<tr height="10"></tr>
+
+				<tr><td>Acer CB3-531</td><td>Banjo</td><td class="chipset" rowspan="13"><img src="intel.svg" /> <span>Bay Trail</span></td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td rowspan="13">N/A</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Dell Chromebook 11 3120</td><td>Candy</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Lenovo N20(P)</td><td>Clapper</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Lenovo N21</td><td>Enguarde</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Lenovo 11e/Yoga</td><td>Glimmer</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Acer CB3-111/131, C730(E), C735</td><td>Gnawty</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Haier Chromebook G2</td><td>Heli</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>HP Chromebook 11 G3/G4</td><td>Kip</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Lenovo 100S</td><td>Orco</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Asus C300</td><td>Quawks</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Asus C200 <img src="verified.svg" class="verified" /></td><td>Squawks</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Toshiba Chromebook 2</td><td>Swanky</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Samsung Chromebook 2</td><td>Winky</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+
+				<tr height="10"></tr>
+				
+				<tr><td>Samsung Series 5 550</td><td>Lumpy</td><td class="chipset" rowspan="2"><img src="intel.svg" /> <span>Sandy Bridge</span></td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td rowspan="2">N/A</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>HP Pavilion Chromebook</td><td>Butterfly</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+
+				<tr height="10"></tr>
+
+				<tr><td>Acer Chromebook 315 (CB315-2H)</td><td>Aleena</td><td class="chipset" rowspan="6"><img src="amd.svg" /> <span>Stoney Ridge</span></td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td><td class="buggy">w/ Patch</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td rowspan="6">N/A</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>HP Chromebook 11A G6 EE<br>HP Chromebook 11A G8 EE</td><td>Barla</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="buggy">w/ Patch</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>HP Chromebook 14A G5 <img src="verified.svg" class="verified" /></td><td>Careena</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="buggy">w/ Patch</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Acer Chromebook 311 (R721)<br>Acer Chromebook Spin 311 (R721T)</td><td>Kasumi</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="buggy">w/ Patch</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Lenovo 14e Chromebook (S345)</td><td>Liara</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="buggy">w/ Patch</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+				<tr><td>Lenovo 100e Chromebook Gen 2 AMD<br>Lenovo 300e Chromebook Gen 2 AMD</td><td>Treeya</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="buggy">w/ Patch</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</tr>
+
+				</table>
+
+				<table align="center" id="chromeboxes">
+				<tr><th>Chromebox Name</th><th>Board Name</th><th>Chipset</th><th>Boots</th><th>Touch Screen</th><th>GPU Accel</th><th>DP / HDMI</th><th>Audio</th><th>Audio (HDMI)</th><th>USB</th><th>Webcam</th></tr>
+
+				<tr height="10"></tr>
+
+				<tr><td>HP Chromebase 21.5</td><td>Dooly</td><td rowspan="6" class="chipset"><img src="intel.svg"/> <span>Comet Lake</span></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+				<tr><td>Asus Chromebox 4</td><td>Duffy</td><td class="working">Yes</td><td rowspan="5">N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td rowspan="5">N/A</td></tr>
+				<tr><td>Asus Fanless Chromebox</td><td>Faffy</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+				<tr><td>Asus Chromebox CXI4</td><td>Kaisa</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+				<tr><td>Hp Chromebox G3</td><td>Noibat</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+				<tr><td>CTL Chromebox CBx2<br>Promethean Chromebox 2<br>ViewSonic NMP760 Chromebox</td><td>Wyvern</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+
+				<tr height="10"></tr>
+
+				<tr><td>AOpen Chromebox Commercial 2<br>Newline Chromebox A10</td><td>Jax</td><td rowspan="6" class="chipset"><img src="intel.svg"/> <span>Kaby Lake</span></td><td class="working">Yes</td><td rowspan="5">N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td rowspan="5">N/A</td></tr>
+				<tr><td>HP Chromebox G2</td><td>Kench</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+				<tr><td>Acer Chromebox CXI3</td><td>Sion</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+				<tr><td>Asus Chromebox 3 (CN65) <img src="verified.svg" class="verified" /></td><td>Teemo</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+				<tr><td>CTL Chromebox CBx1<br>Promethean Chromebox<br>SMART Chromebox G3<br>ViewSonic NMP660 Chromebox</td><td>Wukong</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+				<tr><td>Acer Chromebase 24l2</td><td>Karma</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="paid">Yes (Paid)</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+
+				<tr height="10"></tr>
+
+				<tr>
+					<td colspan="13" align="center">
+						<ins class="adsbygoogle"
+						style="display:block"
+						data-ad-client="ca-pub-5893310803057886"
+						data-ad-slot="2980587175"
+						data-ad-format="auto"
+						data-full-width-responsive="true"></ins>
+						<script>
+							(adsbygoogle = window.adsbygoogle || []).push({});
+						</script>
+					</td>
+			 	</tr>
+
+				<tr height="10"></tr>
+
+				<tr><td>Acer Chromebase 24</td><td>Buddy</td><td rowspan="4" class="chipset"><img src="intel.svg"/> <span>Broadwell</span></td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+				<tr><td>Acer Chromebox 2 (CN62)</td><td>Guado</td><td class="working">Yes</td><td rowspan="3">N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td rowspan="3">N/A</td></tr>
+				<tr><td>Acer Chromebox CXI2</td><td>Rikku</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+				<tr><td>Lenovo ThinkCentre Chromebox</td><td>Tidus</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+
+				<tr height="10"></tr>
+
+				<tr><td>LG Chromebase 22</td><td>Monroe</td><td rowspan="5" class="chipset"><img src="intel.svg"/> <span>Haswell</span></td><td class="working">Yes</td><td rowspan="5">N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+				<tr><td>Acer Chromebox CXI</td><td>Mccloud</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td rowspan="4">N/A</td></tr>
+				<tr><td>Acer Chromebox CN60</td><td>Panther</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+				<tr><td>Dell Chromebox 3010</td><td>Tricky</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+				<tr><td>HP Chromebox CB1 / G1</td><td>Zako</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+
+				<tr height="10"></tr>
+
+				<tr><td>AOpen Chromebox Commercial</td><td>Sumo</td><td rowspan="2" class="chipset"><img src="intel.svg"/> <span>Bay Trail</span></td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td></tr>
+				<tr><td>AOpen Chromebase Commercial</td><td>Sumo</td><td class="working">Yes</td><td class="broken">No</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td></tr>
+
+				<tr height="10"></tr>
+
+				<tr><td>Samsung Chromebox Series 3</td><td>Stumpy</td><td class="chipset"><img src="intel.svg"/> <span>Ivy Bridge</span></td><td class="working">Yes</td><td>N/A</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td class="working">Yes</td><td>N/A</td></tr>
+				</table>
+			</div>
+		</div>
+		<div id="rootcontainer"></div>
+	</body>
+</html>

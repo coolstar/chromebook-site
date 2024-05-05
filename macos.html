@@ -1,0 +1,125 @@
+<html>
+	<head>
+		<title>OS X 10.15.x for the Acer C720</title>
+		<link rel='preload' href='https://fonts.googleapis.com/css?family=Ubuntu:300&display=swap' type='text/css' onload="this.onload=null;this.rel='stylesheet'">
+		<noscript>
+			<link href='https://fonts.googleapis.com/css?family=Ubuntu:300&display=swap' rel='stylesheet' type='text/css'>
+		</noscript>
+		<style type="text/css">
+		body {
+			background: #007180; /* Old browsers */
+			background: -moz-linear-gradient(top,  #007180 0%, #cbddc8 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#007180), color-stop(100%,#cbddc8)); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(top,  #007180 0%,#cbddc8 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(top,  #007180 0%,#cbddc8 100%); /* Opera 11.10+ */
+			background: -ms-linear-gradient(top,  #007180 0%,#cbddc8 100%); /* IE10+ */
+			background: linear-gradient(to bottom,  #007180 0%,#cbddc8 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#007180', endColorstr='#cbddc8',GradientType=0 ); /* IE6-9 */
+			font-family: "Segoe UI Light", "Ubuntu", "Helvetica Neue Ultralight", "Calibri Light";
+			/*text-shadow: 1px 1px rgba(0,0,0,0.5);*/
+			color: white;
+		}
+		h1 {
+			font-weight: normal;
+		}
+		h3 {
+			font-weight: normal;
+		}
+		h4 {
+			font-weight: normal;
+		}
+		a {
+			text-decoration: none;
+			color: rgb(0,0,200);
+		}
+		.working {
+			background-color: rgba(0,200,0, 0.7);
+		}
+		.partial {
+			background-color: rgba(200,200,0, 0.7);
+			color: black;
+		}
+		.untested {
+			background-color: rgba(200,200,0, 0.7);
+			color: black;
+		}
+		.broken {
+			background-color: rgba(200,0,0, 0.7);
+		}
+		table, td, th {
+			border: 1px solid rgb(64, 64, 64);
+		}
+		th {
+			background-color: rgba(64, 64, 64, 0.4);
+		}
+		td {
+			background-color: rgba(0, 0, 0, 0.3);
+		}
+		.bg-img {
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			top:0px;
+			left:0px;
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: 50% 50%;
+			will-change: transform;
+		}
+		.blur {
+			-webkit-filter: blur(5px);
+			-moz-filter: blur(5px);
+			-o-filter: blur(5px);
+			-ms-filter: blur(5px);
+			filter: blur(5px);
+		}
+		.overlay {
+		}
+		</style>
+	</head>
+	<body>
+		<div id="bg-img" class="bg-img blur" style="display: block;background-image: url('/images/wallpaper-yosemite.jpg')"></div>
+		<div id="bg-overlay" class="bg-img overlay" style="display: block;"></div>
+		<div style="width: 100%; height: 100%;display: table;text-align: center;">
+			<div style="position:relative;width:700px;height:500px;display: table-cell;">
+				<img src="C720-macos.png" width="600"/>
+				<h1>OS X 10.15.x on the Acer C720</h1>
+				<h2>(Core i3, 4 GB RAM and 64 GB or higher SSD required)</h2><br />
+
+				<h3 id="driver">Bootloader Status</h3><br />
+				<table align="center">
+				<tr><th>Bootloader</th><th>Status</th><th>Description</th></tr>
+				<tr><td>Clover UEFI</td><td class="partial">Deprecated</td><td>Working but better to use OpenCore</td></tr>
+				<tr><td>OpenCore</td><td class="working">Working</td><td>Working with Coreboot + Tianocore UEFI firmware</td></tr>
+				</table>
+				<br>
+
+
+				<h3 id="driver">Device Driver Status</h3>
+				<table align="center">
+				<tr><th>Device</th><th>Status</th><th>Description</th></tr>
+				<tr><td>CPU/Mainboard/Chipset</td><td class="working">Working</td><td>Works with patched coreboot and VoodooSMC</td></tr>
+				<tr><td>Keyboard</td><td class="working">Working</td><td>Working with HIDPS2Keyboard.</td></tr>
+				<tr><td>I2C Bus</td><td class="working">Working</td><td>Working with VoodooI2C</td></tr>
+				<tr><td>Trackpad (Cypress)</td><td class="working">Working</td><td>Working with Cypress driver (needs older VoodooI2C)</td></tr>
+				<tr><td>Trackpad (Elan)</td><td class="working">Working</td><td>Working with Elan driver in VoodooI2C.</td></tr>
+				<tr><td>Touch Screen (Atmel) [Acer C720P]</td><td class="working">Working</td><td>Working with Atmel driver in VoodooI2C.</td></tr>
+				
+				<tr><td>Video Acceleration</td><td class="working">Working</td><td>Working with WhateverGreen</td></tr>
+				<tr><td>HDMI Video</td><td class="working">Working</td><td>Working with WhateverGreen</td></tr>
+				<tr><td>Brightness Control</td><td class="working">Working</td><td>Working with PNLF SSDT + WhateverGreen</td></tr>
+				<tr><td>Power Status</td><td class="working">Working</td><td>Fully working with SMCBatteryManager.</td></tr>
+				<tr><td>Audio (Speakers &amp; Microphone)</td><td class="working">Working</td><td>Works with AppleALC</td></tr>
+				<tr><td>Audio (Headphone Port; Headphone &amp; Mic combo)</td><td class="working">Working</td><td>Works with AppleALC and Codec Commander</td></tr>
+				<tr><td>Audio (HDMI)</td><td class="working">Working</td><td>Working with WhateverGreen + AppleALC + DSDT Patch.</td></tr>
+				<tr><td>Wireless LAN</td><td class="working">Working</td><td>Working with 10.13.5 IO80211Family + patched AirportAtheros40</td></tr>
+				<tr><td>Bluetooth</td><td class="working">Working</td><td>Working with BTFirmwareUploader (up to 10.13.x)</td></tr>
+				<tr><td>Webcam</td><td class="working">Working</td><td>Working with UEFI firmware</td></tr>
+				<tr><td>USB 3.0 Port (XHCI)</td><td class="working">Working</td><td>Works with UEFI firmware</td></tr>
+				<tr><td>USB 2.0 Port (ECHI)</td><td class="working">Working</td><td>Works with UEFI firmware</td></tr>
+				<tr><td>SD Card Slot</td><td class="working">Working</td><td>Works with UEFI firmware</td></tr>
+				</table>
+			</div>
+		</div>
+	</body>
+</html>

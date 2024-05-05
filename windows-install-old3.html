@@ -1,0 +1,2210 @@
+<html>
+	<head>
+		<title>Windows Install Helper</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<link href='https://fonts.googleapis.com/css?family=Ubuntu:300' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+		<!-- Compiled and minified JavaScript -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+		<link href='../css.css' rel='stylesheet' type='text/css'>
+		<style type="text/css">
+		body {
+			background-attachment: fixed;
+		}
+		.ui-autocomplete {
+			background: #fff;
+			box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+			position: absolute;
+			display: block;
+			padding: 0;
+			margin: 0;
+		}
+		.ui-autocomplete li {
+			font-size: 16px;
+			color: #26a69a;
+			display: block;
+			line-height: 22px;
+			padding: 14px 16px;
+
+			clear: both;
+			cursor: pointer;
+			border: none;
+		}
+		.ui-autocomplete li:hover {
+			background: #eee;
+		}
+		.ui-helper-hidden-accessible {
+			display: none;
+		}
+		</style>
+		<style type="text/css">
+		.working {
+			background-color: rgba(0,255,0, 0.7);
+		}
+		.partial {
+			background-color: rgba(170,255,0, 0.7);
+		}
+		.untested {
+			background-color: rgba(255,255,0, 0.7);
+		}
+		.broken {
+			background-color: rgba(255,0,0, 0.7);
+		}
+		h1 {
+			font-weight: normal;
+		}
+		h3 {
+			padding-top: 20px;
+			font-weight: normal;
+		}
+		h4 {
+			font-weight: normal;
+		}
+		table, td, th {
+			border: 1px solid rgb(128, 128, 160);
+		}
+		th {
+			background-color: rgba(128, 128, 160, 0.4);
+		}
+		.modalitems {
+			margin-left: 30px;
+			height: auto;
+			height: 100%;
+			position: relative;
+			overflow-x: hidden;
+		}
+		.modalitem {
+			transition: left 0.5s, opacity 0.25s;
+			-webkit-transition: left 0.5s, opacity 0.25s; /* Safari */
+			-moz-transition: left 0.5s, opacity 0.25s; /* Firefox */
+			-ms-transition: left 0.5s, opacity 0.25s; /* IE */
+			top: 10px;
+			position: absolute;
+			width: 540px;
+		}
+		@media (max-width: 650px){
+			h3 {
+				font-size: 16pt;
+				padding-top: 0px;
+			}
+			.headerimg {
+				display: none;
+			}
+			#modalbackground {
+				z-index: -1;
+			}
+			#modalcontainer {
+				width: 100%;
+				height: 100%;
+				text-align: left;
+				display: table;
+			}
+			.modalprompt {
+				width: 100%;
+				height: 100%;
+				margin: auto;
+				background: white;
+			}
+		}
+		@media (min-width: 650px){
+			.headerimg {
+				margin-left: auto;
+				margin-right: auto;
+				display: block;
+			}
+			#modalbackground {
+				width: 600px;
+				height: 100%;
+				position: fixed;
+				left: calc(50% - 300px);
+				background: white;
+				z-index: -1;
+			}
+			#modalcontainer {
+				width: 100%;
+				height: 100%;
+				text-align: left;
+				display: table;
+			}
+			.modalprompt {
+				width: 600px;
+				height: 100%;
+				margin: auto;
+			}
+		}
+		nav {
+			text-align: left;
+		}
+		.nav-wrapper {
+			margin-left: 6px;
+		}
+
+		.guide {
+			overflow-y: scroll;
+		}
+
+		.guide li {
+			list-style-type: decimal;
+		}
+
+		.device {
+			display: none;
+		}
+		</style>
+		<script type="text/javascript">
+		var pageslist = ["manufacturer","cpu","model","guide"];
+
+		var manufacturers = {};
+
+		var chipsets = {
+			"sandybridge": {
+				"supported": true,
+				"cpus" : [
+					"Intel Celeron 847"
+				]
+			},
+			"ivybridge": {
+				"supported": true,
+				"cpus" : [
+					"Intel Celeron 1007U",
+					"Intel Core i5-3427U"
+				]
+			},
+			"haswell" : {
+				"supported": true,
+				"cpus" : [
+					"Intel Celeron 2955U/2957U",
+					"Intel Core i3-4005U"
+				]
+			},
+			"baytrail" : {
+				"supported": true,
+				"cpus" : [
+					"Intel Celeron N2830/N2840",
+					"Intel Celeron N2930/N2940"
+				]
+			},
+			"broadwell" : {
+				"supported": true,
+				"cpus" : [
+					"Intel Celeron 3205U/3215U",
+					"Intel Core i3-5005U/i3-5015U",
+					"Intel Core i5-5200U/i7-5500U",
+				]
+			},
+			"braswell" : {
+				"supported": true,
+				"cpus" : [
+					"Intel Celeron N3050/N3060",
+					"Intel Celeron N3150/N3160"
+				]
+			},
+			"skylake": {
+				"supported": true,
+				"cpus": [
+					"Intel Pentium 4405Y",
+					"Intel Core m3-6Y30/m5-6Y57/m7-6Y75",
+					"Intel Celeron 3855U",
+					"Intel Core i3-6100U/i5-6200U/i5-6300U",
+				]
+			},
+			"apollolake": {
+				"supported": true,
+				"cpus": [
+					"Intel Celeron N3350/N3450",
+				]
+			},
+			"kabylake": {
+				"supported": true,
+				"cpus": [
+					"Intel Celeron 3965Y",
+					"Intel Core m3-7Y30/m3-8100Y/i5-8200Y",
+					"Intel Core i7-7600U/i3-8130U",
+					"Intel Pentium Gold 4417U",
+					"Intel Core i5-8250U/i5-8350U/i7-8650U",
+				]
+			},
+			"geminilake": {
+				"supported": true,
+				"cpus": [
+					"Intel Celeron N4000/N4020/N4100/N4120",
+					"Intel Pentium Silver N5000/N5030"
+				]
+			},
+			"picasso": {
+				"supported": true,
+				"cpus": [
+					"AMD 3015ce",
+					"AMD Ryzen 3 3250C",
+					"AMD Ryzen 5 3500C",
+					"AMD Ryzen 7 3700C"
+				]
+			}
+		};
+
+		var models = [
+		{
+			"supported": false,
+			"manufacturer": "ref",
+			"family": "haswell",
+			"name": "Haswell Reference",
+			"codename": "Slippy",
+			"devices": [
+				"keyboard",
+				"chromeec",
+				"cyapaTrackpad",
+				"elanTrackpad",
+				"realtekALC283"
+			]
+		},
+		{
+			"supported": false,
+			"manufacturer": "ref",
+			"family": "broadwell",
+			"name": "Broadwell Reference",
+			"codename": "Auron",
+			"devices": [
+				"keyboard",
+				"chromeec",
+				"cyapaTrackpad",
+				"elanTrackpad",
+				"realtekALC283"
+			]
+		},{
+			"supported": false,
+			"manufacturer": "ref",
+			"family": "baytrail",
+			"name": "Baytrail Reference",
+			"codename": "Rambi",
+			"devices": [
+				"keyboard",
+				"elanTrackpad",
+				"atmelTrackpad",
+				"max98090Audio",
+				"tinySolderedStorage"
+			]
+		},{
+			"supported": false,
+			"manufacturer": "ref",
+			"family": "braswell",
+			"name": "Braswell Reference",
+			"codename": "Cyan-ref",
+			"devices": [
+				"keyboard",
+				"elanTrackpad",
+				"realtekALC5645",
+				"tinySolderedStorage"
+			]
+		},{
+			"supported": false,
+			"manufacturer": "ref",
+			"family": "skylake",
+			"name": "Skylake Reference",
+			"codename": "Glados",
+			"devices": [
+				"keyboard",
+				"chromeec",
+				"elanTrackpad",
+				"elanTouchScreen",
+				"avsAudio",
+				"tinySolderedStorage"
+			],
+			"warnings": [
+				"Audio driver is currently under development."
+			]
+		},{
+			"supported": false,
+			"manufacturer": "ref",
+			"family": "apollolake",
+			"name": "Apollolake Reference",
+			"codename": "Reef-ref",
+			"devices": [
+				"keyboard",
+				"chromeec",
+				"elanTrackpad",
+				"elanTouchScreen",
+				"avsAudio",
+				"tinySolderedStorage"
+			],
+			"warnings": [
+				"Audio driver is currently under development.",
+				"SD Card hotplug does not work (disable + re-enable in device manager as a workaround).",
+				"Some models use Raydium touch screens which don't have a driver."
+			]
+		},{
+			"supported": false,
+			"manufacturer": "ref",
+			"family": "kabylake",
+			"name": "Kaby Lake Reference",
+			"codename": "Poppy",
+			"devices": [
+				"keyboard",
+				"chromeec",
+				"elanTrackpad",
+				"elanTouchScreen",
+				"avsAudio"
+			],
+			"warnings": [
+				"Audio driver is currently under development.",
+				"Some models use Raydium touch screens which don't have a driver."
+			]
+		},{
+			"supported": false,
+			"manufacturer": "ref",
+			"family": "geminilake",
+			"name": "Geminilake Reference",
+			"codename": "Octopus",
+			"devices": [
+				"keyboard",
+				"chromeec",
+				"elanTrackpad",
+				"elanTouchScreen",
+				"avsAudio",
+				"tinySolderedStorage"
+			],
+			"warnings": [
+				"Audio driver is currently under development.",
+				"Some models use Raydium touch screens which don't have a driver."
+			]
+		},{
+			"supported": false,
+			"manufacturer": "ref",
+			"family": "picasso",
+			"name": "Picasso Reference",
+			"codename": "Zork",
+			"devices": [
+				"cr50i2c",
+				"chromeec",
+				"keyboard",
+				"elanTrackpad",
+				"synapticsTrackpad",
+				"acp3xmax98357aalc5682"
+			]
+		},
+		{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "sandybridge",
+			"name": "Acer C7 / C710",
+			"codename": "Parrot-snb",
+			"baseboard": "Parrot-ivb"
+		},
+		{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "ivybridge",
+			"name": "Acer C710",
+			"codename": "Parrot-ivb",
+			"devices": [
+				"keyboard",
+				"cyapaSmbusTrackpad",
+				"realtekALC269",
+				"brcmsdcard"
+			]
+		},
+		{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "haswell",
+			"name": "Acer C720(P)",
+			"codename": "Peppy",
+			"baseboard": "Slippy",
+			"devices": [
+				"atmelTouchScreen"
+			]
+		},
+		{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "broadwell",
+			"name": "Acer C740",
+			"codename": "Paine",
+			"baseboard": "Auron"
+		},
+		{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "broadwell",
+			"name": "Acer C910 / Acer CB5-571",
+			"codename": "Yuna",
+			"baseboard": "Auron"
+		},{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "baytrail",
+			"name": "Acer C730/CB3-111",
+			"codename": "Gnawty",
+			"baseboard": "Rambi"
+		},{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "baytrail",
+			"name": "Acer CB3-531",
+			"codename": "Banjo",
+			"baseboard": "Rambi"
+		},{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "braswell",
+			"name": "Acer CB3-532",
+			"codename": "Banon",
+			"baseboard": "Cyan-ref"
+		},{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "braswell",
+			"name": "Acer R11/CB5-132",
+			"codename": "Cyan",
+			"devices": [
+				"keyboard",
+				"elanTrackpad",
+				"elanTouchScreen",
+				"max98090v2Audio",
+				"tinySolderedStorage"
+			]
+		},{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "braswell",
+			"name": "Acer CB3-431",
+			"codename": "Edgar",
+			"baseboard": "Cyan-ref"
+		},{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "braswell",
+			"name": "Acer C731",
+			"codename": "Relm-Acer",
+			"baseboard": "Cyan-ref",
+			"devices": [
+				"melfasTouchScreen",
+				"elanTouchScreen"
+			]
+		},{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "skylake",
+			"name": "Acer C771/Chromebook 14 for Work",
+			"codename": "Lars",
+			"baseboard": "Glados"
+		},{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "apollolake",
+			"name": "Acer C732",
+			"codename": "Astronaut",
+			"baseboard": "Reef-ref"
+		},{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "apollolake",
+			"name": "Acer CB315",
+			"codename": "Blue",
+			"baseboard": "Reef-ref"
+		},{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "apollolake",
+			"name": "Acer CP315",
+			"codename": "Bruce",
+			"baseboard": "Reef-ref"
+		},{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "apollolake",
+			"name": "Acer R751T",
+			"codename": "Electro",
+			"baseboard": "Reef-ref"
+		},{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "apollolake",
+			"name": "Acer Chromebook 514",
+			"codename": "Epaulette",
+			"baseboard": "Reef-ref"
+		},{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "apollolake",
+			"name": "Acer Spin 11 CP311",
+			"codename": "Lava",
+			"baseboard": "Reef-ref"
+		},{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "apollolake",
+			"name": "Acer CB515",
+			"codename": "Sand",
+			"baseboard": "Reef-ref"
+		},{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "apollolake",
+			"name": "Acer CB311",
+			"codename": "Santa",
+			"baseboard": "Reef-ref"
+		},{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "geminilake",
+			"name": "Acer Chromebook 315",
+			"codename": "Blorb",
+			"baseboard": "Octopus"
+		},{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "geminilake",
+			"name": "Acer Chromebook CB311-9H, CB311-9HT, C733, C733U, C733T",
+			"codename": "Bobba",
+			"baseboard": "Octopus"
+		},{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "geminilake",
+			"name": "Acer Chromebook Spin 511, CP311-2H, CP311-2HN",
+			"codename": "Bobba360",
+			"baseboard": "Octopus"
+		},{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "geminilake",
+			"name": "Acer Chromebook 314",
+			"codename": "Droid",
+			"baseboard": "Octopus"
+		},{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "geminilake",
+			"name": "Acer Chromebook 311",
+			"codename": "Glk",
+			"baseboard": "Octopus"
+		},{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "geminilake",
+			"name": "Acer Chromebook Spin 311",
+			"codename": "Glk360",
+			"baseboard": "Octopus"
+		},{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "geminilake",
+			"name": "Acer Chromebook 512",
+			"codename": "Sparky",
+			"baseboard": "Octopus"
+		},{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "geminilake",
+			"name": "Acer Chromebook Spin 512",
+			"codename": "Sparky360",
+			"baseboard": "Octopus"
+		},{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "kabylake",
+			"name": "Acer Chromebook 13",
+			"codename": "Akali",
+			"baseboard": "Poppy"
+		},{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "kabylake",
+			"name": "Acer Chromebook Spin 13",
+			"codename": "Akali360",
+			"baseboard": "Poppy"
+		},{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "kabylake",
+			"name": "Acer Chromebook 715",
+			"codename": "Bard",
+			"baseboard": "Poppy"
+		},{
+			"supported": true,
+			"manufacturer": "acer",
+			"family": "kabylake",
+			"name": "Acer Chromebook 714",
+			"codename": "Ekko",
+			"baseboard": "Poppy"
+		},{
+			"supported": true,
+			"manufacturer": "asus",
+			"family": "baytrail",
+			"name": "Asus C200",
+			"codename": "Squawks",
+			"baseboard": "Rambi"
+		},
+		{
+			"supported": true,
+			"manufacturer": "asus",
+			"family": "baytrail",
+			"name": "Asus C300",
+			"codename": "Quawks",
+			"baseboard": "Rambi"
+		},{
+			"supported": true,
+			"manufacturer": "asus",
+			"family": "braswell",
+			"name": "Asus C202/C300SA/C301SA",
+			"codename": "Terra",
+			"baseboard": "Cyan-ref"
+		},{
+			"supported": true,
+			"manufacturer": "asus",
+			"family": "skylake",
+			"name": "Asus C302CA",
+			"codename": "Cave",
+			"baseboard": "Glados"
+		},{
+			"supported": true,
+			"manufacturer": "asus",
+			"family": "apollolake",
+			"name": "Asus C223NA",
+			"codename": "Babymega",
+			"baseboard": "Reef-ref"
+		},{
+			"supported": true,
+			"manufacturer": "asus",
+			"family": "apollolake",
+			"name": "Asus C523NA",
+			"codename": "Babytiger",
+			"baseboard": "Reef-ref"
+		},{
+			"supported": true,
+			"manufacturer": "asus",
+			"family": "apollolake",
+			"name": "Asus C423",
+			"codename": "Rabbid",
+			"baseboard": "Reef-ref"
+		},{
+			"supported": true,
+			"manufacturer": "asus",
+			"family": "apollolake",
+			"name": "Asus Flip C213SA",
+			"codename": "Reef",
+			"baseboard": "Reef-ref"
+		},{
+			"supported": true,
+			"manufacturer": "asus",
+			"family": "geminilake",
+			"name": "Asus Chromebook Flip C214/C234",
+			"codename": "Ampton",
+			"baseboard": "Octopus"
+		},{
+			"supported": true,
+			"manufacturer": "asus",
+			"family": "geminilake",
+			"name": "Asus Chromebook Flip C204",
+			"codename": "Apel",
+			"baseboard": "Octopus"
+		},{
+			"supported": true,
+			"manufacturer": "asus",
+			"family": "geminilake",
+			"name": "Asus Chromebook C424",
+			"codename": "Nospike",
+			"baseboard": "Octopus"
+		},{
+			"supported": true,
+			"manufacturer": "asus",
+			"family": "kabylake",
+			"name": "Asus Chromebook C425",
+			"codename": "Leona",
+			"baseboard": "Poppy"
+		},{
+			"supported": true,
+			"manufacturer": "asus",
+			"family": "kabylake",
+			"name": "Asus Chromebook Flip C433/C434",
+			"codename": "Shyvana",
+			"baseboard": "Poppy"
+		},{
+			"supported": true,
+			"manufacturer": "asus",
+			"family": "picasso",
+			"name": "Asus Chromebook Flip CM5",
+			"codename": "Woomax",
+			"baseboard": "Zork",
+			"warnings": [
+				"Fingerprint sensor does not work yet, but is currently being worked on"
+			]
+		},{
+			"supported": true,
+			"manufacturer": "dell",
+			"family": "haswell",
+			"name": "Dell Chromebook 11",
+			"codename": "Wolf",
+			"baseboard": "Slippy"
+		},
+		{
+			"supported": true,
+			"manufacturer": "dell",
+			"family": "broadwell",
+			"name": "Dell Chromebook 13",
+			"codename": "Lulu",
+			"baseboard": "Auron",
+			"devices": [
+				"elanTouchScreen"
+			]
+		},{
+			"supported": true,
+			"manufacturer": "dell",
+			"family": "baytrail",
+			"name": "Dell Chromebook 11 3120",
+			"codename": "Candy",
+			"baseboard": "Rambi",
+			"devices": [
+				"elanTouchScreen"
+			]
+		},{
+			"supported": true,
+			"manufacturer": "dell",
+			"family": "braswell",
+			"name": "Dell Chromebook 11 3180",
+			"codename": "Kefka",
+			"baseboard": "Cyan-ref",
+			"devices": [
+				"elanTouchScreen"
+			]
+		},{
+			"supported": true,
+			"manufacturer": "dell",
+			"family": "skylake",
+			"name": "Dell Chromebook 13 3380",
+			"codename": "Asuka",
+			"baseboard": "Glados"
+		},{
+			"supported": true,
+			"manufacturer": "dell",
+			"family": "apollolake",
+			"name": "Dell Chromebook 11 5190",
+			"codename": "Nasher",
+			"baseboard": "Reef-ref"
+		},{
+			"supported": true,
+			"manufacturer": "dell",
+			"family": "apollolake",
+			"name": "Dell Chromebook 11 5190 2-in-1",
+			"codename": "Nasher360",
+			"baseboard": "Reef-ref"
+		},{
+			"supported": true,
+			"manufacturer": "dell",
+			"family": "geminilake",
+			"name": "Dell Chromebook 3100",
+			"codename": "Fleex",
+			"baseboard": "Octopus"
+		},{
+			"supported": true,
+			"manufacturer": "dell",
+			"family": "geminilake",
+			"name": "Dell Chromebook 3100 2-in-1",
+			"codename": "Grabbiter",
+			"baseboard": "Octopus"
+		},{
+			"supported": true,
+			"manufacturer": "dell",
+			"family": "geminilake",
+			"name": "Dell Chromebook 3400",
+			"codename": "Orbatrix",
+			"baseboard": "Octopus"
+		},{
+			"supported": true,
+			"manufacturer": "dell",
+			"family": "kabylake",
+			"name": "Dell Inspiron Chromebook 14 (7460)",
+			"codename": "Vayne",
+			"baseboard": "Poppy"
+		},{
+			"supported": true,
+			"manufacturer": "google",
+			"family": "ivybridge",
+			"name": "Chromebook Pixel 1",
+			"codename": "Link",
+			"devices": [
+				"keyboard"
+			],
+			"warnings": [
+				"Touchpad does not work yet.",
+				"Touch Screen does not work yet."
+			]
+		},{
+			"supported": true,
+			"manufacturer": "google",
+			"family": "broadwell",
+			"name": "Chromebook Pixel 2",
+			"codename": "Samus",
+			"devices": [
+				"keyboard",
+				"chromeec",
+				"atmelTrackpad",
+				"atmelTouchScreen",
+				"realtekALC5677"
+			]
+		},{
+			"supported": true,
+			"manufacturer": "haier",
+			"family": "baytrail",
+			"name": "Haier Chromebook G2",
+			"codename": "Heli",
+			"baseboard": "Rambi"
+		},{
+			"supported": true,
+			"manufacturer": "haier",
+			"family": "braswell",
+			"name": "Haier Chromebook 11C",
+			"codename": "Wizpig",
+			"baseboard": "Cyan-ref",
+			"devices": [
+				"elanTouchScreen"
+			]
+		},{
+			"supported": true,
+			"manufacturer": "hp",
+			"family": "sandybridge",
+			"name": "HP Pavilion Chromebook",
+			"codename": "Butterfly",
+			"devices": [
+				"keyboard",
+				"cyapaSmbusTrackpad"
+			]
+		},{
+			"supported": true,
+			"manufacturer": "hp",
+			"family": "haswell",
+			"name": "HP Chromebook 14",
+			"codename": "Falco",
+			"baseboard": "Slippy"
+		},{
+			"supported": true,
+			"manufacturer": "hp",
+			"family": "baytrail",
+			"name": "HP Chromebook 11 G3/G4",
+			"codename": "Kip",
+			"baseboard": "Rambi"
+		},{
+			"supported": true,
+			"manufacturer": "hp",
+			"family": "braswell",
+			"name": "HP Chromebook 11 G5 EE",
+			"codename": "Relm-HP",
+			"baseboard": "Cyan-ref",
+			"devices": [
+				"melfasTouchScreen",
+				"elanTouchScreen"
+			]
+		},{
+			"supported": true,
+			"manufacturer": "hp",
+			"family": "braswell",
+			"name": "HP Chromebook 11 G5",
+			"codename": "Setzer",
+			"baseboard": "Cyan-ref"
+		},{
+			"supported": true,
+			"manufacturer": "hp",
+			"family": "skylake",
+			"name": "HP Chromebook 13 G1",
+			"codename": "Chell",
+			"baseboard": "Glados"
+		},{
+			"supported": true,
+			"manufacturer": "hp",
+			"family": "apollolake",
+			"name": "HP x360 11 G1 EE / 11 G5 / 11 G6",
+			"codename": "Snappy",
+			"baseboard": "Reef-ref"
+		},{
+			"supported": true,
+			"manufacturer": "hp",
+			"family": "geminilake",
+			"name": "HP Chromebook x360 12b",
+			"codename": "Bloog",
+			"baseboard": "Octopus"
+		},{
+			"supported": true,
+			"manufacturer": "hp",
+			"family": "geminilake",
+			"name": "HP Chromebook 14a",
+			"codename": "Blooglet",
+			"baseboard": "Octopus"
+		},{
+			"supported": true,
+			"manufacturer": "hp",
+			"family": "geminilake",
+			"name": "HP Chromebook x360 14a/14b",
+			"codename": "Blooguard",
+			"baseboard": "Octopus"
+		},{
+			"supported": true,
+			"manufacturer": "hp",
+			"family": "geminilake",
+			"name": "HP Chromebook 14 G6",
+			"codename": "Dorp",
+			"baseboard": "Octopus"
+		},{
+			"supported": true,
+			"manufacturer": "hp",
+			"family": "geminilake",
+			"name": "HP Chromebook x360 11 G2 EE",
+			"codename": "Meep",
+			"baseboard": "Octopus"
+		},{
+			"supported": true,
+			"manufacturer": "hp",
+			"family": "geminilake",
+			"name": "HP Chromebook 11 G7 EE",
+			"codename": "Nimrock",
+			"baseboard": "Octopus"
+		},{
+			"supported": true,
+			"manufacturer": "hp",
+			"family": "geminilake",
+			"name": "HP Chromebook 11 G8 EE",
+			"codename": "Vorticon",
+			"baseboard": "Octopus"
+		},{
+			"supported": true,
+			"manufacturer": "hp",
+			"family": "geminilake",
+			"name": "HP Chromebook x360 11 G3 EE",
+			"codename": "Vortininja",
+			"baseboard": "Octopus"
+		},{
+			"supported": true,
+			"manufacturer": "hp",
+			"family": "kabylake",
+			"name": "HP Chromebook x360 14",
+			"codename": "Sona",
+			"baseboard": "Poppy"
+		},{
+			"supported": true,
+			"manufacturer": "hp",
+			"family": "kabylake",
+			"name": "HP Chromebook X2",
+			"codename": "Soraka",
+			"baseboard": "Poppy"
+		},{
+			"supported": true,
+			"manufacturer": "hp",
+			"family": "kabylake",
+			"name": "HP Chromebook 15 G1",
+			"codename": "Syndra",
+			"baseboard": "Poppy"
+		},{
+			"supported": true,
+			"manufacturer": "hp",
+			"family": "picasso",
+			"name": "HP Chromebook Pro C645 Enterprise (or 14b)",
+			"codename": "Berknip",
+			"baseboard": "Zork",
+			"warnings": [
+				"Fingerprint sensor does not work yet, but is currently being worked on"
+			]
+		},{
+			"supported": true,
+			"manufacturer": "lenovo",
+			"family": "ivybridge",
+			"name": "Lenovo Thinkpad X131e Chromebook",
+			"codename": "Stout",
+			"devices": []
+		},{
+			"supported": true,
+			"manufacturer": "lenovo",
+			"family": "baytrail",
+			"name": "Lenovo N20(p) Chromebook",
+			"codename": "Clapper",
+			"baseboard": "Rambi",
+			"devices": [
+				"elanTouchScreen"
+			]
+		},{
+			"supported": true,
+			"manufacturer": "lenovo",
+			"family": "baytrail",
+			"name": "Lenovo N21 Chromebook",
+			"codename": "Enguarde",
+			"baseboard": "Rambi"
+		},{
+			"supported": true,
+			"manufacturer": "lenovo",
+			"family": "baytrail",
+			"name": "Lenovo Thinkpad 11e/Yoga Chromebook",
+			"codename": "Glimmer",
+			"baseboard": "Rambi",
+			"devices": [
+				"atmelTouchScreen"
+			]
+		},{
+			"supported": true,
+			"manufacturer": "lenovo",
+			"family": "baytrail",
+			"name": "Lenovo 100S Chromebook",
+			"codename": "Orco",
+			"baseboard": "Rambi"
+		},{
+			"supported": true,
+			"manufacturer": "lenovo",
+			"family": "braswell",
+			"name": "Lenovo N22/N23/N42 Chromebook",
+			"codename": "Reks",
+			"baseboard": "Cyan-ref",
+			"devices": [
+				"melfasTouchScreen",
+				"elanTouchScreen"
+			]
+		},{
+			"supported": true,
+			"manufacturer": "lenovo",
+			"family": "braswell",
+			"name": "Lenovo Thinkpad 11e 3rd Gen",
+			"codename": "Ultima",
+			"baseboard": "Cyan-ref",
+			"devices": [
+				"elanTouchScreen"
+			]
+		},{
+			"supported": true,
+			"manufacturer": "lenovo",
+			"family": "skylake",
+			"name": "Lenovo Thinkpad 13",
+			"codename": "Sentry",
+			"baseboard": "Glados",
+			"warnings": [
+				"Raydium touch screen does not have a driver yet."
+			]
+		},{
+			"supported": true,
+			"manufacturer": "lenovo",
+			"family": "apollolake",
+			"name": "Lenovo Thinkpad 11e/Yoga 11e (G4)",
+			"codename": "Pyro",
+			"baseboard": "Reef-ref"
+		},{
+			"supported": true,
+			"manufacturer": "lenovo",
+			"family": "apollolake",
+			"name": "Lenovo 100e",
+			"codename": "Robo",
+			"baseboard": "Reef-ref"
+		},{
+			"supported": true,
+			"manufacturer": "lenovo",
+			"family": "apollolake",
+			"name": "Lenovo 500e",
+			"codename": "Robo360",
+			"baseboard": "Reef-ref"
+		},{
+			"supported": true,
+			"manufacturer": "lenovo",
+			"family": "geminilake",
+			"name": "Lenovo Chromebook C340",
+			"codename": "Laser",
+			"baseboard": "Octopus"
+		},{
+			"supported": true,
+			"manufacturer": "lenovo",
+			"family": "geminilake",
+			"name": "Lenovo Chromebook S340/Ideapad 3",
+			"codename": "Laser14",
+			"baseboard": "Octopus"
+		},{
+			"supported": true,
+			"manufacturer": "lenovo",
+			"family": "geminilake",
+			"name": "Lenovo Ideapad 3 Chromebook",
+			"codename": "Lick",
+			"baseboard": "Octopus"
+		},{
+			"supported": true,
+			"manufacturer": "lenovo",
+			"family": "geminilake",
+			"name": "Lenovo 100e Chromebook 2nd Gen",
+			"codename": "Phaser",
+			"baseboard": "Octopus"
+		},{
+			"supported": true,
+			"manufacturer": "lenovo",
+			"family": "geminilake",
+			"name": "Lenovo 300e Chromebook 2nd Gen/Ideapad Flex 3",
+			"codename": "Phaser360",
+			"baseboard": "Octopus"
+		},{
+			"supported": true,
+			"manufacturer": "lenovo",
+			"family": "geminilake",
+			"name": "Lenovo 300e Chromebook 2nd Gen",
+			"codename": "Phaser360S",
+			"baseboard": "Octopus"
+		},{
+			"supported": true,
+			"manufacturer": "lenovo",
+			"family": "kabylake",
+			"name": "Lenovo Yoga Chromebook C630",
+			"codename": "Pantheon",
+			"baseboard": "Poppy"
+		},{
+			"supported": true,
+			"manufacturer": "lenovo",
+			"family": "picasso",
+			"name": "Lenovo Thinkpad Yoga C13",
+			"codename": "Morphius",
+			"baseboard": "Zork",
+			"devices": [
+				"elanTouchScreen"
+			],
+			"warnings": [
+				"Fingerprint sensor does not work currently"
+			]
+		},{
+			"supported": true,
+			"manufacturer": "samsung",
+			"family": "sandybridge",
+			"name": "Samsung Series 5 550",
+			"codename": "Lumpy",
+			"devices": [
+				"keyboard",
+				"cyapaSmbusTrackpad"
+			]
+		},{
+			"supported": true,
+			"manufacturer": "samsung",
+			"family": "baytrail",
+			"name": "Samsung Chromebook 2",
+			"codename": "Winky",
+			"baseboard": "Rambi"
+		},{
+			"supported": true,
+			"manufacturer": "samsung",
+			"family": "braswell",
+			"name": "Samsung Chromebook 3",
+			"codename": "Celes",
+			"baseboard": "Cyan-ref",
+			"devices": [
+				"celesWorkaround"
+			],
+			"warnings": [
+				"Model has timing issues and needs a workaround"
+			]
+		},{
+			"supported": true,
+			"manufacturer": "samsung",
+			"family": "skylake",
+			"name": "Samsung Chromebook Pro",
+			"codename": "Caroline",
+			"baseboard": "Glados"
+		},{
+			"supported": true,
+			"manufacturer": "samsung",
+			"family": "geminilake",
+			"name": "Samsung Chromebook 4",
+			"codename": "Bluebird",
+			"baseboard": "Octopus"
+		},{
+			"supported": true,
+			"manufacturer": "samsung",
+			"family": "geminilake",
+			"name": "Samsung Chromebook 4+",
+			"codename": "Casta",
+			"baseboard": "Octopus"
+		},{
+			"supported": true,
+			"manufacturer": "samsung",
+			"family": "kabylake",
+			"name": "Samsung Chromebook Plus V2",
+			"codename": "Nautilus",
+			"baseboard": "Poppy"
+		},{
+			"supported": true,
+			"manufacturer": "toshiba",
+			"family": "haswell",
+			"name": "Toshiba Chromebook 1",
+			"codename": "Leon",
+			"baseboard": "Slippy"
+		},{
+			"supported": true,
+			"manufacturer": "toshiba",
+			"family": "baytrail",
+			"name": "Toshiba Chromebook 2",
+			"codename": "Swanky",
+			"baseboard": "Rambi"
+		},{
+			"supported": true,
+			"manufacturer": "toshiba",
+			"family": "broadwell",
+			"name": "Toshiba Chromebook 2",
+			"codename": "Gandof",
+			"baseboard": "Auron"
+		}];
+
+		function updateBreadCrumbs(pageName){
+			var breadcrumbs = {
+				"manufacturer":"Select Manufacturer",
+				"cpu":"Select CPU",
+				"model":"Select Model",
+				"guide": "Guide"
+			};
+			var breadcrumbitems = document.getElementById("breadcrumbitems");
+			breadcrumbitems.innerHTML="";
+			for (var key in breadcrumbs){
+				var breadcrumb = document.createElement("a");
+				breadcrumb.href="#!";
+				breadcrumb.className="breadcrumb";
+				breadcrumb.innerHTML = breadcrumbs[key];
+				breadcrumb.setAttribute("onclick","changePage('"+key+"');");
+
+				breadcrumbitems.appendChild(breadcrumb);
+
+				if (pageName == key)
+					return;
+			}
+		}
+
+		function changePage(pageName){
+			var foundPage = false;
+			for (var idx = 0;idx < pageslist.length;idx++){
+				var pageItemName = pageslist[idx];
+				var page = document.getElementById(pageItemName);
+				if (pageItemName == pageName){
+					foundPage = true;
+					page.style.left="0px";
+					page.style.opacity="1";
+				} else if (foundPage){
+					page.style.left = "600px";
+					page.style.opacity="0";
+				} else {
+					page.style.left = "-600px";
+					page.style.opacity="0";
+				}
+			}
+			updateBreadCrumbs(pageName);
+			if (pageName == "cpu")
+				loadCPUsForManufacturer();
+			if (pageName == "model")
+				loadModelsForCPUAndManufacturer();
+			loadGuideForModel();
+			window.scrollTo(0, 0);
+		}
+
+		function chipsetForCPU(cpuName){
+			for (var chipset in chipsets){
+				for (var cpuIdx in chipsets[chipset]["cpus"]){
+					var cpu = chipsets[chipset]["cpus"][cpuIdx];
+					if (cpu == cpuName)
+						return chipset;
+				}
+			}
+		}
+
+		function loadManufacturerNames(){
+			var manufacturerNames = [];
+
+			window.modelCodeNames = {};
+			for (var modelIdx in models){
+				var model = models[modelIdx];
+				if (model["supported"] === false)
+					continue;
+
+				var codename = model["codename"];
+				modelCodeNames[codename] = null;
+
+				var manufacturer = model["manufacturer"];
+				if (manufacturerNames.indexOf(manufacturer) === -1){
+					manufacturerNames.push(manufacturer);
+				}
+			}
+
+			var manufacturerForm = document.getElementById("manufacturerForm");
+			for (var manufacturerIdx in manufacturerNames){
+				var manufacturer = manufacturerNames[manufacturerIdx];
+				var paragraph = document.createElement("p");
+
+				var label = document.createElement("label");
+
+				var input = document.createElement("input");
+				input.className = "with-gap";
+				input.name = "manufacturer";
+				input.type = "radio";
+				input.id = manufacturer;
+				if (model["supported"] === false)
+					input.disabled = true;
+
+				var span = document.createElement("span");
+				span.innerHTML = capitalizeFirstLetter(manufacturer);
+
+				label.appendChild(input);
+				label.appendChild(span);
+
+				paragraph.appendChild(label);
+
+				manufacturerForm.appendChild(paragraph);
+			}
+		}
+
+		function generateManufacturers(){
+			for (var modelIdx in models){
+				var model = models[modelIdx];
+				if (model["supported"] === false){
+					continue;
+				}
+
+				var manufacturer = model["manufacturer"];
+
+				if (manufacturers[manufacturer] === undefined){
+					manufacturers[manufacturer] = [];
+				}
+
+				var chipset = chipsets[model["family"]];
+				if (model["baseboard"]){
+					for (var modelIdx in models){
+						var modelItem = models[modelIdx];
+						if (modelItem["codename"] == model["baseboard"]){
+							chipset = chipsets[modelItem["family"]];
+							break;
+						}
+					}
+				}
+
+				if (chipset["supported"] === false){
+					continue;
+				}
+
+				var cpus = chipset["cpus"];
+				for (var cpuIdx in cpus){
+					var cpu = cpus[cpuIdx];
+					if (!manufacturers[manufacturer].includes(cpu)){
+						manufacturers[manufacturer].push(cpu);
+					}
+				}
+			}
+		}
+
+		function loadCPUsForManufacturer(){
+			var manufacturer = document.querySelector('input[name = "manufacturer"]:checked').id;
+			var cpus = manufacturers[manufacturer].slice().reverse();
+
+			document.getElementById("cpu").innerHTML="";
+
+			var cpusForm = document.createElement("form");
+
+			for (var idx = 0;idx < cpus.length;idx++){
+				var cpu = cpus[idx];
+
+				var paragraph = document.createElement("p");
+
+				var label = document.createElement("label");
+
+				var input = document.createElement("input");
+				input.className = "with-gap";
+				input.name = "cpu";
+				input.type = "radio";
+				input.id = cpu;
+
+				var chipset = chipsetForCPU(cpu);
+				if (chipsets[chipset]["supported"] === false)
+					input.disabled = true;
+
+				var span = document.createElement("span");
+				span.innerHTML = cpu;
+
+				label.appendChild(input);
+				label.appendChild(span);
+
+				paragraph.appendChild(label);
+
+				cpusForm.appendChild(paragraph);
+			}
+			document.getElementById("cpu").appendChild(cpusForm);
+
+			var nextbtn = document.createElement("a");
+			nextbtn.className = "waves-effect waves-light btn";
+			nextbtn.setAttribute("onclick","changePage('model');");
+			nextbtn.innerHTML="Next";
+			document.getElementById("cpu").appendChild(nextbtn);
+		}
+
+		function loadModelsForCPUAndManufacturer(){
+			var manufacturer = document.querySelector('input[name = "manufacturer"]:checked').id;
+			var cpu = document.querySelector('input[name = "cpu"]:checked').id;
+			var chipset = chipsetForCPU(cpu);
+
+			var modelsList = [];
+			for (var modelIdx in models){
+				var model = models[modelIdx];
+				if (model["manufacturer"] == manufacturer && model["family"] == chipset)
+					modelsList.push(model);
+			}
+
+			document.getElementById("model").innerHTML="";
+
+			var modelsForm = document.createElement("form");
+
+			for (var idx = 0;idx < modelsList.length;idx++){
+				var model = modelsList[idx];
+
+				var paragraph = document.createElement("p");
+
+				var label = document.createElement("label");
+
+				var input = document.createElement("input");
+				input.className = "with-gap";
+				input.name = "model";
+				input.type = "radio";
+				input.id = model["codename"];
+				if (model["supported"] === false)
+					input.disabled = true;
+
+				var span = document.createElement("span");
+				span.innerHTML = model["name"];
+
+				label.appendChild(input);
+				label.appendChild(span);
+
+				paragraph.appendChild(label);
+
+				modelsForm.appendChild(paragraph);
+			}
+			document.getElementById("model").appendChild(modelsForm);
+
+			var nextbtn = document.createElement("a");
+			nextbtn.className = "waves-effect waves-light btn";
+			nextbtn.setAttribute("onclick","changePage('guide');");
+			nextbtn.innerHTML="Next";
+			document.getElementById("model").appendChild(nextbtn);
+		}
+
+		function loadGuideForModel(){
+			var codename = null;
+			try {
+				codename = document.querySelector('input[name = "model"]:checked').id;
+			} catch {
+
+			}
+			var model = null;
+
+			for (var modelIdx in models){
+				var modelItem = models[modelIdx];
+				if (modelItem["codename"] == codename){
+					model = modelItem;
+					break;
+				}
+			}
+
+			var devices = [
+				"partition",
+				"rwlegacy",
+				"uefifwjumper",
+				"uefifwscrew",
+				"uefifwcr50",
+				"fwupdatewin",
+				"installuefi",
+				"installrefind",
+				"bypassWin11",
+				"cr50i2c",
+				"chromeec",
+				"hswrst",
+				"bytchip",
+				"bdwrst",
+				"ryzenchip",
+				"ryzengpu",
+				"celesWorkaround",
+				"keyboard",
+				"touchpadCommon",
+				"touchscreenCommon",
+				"realtekALC269",
+				"realtekALC5645",
+				"max98090Audio",
+				"max98090v2Audio",
+				"acp3xmax98357aalc5682",
+				"realtekALC5677",
+				"avsAudio",
+				"usbAudio",
+				"brcmsdcard",
+				"tinySolderedStorage",
+				"utcTime"
+			];
+
+			for (var idx in devices){
+				var device = devices[idx];
+				document.getElementById(device).style.display="none";
+			}
+
+			if (model == null){
+				return;
+			}
+
+			if (model["family"] == "haswell"){
+				document.getElementById("hswrst").style.display="block";
+			} else if (model["family"] == "baytrail"){
+				document.getElementById("bytchip").style.display="block";
+			} else if (model["family"] == "broadwell"){
+				document.getElementById("bdwrst").style.display="block";
+			}
+
+			if (model["family"] == "sandybridge" ||
+			    model["family"] == "ivybridge")
+			{
+				document.getElementById("uefifwjumper").style.display = "block";
+				document.getElementById("installuefi").style.display = "block";
+			}
+
+			if (model["family"] == "haswell" ||
+			    model["family"] == "baytrail" ||
+			    model["family"] == "broadwell" ||
+			    model["family"] == "braswell")
+			{
+				document.getElementById("uefifwscrew").style.display = "block";
+				document.getElementById("fwupdatewin").style.display = "block";
+				document.getElementById("installuefi").style.display = "block";
+			}
+
+			if (model["family"] == "skylake"){
+				document.getElementById("uefifwscrew").style.display = "block";
+				document.getElementById("installuefi").style.display = "block";
+				document.getElementById("bypassWin11").style.display = "block";
+			}
+
+			if (model["family"] == "apollolake" ||
+			    model["family"] == "kabylake" ||
+			    model["family"] == "geminilake")
+			{
+				document.getElementById("uefifwcr50").style.display = "block";
+				document.getElementById("installuefi").style.display = "block";
+				document.getElementById("bypassWin11").style.display = "block";
+			}
+
+			if (model["family"] == "picasso")
+			{
+				document.getElementById("partition").style.display = "block";
+				document.getElementById("rwlegacy").style.display = "block";
+				document.getElementById("ryzenchip").style.display = "block";
+				document.getElementById("ryzengpu").style.display = "block";
+				document.getElementById("installrefind").style.display = "block";
+				document.getElementById("bypassWin11").style.display = "block";
+				document.getElementById("utcTime").style.display = "block";
+			}
+
+			var devices = model["devices"];
+			if (model["baseboard"]){
+				for (var modelIdx in models){
+					var modelItem = models[modelIdx];
+					if (modelItem["codename"] == model["baseboard"]){
+						devices = modelItem["devices"];
+						break;
+					}
+				} 
+			}
+			if (model["devices"]){
+				for (var idx in model["devices"]){
+					devices.push(model["devices"][idx]);
+				}
+			}
+
+			for (var idx in devices){
+				var device = devices[idx];
+				try {
+					if (device == "cyapaTrackpad" || device == "cyapaSmbusTrackpad" ||
+					 "device" == "cyapaSmbusTrackpad" || device == "elanTrackpad" || device == "atmelTrackpad" || device == "synapticsTrackpad")
+						device="touchpadCommon";
+
+					if (device == "atmelTouchScreen" || device == "elanTouchScreen" ||
+					 "device" == "melfasTouchScreen")
+						device="touchscreenCommon";
+
+					document.getElementById(device).style.display="block";
+				} catch (e){
+					
+				}
+			}
+
+			document.getElementById("modelName").innerHTML = model["name"] + " (" + model["codename"] + ")";
+
+			document.getElementById("warnings").innerHTML = "";
+			var warnings = model["warnings"];
+			if (model["baseboard"]){
+				for (var modelIdx in models){
+					var modelItem = models[modelIdx];
+					if (modelItem["codename"] == model["baseboard"]){
+						warnings = modelItem["warnings"];
+						break;
+					}
+				} 
+			}
+			if (model["warnings"]){
+				for (var idx in model["warnings"]){
+					warnings.push(model["warnings"][idx]);
+				}
+			}
+			for (var idx in warnings){
+				var warning = warnings[idx];
+
+				var p = document.createElement("p");
+				var i = document.createElement("i");
+				i.className = "material-icons";
+				i.innerHTML = "warning";
+				p.appendChild(i);
+
+				p.innerHTML += "Warning: "+warning;
+				p.style.backgroundColor = "rgba(255,255,0,0.75)";
+				document.getElementById("warnings").appendChild(p);
+			}
+		}
+
+		function getUrlVars() {
+			var vars = {};
+			var parts = location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,    
+			function(m,key,value) {
+				vars[key] = value;
+			});
+			return vars;
+		}
+
+		function capitalizeFirstLetter(string) {
+			return string.charAt(0).toUpperCase() + string.slice(1);
+		}
+
+		window.onload = function(){
+			generateManufacturers();
+
+			$('.collapsible').collapsible();
+			loadManufacturerNames();
+
+			$("#modelsearch").autocomplete({
+				data: modelCodeNames,
+				onAutocomplete: function (codename){
+					var model = null;
+
+					for (var modelIdx in models){
+						var modelItem = models[modelIdx];
+						if (modelItem["codename"] == codename){
+							model = modelItem;
+							break;
+						}
+					}
+
+					var manufacturer = modelItem["manufacturer"];
+
+					document.getElementById(manufacturer).checked = true;
+					changePage("cpu");
+
+					var cpus = chipsets[modelItem["family"]]["cpus"];
+					for (var cpuIdx in cpus){
+						var cpu = cpus[cpuIdx];
+						if ($.inArray(cpu,manufacturers[manufacturer]) != -1){
+							document.getElementById(cpu).checked = true;
+							break;
+						}
+					}
+
+					changePage("model");
+					document.getElementById(codename).checked = true;
+					changePage("guide");
+				}
+			});
+
+			changePage("manufacturer");
+			loadGuideForModel();
+
+			var queryDevice = getUrlVars()["device"];
+			if (queryDevice !== undefined && queryDevice != null){
+				var codename = capitalizeFirstLetter(queryDevice.toLowerCase());
+				var model = null;
+
+				for (var modelIdx in models){
+					var modelItem = models[modelIdx];
+					if (modelItem["codename"] == codename){
+						model = modelItem;
+						break;
+					}
+				}
+
+				if (model["supported"] === false)
+					return;
+
+				if (model == null)
+					return;
+
+				var manufacturer = modelItem["manufacturer"];
+
+				document.getElementById(manufacturer).checked = true;
+				changePage("cpu");
+
+				var cpus = chipsets[modelItem["family"]]["cpus"];
+				for (var cpuIdx in cpus){
+					var cpu = cpus[cpuIdx];
+					if ($.inArray(cpu,manufacturers[manufacturer]) != -1){
+						document.getElementById(cpu).checked = true;
+						break;
+					}
+				}
+
+				changePage("model");
+				document.getElementById(codename).checked = true;
+				changePage("guide");
+			}
+		};
+		</script>
+	</head>
+	<body>
+		<div id="modalbackground">
+		</div>
+		<div id="modalcontainer">
+			<div id="selectmodal" class="modalprompt">
+				<h3 style="text-align: center;">Windows for Chromebooks installation helper</h3>
+				<img class="headerimg" src="chromebooks-2022.png" width="400"/><br>
+				<nav>
+					<div class="nav-wrapper">
+						<div class="col s12" id="breadcrumbitems">
+							<a href="#!" class="breadcrumb">Select Manufacturer</a>
+						</div>
+					</div>
+				</nav>
+				<div class="modalitems">
+					<div class="modalitem input-field" id="manufacturer">
+						<div>
+							If you know the model codename of your chromebook, you may enter it here:
+							<input id="modelsearch"/>
+						</div>
+						<form action="#" id="manufacturerForm">
+						</form>
+						<a class="waves-effect waves-light btn" onclick="changePage('cpu');">Next</a>
+					</div>
+					<div class="modalitem" id="cpu" style="opacity:0;">
+					</div>
+					<div class="modalitem" id="model" style="opacity:0;">
+					</div>
+					<div class="modalitem" id="guide" style="opacity:0;">
+						<h4 id="modelName" style="text-align: center;"></h4>
+						<div id="warnings"></div>
+						<ul class="collapsible collapsible-accordion">
+							<li id="partition">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">developer_mode</i>Developer Mode &amp; Partition</div>
+								<div class="collapsible-body">
+									<ol class="guide">
+										<li>Press Esc + Refresh + Power</li>
+										<li>Press Ctrl + D and press Enter to enable developer mode</li>
+										<li>Press Ctrl + D to boot Chrome OS</li>
+										<li>Open a tab and press Ctrl + Alt + T</li>
+										<li>Type in "shell" and press Enter.</li>
+										<li>Paste the following into the shell and press enter<br><pre>curl https://chrx.org/ | sudo tar xzfC - /usr/local && chrx</pre></li>
+										<li>Follow the instructions to allocate storage space for Windows (Do not run chrx a second time to install Linux).</li>
+									</ol>
+								</div>
+							</li>
+							<li id="rwlegacy">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">developer_mode</i>Update RW_LEGACY &amp; Setup UEFI</div>
+								<div class="collapsible-body">
+									<ol class="guide">
+										<li>If you haven't rebooted already after partitioning with chrx, reboot and press Ctrl + D to let Chrome OS repair itself.</li>
+										<li>Press Ctrl + D to boot Chrome OS</li>
+										<li>Open a tab and press Ctrl + Alt + T</li>
+										<li>Type in "shell" and press Enter.</li>
+										<li>Paste the following into the shell and press enter<br><pre>cd; curl -LO mrchromebox.tech/firmware-util.sh; sudo install -Dt /usr/local/bin -m 755 firmware-util.sh; sudo firmware-util.sh</pre></li>
+										<li>Select "RW_LEGACY" from the options.</li>
+										<li>Paste the following into the shell and press enter<br><pre>cd; curl -LO https://coolstar.org/chromebook/windows-rwl/install-rwl.sh; sudo bash install-rwl.sh</pre></li>
+										<li>Follow the instructions to set up your partition for Windows and install OpenCore with patches</li>
+									</ol>
+								</div>
+							</li>
+							<li id="uefifwjumper">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">developer_mode</i>Developer Mode &amp; Flash Firmware</div>
+								<div class="collapsible-body">
+									<ol class="guide">
+										<li>Turn off your device, open the back and bridge the Write Protect Jumper.</li>
+										<li>Press Esc + Refresh + Power</li>
+										<li>Press Ctrl + D and press Enter to enable developer mode</li>
+										<li>Press Ctrl + D to boot Chrome OS</li>
+										<li>Open a tab and press Ctrl + Alt + T</li>
+										<li>Type in "shell" and press Enter.</li>
+										<li>Paste the following into the shell and press enter<br><pre>cd; curl -LO mrchromebox.tech/firmware-util.sh; sudo install -Dt /usr/local/bin -m 755 firmware-util.sh; sudo firmware-util.sh</pre></li>
+										<li>Select "Full UEFI Firmware" from the options.</li>
+									</ol>
+								</div>
+							</li>
+							<li id="uefifwscrew">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">developer_mode</i>Developer Mode &amp; Flash Firmware</div>
+								<div class="collapsible-body">
+									<ol class="guide">
+										<li>Turn off your device, open the back and remove the Write Protect Screw.</li>
+										<li>Press Esc + Refresh + Power</li>
+										<li>Press Ctrl + D and press Enter to enable developer mode</li>
+										<li>Press Ctrl + D to boot Chrome OS</li>
+										<li>Open a tab and press Ctrl + Alt + T</li>
+										<li>Type in "shell" and press Enter.</li>
+										<li>Paste the following into the shell and press enter<br><pre>cd; curl -LO mrchromebox.tech/firmware-util.sh; sudo install -Dt /usr/local/bin -m 755 firmware-util.sh; sudo firmware-util.sh</pre></li>
+										<li>Select "Full UEFI Firmware" from the options.</li>
+									</ol>
+								</div>
+							</li>
+							<li id="uefifwcr50">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">developer_mode</i>Developer Mode &amp; Flash Firmware</div>
+								<div class="collapsible-body">
+									<ol class="guide">
+										<li>Turn off your device, open the back and disconnect the battery.</li>
+										<li>Press Esc + Refresh + Power</li>
+										<li>Press Ctrl + D and press Enter to enable developer mode</li>
+										<li>Press Ctrl + D to boot Chrome OS</li>
+										<li>Open a tab and press Ctrl + Alt + T</li>
+										<li>Type in "shell" and press Enter.</li>
+										<li>Paste the following into the shell and press enter<br><pre>cd; curl -LO mrchromebox.tech/firmware-util.sh; sudo install -Dt /usr/local/bin -m 755 firmware-util.sh; sudo firmware-util.sh</pre></li>
+										<li>Select "Full UEFI Firmware" from the options.</li>
+										<li>After successful flashing, turn off your device, open the back and disconnect the battery.</li>
+									</ol>
+								</div>
+							</li>
+							<li id="fwupdatewin">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">developer_mode</i>Update Firmware</div>
+								<div class="collapsible-body">
+									<p>
+									    Note: Does not need to be done if you just flashed firmware from Chrome OS or Linux!
+									    To Update Firmware from Inside Windows, you may use this tool:
+										Download: <a href="https://coolstar.org/chromebook/downloads/firmwareutils/CBWinFlash.zip">Link</a>
+									</p>
+								</div>
+							</li>
+						    <li id="installuefi">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">usb</i>Install Windows from USB</div>
+								<div class="collapsible-body">
+									<ol class="guide">
+										<li>On another computer, create a Windows 10 installer with Rufus as "GPT for UEFI"</li>
+										<li>Plug the USB Drive into the chromebook</li>
+										<li>Plug a USB keyboard or mouse in for installation</li>
+										<li>Turn on the chromebook, and let it boot the USB drive</li>
+									</ol>
+									Note: If you need to select a different boot device, press any key in "Select Boot Option". Then select "Boot Manager" to select your boot drive.
+								</div>
+						    </li>
+						    <li id="installrefind">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">usb</i>Install Windows from USB</div>
+								<div class="collapsible-body">
+									<ol class="guide">
+										<li>On another computer, create a Windows 10 or 11 installer with Rufus as "GPT for UEFI"</li>
+										<li>Plug the USB Drive into the chromebook</li>
+										<li>Plug a USB keyboard or mouse in for installation</li>
+										<li>Turn on the chromebook, and let it boot the USB drive</li>
+									</ol>
+									Note: If you need to select a different boot device, select it in rEFInd. Do not press esc on "Select Boot Option" as OpenCore must run patches on boot first.
+								</div>
+						    </li>
+						    <li id="bypassWin11">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">check</i>Bypass Windows 11 installation check</div>
+								<div class="collapsible-body">
+									<ol class="guide">
+										<li>At the Windows installer, press Shift + F10 (Volume Up) to open command prompt</li>
+										<li>Type in "regedit" and press enter</li>
+										<li>Navigate to HKEY_LOCAL_MACHINE\SYSTEM\Setup</li>
+										<li>Right click setup and create a new Key called "LabConfig"</li>
+										<li>Right click LabConfig and create new DWORD (32 bit) called "BypassSecureBootCheck" and set it to 1</li>
+										<li>Right click LabConfig and create new DWORD (32 bit) called "BypassTPMCheck" and set it to 1</li>
+										<li>Close regedit and command prompt and proceed with installation normally</li>
+									</ol>
+									Note: This step is not required for Windows 10.
+								</div>
+						    </li>
+						    <li id="vcredist">
+						    	<div class="collapsible-header" tabindex="0"><i class="material-icons">code</i>Install Visual C++ Redistributable</div>
+								<div class="collapsible-body">
+									<p>
+										Download: <a href="https://aka.ms/vs/17/release/vc_redist.x64.exe">Link</a>
+										<br>
+										Simply run the installer to install the libraries.
+										<br>
+										<b>Note: Several drivers listed below require this to be installed to work properly.</b>
+									</p>
+								</div>
+						    </li>
+						    <li id="cr50i2c">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">security</i>Install CR50 (I2C) TPM Driver</div>
+								<div class="collapsible-body">
+									<p>
+										Download: <a href="https://github.com/coolstar/driverinstallers/raw/master/cr50i2c/cr50i2c.1.0-installer.exe">Link</a>
+										<br>
+										Simply run the installer to install the driver.
+										<br>
+										<b>Note: If you are booting with RW_LEGACY, you MUST install this driver for working sleep/wake</b>
+									</p>
+								</div>
+							</li>
+						    <li id="chromeec">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">memory</i>Install Chrome EC Driver</div>
+								<div class="collapsible-body">
+									<p>
+										Download: <a href="https://github.com/coolstar/driverinstallers/raw/master/crosec/crosec.1.0-installer.exe">Link</a>
+										<br>
+										Simply run the installer to install the driver.
+									</p>
+								</div>
+							</li>
+							<!--<li>
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">edit</i>Enable Testsigning</div>
+								<div class="collapsible-body">
+									<ol class="guide">
+										<li>Open Command Prompt as Administrator</li>
+										<li>Type in the following command: <br><pre>bcdedit -set testsigning on</pre></li>
+										<li>Press Enter</li>
+										<li>Restart Windows</li>
+									</ol>
+								</div>
+							</li>-->
+							<li id="hswrst">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">sd_storage</i>Install Rapid Storage Technology Driver</div>
+								<div class="collapsible-body">
+									<p>
+										Download: <a href="https://downloadcenter.intel.com/download/24501/RAID-Intel-Rapid-Storage-Technology-for-D54250WY-D34010WY">Link</a>
+										<br>
+										(The driver from Windows works, but the one linked on Intel's website is specialized and delivers better battery life).
+									</p>
+								</div>
+							</li>
+							<li id="bytchip">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">memory</i>Install Chipset Driver</div>
+								<div class="collapsible-body">
+									<p>
+										Download: <a href="https://coolstar.org/chromebook/downloads/drivers/BayTrailChipsetDriver-Lenovo.exe">Link</a>
+										<br>
+										The driver I2C from Windows Update does not work. Make sure to install this for working touchpad/touch screen.
+									</p>
+								</div>
+							</li>
+							<li id="bdwrst">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">sd_storage</i>Install Rapid Storage Technology Driver</div>
+								<div class="collapsible-body">
+									<p>
+										Download: <a href="https://downloadcenter.intel.com/download/25910/Intel-Rapid-Storage-Technology-for-Intel-NUC?product=87570">Link</a>
+										<br>
+										(The driver from Windows works, but the one linked on Intel's website is specialized and delivers better battery life).
+									</p>
+								</div>
+							</li>
+							<li id="ryzenchip">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">memory</i>Install AMD Ryzen Chipset Driver</div>
+								<div class="collapsible-body">
+									<p>
+										Download: <a href="https://www.amd.com/en/support/chipsets/socket-fp5-mobile/amd-ryzen-and-athlon-mobile-chipset">Link</a>
+									</p>
+								</div>
+							</li>
+							<li id="ryzengpu">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">monitor</i>Install AMD Vega GPU Driver</div>
+								<div class="collapsible-body">
+									<p>
+										Download: <a href="https://www.amd.com/en/support/apu/amd-ryzen-processors/amd-ryzen-3-mobile-processors-radeon-vega-graphics/amd-ryzen-3-2">Link</a><br>
+										<b>Note: There is a bug that causes high CPU usage. To fix it, go to C:\Windows\System32 and rename clinfo.exe to clinfo2.exe</b>
+  									</p>
+								</div>
+							</li>
+							<li id="celesWorkaround">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">bug_report</i>Workaround Celes Issues</div>
+								<div class="collapsible-body">
+									<ol class="guide">
+										<li>After Windows installation, boot to the installer again</li>
+										<li>Press Shift + F10 to open Command Prompt</li>
+										<li>Type in the following command: <br><pre>bcdedit /set {default} useplatformclock on</pre></li>
+										<li>Press Enter</li>
+										<li>Restart Windows into the installed copy</li>
+									</ol>
+								</div>
+							</li>
+							<li id="keyboard">
+							    <div class="collapsible-header" tabindex="0"><i class="material-icons">keyboard</i>Install Keyboard Remap Utility</div>
+								<div class="collapsible-body">
+									<p>
+									    Note: This utility adds key remppings for your chromebook.
+									    
+										Download: <a href="https://github.com/coolstar/driverinstallers/raw/master/chromebookremap/chromebookremap.1.0.4-installer.exe">Link</a>
+										<br>
+										Simply run the installer to install the utility.
+										
+										List of remappings:
+									    
+									    <ol class="guide">
+									        <li>LCtrl + F1 (Back Arrow): Browser Back</li>
+									        <li>LCtrl + F2 (Forward Arrow): Browser Forward</li>
+									        <li>LCtrl + F3 (Refresh): Browser Refresh/F5</li>
+									        <li>LCtrl + F4 (Full Screen): Full Screen/F11</li>
+									        <li>LCtrl + LShift + F4 (Full Screen): Project/Extend Screen</li>
+									        <li>LCtrl + F5 (Window List): Task View (Windows 10 / 11)</li>
+									        <li>LCtrl + LShift + F5 (Window List): Take Screenshot</li>
+									        <li>LCtrl + F6 (Brightness Down): Brightness Down</li>
+									        <li>LCtrl + F7 (Brightness Up): Brightness Up</li>
+									        <li>LCtrl + LAlt + F6 (Brightness Down): Keyboard Backlight Brightness Down</li>
+									        <li>LCtrl + LAlt + F7 (Brightness Up): Keyboard Backlight Brightness Up</li>
+									        <li>LCtrl + F8 (Volume Mute): Volume Mute</li>
+									        <li>LCtrl + F9 (Volume Down): Volume Down</li>
+									        <li>LCtrl + F10 (Volume Up): Volume Up</li>
+									        <li>LCtrl + Left Arrow: Home</li>
+									        <li>LCtrl + Right Arrow: End</li>
+									        <li>LCtrl + Up Arrow: Page Up</li>
+									        <li>LCtrl + Down Arrow: Down</li>
+									        <li>LCtrl + Backspace: Delete</li>
+									        <li>RCtrl + 1: F1</li>
+									        <li>RCtrl + 2: F2</li>
+									        <li>RCtrl + 3: F3</li>
+									        <li>RCtrl + 4: F4</li>
+									        <li>RCtrl + 5: F5</li>
+									        <li>RCtrl + 6: F6</li>
+									        <li>RCtrl + 7: F7</li>
+									        <li>RCtrl + 8: F8</li>
+									        <li>RCtrl + 9: F9</li>
+									        <li>RCtrl + 0: F10</li>
+									        <li>RCtrl + -: F11</li>
+									        <li>RCtrl + =: F12</l>
+									    </ol><br>
+									</p>
+								</div>
+							</li>
+							<li id="touchpadCommon">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">mouse</i>Install Touchpad Driver</div>
+								<div class="collapsible-body">
+									<p>
+										Download: <a href="https://github.com/coolstar/driverinstallers/raw/master/crostouchpad/crostouchpad.4.1.3-installer.exe">Link</a>
+										<br>
+										Simply run the installer to install the driver.
+									</p>
+								</div>
+							</li>
+							<li id="touchscreenCommon">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">touch_app</i>Install Touch Screen Driver</div>
+								<div class="collapsible-body">
+									<p>
+										Download: <a href="https://github.com/coolstar/driverinstallers/raw/master/crostouchscreen/crostouchscreen.2.9.3-installer.exe">Link</a>
+										<br>
+										Simply run the installer to install the driver.
+									</p>
+								</div>
+							</li>
+							<li id="realtekALC269">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">volume_up</i>Install Realtek HD Audio Driver</div>
+								<div class="collapsible-body">
+									<p>
+										Download: <a href="http://www.realtek.com.tw/downloads/">Link</a>
+										<br>
+										Download and run the installer.
+									</p>
+								</div>
+							</li>
+							<li id="realtekALC5645">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">volume_up</i>Install Realtek SST Audio Driver</div>
+								<div class="collapsible-body">
+									<p>
+										Download: <a href="https://coolstar.org/chromebook/downloads/drivers/alc5645%20audio.exe">Link</a>
+										<br>
+										Download and run the installer.
+									</p>
+								</div>
+							</li>
+							<li id="max98090v2Audio">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">volume_up</i>Maxim 98090 (R11) Audio Driver</div>
+								<div class="collapsible-body">
+									<p>
+										Download: <a href="https://github.com/coolstar/driverinstallers/raw/master/max98090-r11/max98090-r11.1.0.0-installer.exe">Link</a>
+										<br>
+										Download and run the installer.
+									</p>
+								</div>
+							</li>
+							<li id="max98090Audio">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">volume_up</i>Install Maxim 98090 Audio Driver</div>
+								<div class="collapsible-body">
+									<p>
+										Download: <a href="https://github.com/coolstar/driverinstallers/raw/master/max98090/max98090.1.0.4-installer.exe">Link</a>
+										<br>
+										Download and run the installer.
+									</p>
+								</div>
+							</li>
+							<li id="acp3xmax98357aalc5682">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">volume_up</i>CoolStar ACP Audio / Maxim 98357a / Realtek ALC5682</div>
+								<div class="collapsible-body">
+									<p>
+										Download: <a href="https://github.com/coolstar/driverinstallers/raw/master/csaudioacp3x/csaudioacp3x.1.0-installer.exe">Link</a>
+										<br>
+										Download and run the installer.
+									</p>
+								</div>
+							</li>
+							<li id="realtekALC5677">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">volume_up</i>CoolStar SST Audio / Realtek ALC5677</div>
+								<div class="collapsible-body">
+									<p>
+										Download: <a href="https://github.com/coolstar/driverinstallers/raw/master/csaudiosstcatpt/csaudiosstcatpt.1.0-installer.exe">Link</a>
+										<br>
+										Download and run the installer.
+									</p>
+								</div>
+							</li>
+							<li id="avsAudio">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">volume_up</i>CoolStar AVS Audio / Maxim 98357a / Dialog 7219 / Nuvoton NAU8825 / Analog SSM4567 / Realtek ALC5682</div>
+								<div class="collapsible-body">
+									<p>
+										Coming soon! Check back around mid-October!
+									</p>
+								</div>
+							</li>
+							<li id="usbAudio">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">volume_up</i>Audio Card</div>
+								<div class="collapsible-body">
+									<p>Purchase an audio card here: <a  href="https://www.amazon.com/Sabrent-External-Adapter-Windows-AU-MMSA/dp/B00IRVQ0F8/ref=sr_1_5">https://www.amazon.com/Sabrent-External-Adapter-Windows-AU-MMSA/dp/B00IRVQ0F8/ref=sr_1_5</a></p>
+								</div>
+							</li>
+							<li id="brcmsdcard">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">sd_storage</i>SD Card Reader</div>
+								<div class="collapsible-body">
+									<p>Download the SD Card reader driver here: <a href="http://global-download.acer.com/GDFiles/Driver/CardReader/CardReader_Broadcom_16.0.2.8_W81x64_A.zip?acerid=635171441124450294&Step1=NETBOOK,%20CHROMEBOOK&Step2=ASPIRE%20ONE&Step3=AO756&OS=ALL&LC=en&BC=ACER&SC=AAP_1">Link</a></p>
+								</div>
+							</li>
+							<li id="utcTime">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">watch</i>Set UTC Time</div>
+								<div class="collapsible-body">
+									<ol class="guide">
+										<li>Search for and run "regedit"</li>
+										<li>Navigate to HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation</li>
+										<li>Right click TimeZoneInformation and create new DWORD (32 bit) called "RealTimeIsUniversal" and set it to 1</li>
+										<li>Reboot Windows</li>
+									</ol>
+									Note: This step is required to keep the clock in sync when dual booting Windows and Chrome OS
+								</div>
+							</li>
+							<li id="tinySolderedStorage">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">sd_storage</i>Compress Installation</div>
+								<div class="collapsible-body">
+									<p>To free up storage, compress Windows 10 / 11 by running the following in an Admin Command Prompt:<br><br>
+										<span>compact.exe /compactos:always</span>
+									</p>
+								</div>
+							</li>
+							<!--<li id="donate">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">payment</i>Donate</div>
+								<div class="collapsible-body">
+									<p>
+										If you like running Windows on your chromebook, please donate if you are able to do so. I have made these drivers and the BIOS available free of charge and am relying on donations to be able to get Windows running on more chromebooks (Pixel 2, Dell Chromebook 13).<br>
+										Please donate here: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AR25GXJD45KBW&lc=US&item_name=CoolStar%20Chromebook%20Dev%2e&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted">Link</a>
+									</p>
+								</div>
+							</li>-->
+							<li id="support-chat">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">chat</i>Discord Discussion</div>
+								<div class="collapsible-body">
+									<p>Feel free to join our discord to discuss: <a href="https://discord.gg/tkPTk5w">https://discord.gg/tkPTk5w</a></p>
+								</div>
+							</li>
+							<li id="support">
+								<div class="collapsible-header" tabindex="0"><i class="material-icons">live_help</i>Support</div>
+								<div class="collapsible-body">
+									<p>For Support, please see: <a href="https://reddit.com/r/chrultrabook">https://reddit.com/r/chrultrabook</a></p>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,38 @@
+{
+	"files": [
+		"win11.css",
+		"win11.json",
+		"amd.svg",
+		"intel.svg",
+		"verified.svg",
+		"chromebooks.png",
+		"index.html",
+		"macos.html",
+		"windows.html",
+		"windows-install.html"
+	],
+	"images": [
+		"chromebooks-2024@2x.png",
+		"chromebooks-2024@2x.webp",
+		"chromebooks-2024@3x.png",
+		"chromebooks-2024@3x.webp",
+		"chromebooks-2024.png",
+		"chromebooks-2024.webp",
+		"macos@2x.jpg",
+		"macos@2x.webp",
+		"macos@3x.jpg",
+		"macos@3x.webp",
+		"macos.jpg",
+		"macos-orig.png",
+		"macos.webp",
+		"windows11@2x.jpg",
+		"windows11@2x.webp",
+		"windows11@3x.webp",
+		"windows11.jpg",
+		"windows11.webp"
+	],
+	"reactorgame": [
+		"reactor.css",
+		"reactor.js"
+	]
+}

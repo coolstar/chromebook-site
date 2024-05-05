@@ -1,0 +1,152 @@
+/**
+ * Style.css
+ * By @SmolZoey and @CStar_OW
+ **/
+
+/** Helper classes **/
+.hidden {
+  visibility: hidden;
+}
+
+.center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.center img {
+  width: 100%;
+  height: 100%;
+}
+
+/** Reactor game **/
+#reactor_game {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  top: 30px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.reactorplaceholder {
+  width:  500px;
+  height: 600px;
+  display: inline-block;
+}
+
+@media (orientation: landscape) {
+  #reactor_game {
+    flex-direction: row;
+  }
+
+  .reactorplaceholder {
+    width: 500px;
+    height: 340px;
+    display: inline-block;
+  }
+}
+
+#reactor_game .reactor_keypad {
+  display: flex;
+  width: 249px;
+  height: 285px;
+  position: relative;
+  margin: 5px;
+}
+
+#reactor_game .reactor_container {
+  position: absolute;
+  margin-top: 25px;
+  margin-left: 30px;
+  width: 193px;
+  height: 232px;
+}
+
+#reactor_game .reactor_lights {
+  width: 159px;
+  height: 30px;
+  margin-top: 15px;
+  margin-left: 15px;
+  display: flex;
+}
+
+#reactor_game .reactor_lights.denied .reactor_light {
+  background-color: #CF3103;
+}
+
+#reactor_game .reactor_lights .reactor_light.green {
+  background-color: #06BF06;
+}
+
+#reactor_game .reactor_lights .reactor_light {
+  background-color: #6A6A6A88;
+  width: 22px;
+  height: 22px;
+  border-radius: 100%;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+#reactor_game .reactor_input {
+  width: 160px;
+  height: 160px;
+  margin-top: 15px;
+  margin-left: 15px;
+}
+
+#reactor_game .reactor_buttons {
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+  justify-content: space-between;
+  width: 145px;
+  height: 145px;
+  bottom: 20px;
+  left: 20px;
+}
+
+#reactor_game .reactor_button {
+  width: 40px;
+  height: 40px;
+}
+
+#reactor_game .game_keypad .reactor_button  {
+  width: 45px;
+  height: 45px;
+}
+
+#reactor_game .reactor_button.light {
+  background-color: #48AAFF !important;
+}
+
+#reactor_game .user_keypad .reactor_buttons.denied .reactor_button {
+  background-color: #CF3103;
+}
+
+#reactor_game .user_keypad .reactor_buttons.disabled .reactor_button {
+  background-color: #6A6A6A44;
+}
+
+#reactor_game .user_keypad .reactor_buttons .reactor_button {
+  background-color: #bdbdbd;
+}
+
+.reactor_background {
+  width: 249px;
+  height: 283px;
+  border-radius: 10px;
+  backdrop-filter: blur(30px);
+  background: linear-gradient(#adaaad55 0%, #84858455 100%);
+}
+
+.reactor_input {
+  background: black;
+  border-color: white;
+  border-width: 2px;
+}
