@@ -9,7 +9,8 @@
 		"index.html",
 		"macos.html",
 		"windows.html",
-		"windows-install.html"
+		"windows-install.html",
+		"C720-macos.png"
 	],
 	"images": [
 		"chromebooks-2024@2x.png",
