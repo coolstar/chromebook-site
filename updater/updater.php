@@ -12,6 +12,16 @@
 		}
 	}
 
+	echo "Last Updated: ".filemtime("updated.txt")."<br>\n";
+	echo "Current Time: ".time()."<br>\n";
+	$interval = (time() - filemtime("updated.txt"));
+	echo "Interval: ".$interval."<br>\n";
+	if ($interval < 60){
+		die("<span style='color: red;'>Rate limiting. Please wait 1 minute and retry.</span>");
+	}
+
+	touch("updated.txt");
+
 	$baseURL = "https://raw.githubusercontent.com/coolstar/chromebook-site/main/";
 	$manifest = $baseURL."/manifest.json?rand=".mt_rand();
 	$zipURL = "https://github.com/coolstar/chromebook-site/archive/refs/heads/main.zip?rand=".mt_rand();
