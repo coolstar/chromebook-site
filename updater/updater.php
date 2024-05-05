@@ -12,11 +12,9 @@
 		}
 	}
 
-	echo "Last Updated: ".filemtime("updated.txt")."<br>\n";
-	echo "Current Time: ".time()."<br>\n";
 	$interval = (time() - filemtime("updated.txt"));
-	echo "Interval: ".$interval."<br>\n";
-	if ($interval < 60){
+	echo "Time since last update: ".$interval."<br>\n";
+	if ($interval < 300){
 		die("<span style='color: red;'>Rate limiting. Please wait 1 minute and retry.</span>");
 	}
 
