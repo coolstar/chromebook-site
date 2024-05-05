@@ -1,11 +1,10 @@
 {
 	".": [
 		"win11.css",
-		"win11.json",
+		"win11.js",
 		"amd.svg",
 		"intel.svg",
 		"verified.svg",
-		"chromebooks.png",
 		"index.html",
 		"macos.html",
 		"windows.html",
