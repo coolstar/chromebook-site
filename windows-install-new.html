@@ -1,0 +1,2518 @@
+<html>
+	<head>
+		<title>How to install Windows 10/11 on a Chromebook</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<link rel='preload' href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300&display=swap' type='text/css' as='style' onload="this.onload=null;this.rel='stylesheet'">
+		<noscript>
+			<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300&display=swap' rel='stylesheet' type='text/css'>
+		</noscript>
+		<link rel="stylesheet" href="win11.css">
+		<link rel="stylesheet" href="reactorgame/reactor.css">
+
+		<meta name="description" content="Guide on how to install Windows 10 or Windows 11 on a chromebook">
+
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" data-cfasync="false"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js" data-cfasync="false"></script>
+		<!-- Compiled and minified JavaScript -->
+		<script src="win11.js" data-cfasync="false"></script>
+		<script src="reactorgame/reactor.js"></script>
+		<link rel='preload' href='https://fonts.googleapis.com/icon?family=Material+Icons&display=swap' type='text/css' as='style' onload="this.onload=null;this.rel='stylesheet'">
+		<noscript>
+			<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		</noscript>
+
+		<script type="text/javascript" data-cfasync="false">
+			String.prototype.toProperCase = function () {
+				return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+			};
+		</script>
+
+		<link href='../css.css' rel='stylesheet' type='text/css'>
+		<style type="text/css">
+		body {
+			background-attachment: fixed;
+			overflow-x: hidden;
+			width: 100%;
+			height: 100%;
+		}
+		#bg-image {
+			background-image: url('../images/wallpaper-windows.jpg');
+			@supports (background-image: url('../images/wallpaper-windows.webp')) {
+				background-image: url('../images/wallpaper-windows.webp');
+			}
+			-webkit-filter: blur(5px);
+			-moz-filter: blur(5px);
+			-o-filter: blur(5px);
+			-ms-filter: blur(5px);
+			filter: blur(5px);
+
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			top:  0px;
+			left: 0px;
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: 50% 50%;
+			will-change: transform;
+			z-index: -2;
+		}
+		.ui-autocomplete {
+			background-color: var(--select-items-background-color);
+			border-radius: 5px;
+			border: var(--select-items-border-color) 1px solid;
+			box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+			position: absolute;
+			display: block;
+			padding: 0;
+			margin: 0;
+			z-index: 4;
+		}
+		.ui-autocomplete li {
+			font-size: 16px;
+			color: var(--text-color);
+			display: block;
+			line-height: 22px;
+			padding: 7px 13px;
+			margin: 3px;
+			border: transparent 1px solid;
+			border-radius: 5px;
+
+			clear: both;
+		}
+		.ui-autocomplete li:hover {
+			background-color: var(--select-item-highlight-background-color);
+		}
+		.ui-helper-hidden-accessible {
+			display: none;
+		}
+		</style>
+		<style type="text/css">
+		.working {
+			background-color: rgba(0,255,0, 0.7);
+		}
+		.partial {
+			background-color: rgba(170,255,0, 0.7);
+		}
+		.untested {
+			background-color: rgba(255,255,0, 0.7);
+		}
+		.broken {
+			background-color: rgba(255,0,0, 0.7);
+		}
+		h1 {
+			font-weight: normal;
+		}
+		h3 {
+			padding-top: 20px;
+			font-weight: normal;
+			font-size: 22pt;
+		}
+		h4 {
+			font-weight: normal;
+		}
+		table, td, th {
+			border: 1px solid rgb(128, 128, 160);
+		}
+		th {
+			background-color: rgba(128, 128, 160, 0.4);
+		}
+		pre {
+			background: #1b1b1b;
+			color: #72e0d1;
+			white-space: pre-wrap;
+			padding: 10px;
+		}
+		.warning {
+			background-color: rgba(255,255,0,0.75);
+			margin-bottom: 10px;
+			display: table;
+			width: 100%;
+			border-radius: 10px;
+		}
+		.warning img, .warning .material-icons {
+			padding: 5px;
+			vertical-align: middle;
+		}
+		.warning span {
+
+		}
+		#modelName {
+			font-size: 18pt;
+			line-height: 110%;
+			margin: 1.52rem 0 .912rem 0
+		}
+		.modalitems {
+			position: relative;
+		}
+		.modalitem {
+			position: relative;
+			float: left;
+			top: 10px;
+			transition: opacity 0.25s;
+			-webkit-transition: opacity 0.25s; /* Safari */
+			-moz-transition: opacity 0.25s; /* Firefox */
+			-ms-transition: opacity 0.25s; /* IE */
+		}
+		.modalslider {
+			position: relative;
+			width: 500%;
+			transition: left 0.5s;
+			-webkit-transition: left 0.5s; /* Safari */
+			-moz-transition: left 0.5s; /* Firefox */
+			-ms-transition: left 0.5s; /* IE */
+		}
+		#modalbackground {
+			position: fixed;
+			background: green;
+			z-index: -1;
+		}
+		#heading {
+			transition: background 0.5s;
+		}
+		#modalcontainer {
+			transition: left 0.5s;
+		}
+		#mainbody {
+			transition: filter 0.5s;
+			padding-top: 10px;
+		}
+		#guide {
+			max-width: 800px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		:root {
+			--blur-overlay: rgba(255, 255, 255, 0.5);
+		}
+
+		::-webkit-scrollbar {
+			width: 13px;
+		}
+
+		::-webkit-scrollbar-track {
+			background: transparent;
+		}
+
+		::-webkit-scrollbar-thumb {
+			border: 5px solid rgba(0, 0, 0, 0);
+			border-radius: 9999px;
+			background: #8a8586;
+			background-clip: padding-box;
+		}
+
+		::-webkit-scrollbar-thumb:hover {
+			border: 3px solid rgba(0, 0, 0, 0);
+			background: #8b898a;
+			background-clip: padding-box;
+		}
+
+		#heading {
+			height: 80px;
+			background-color: var(--blur-overlay);
+		}
+
+		#heading .button {
+			border-radius: 5px;
+			width: 24px;
+			height: 24px;
+			vertical-align: middle;
+			position: relative;
+			padding: 8px;
+			display: inline-block;
+			margin-right: 8px;
+			color: rgba(0,0,0,0.5);
+		}
+		#heading .button-selected {
+			color: rgba(0,0,0, 1);
+		}
+		#heading .button:hover {
+			background: var(--menu-highlight-color);
+		}
+
+		#modalbackground {
+			width: 800px;
+			height: 100%;
+			top: 80px;
+			left: calc(50% - 400px);
+		}
+
+		@media (max-width: 670px){
+			h3 {
+				font-size: 16pt;
+				padding-top: 10px;
+			}
+			#heading {
+				height: 50px;
+			}
+			#heading .button {
+				margin-top: 5px;
+				margin-left: 5px;
+			}
+			.headerimg {
+				margin-left: auto;
+				margin-right: auto;
+				display: block;
+			}
+			#modalcontainer {
+				left: 0px;
+				top: 50px;
+				width: 100%;
+				height: calc(100% - 50px);
+				text-align: left;
+				display: table;
+				position: absolute;
+				z-index: 3;
+				background-color: var(--blur-overlay);
+				overflow: hidden scroll;
+			}
+
+			#modalcontainer.collapsed-left {
+				left: -100% !important;
+			}
+
+			#mainbody {
+				left: 0px;
+				top: 50px;
+				width: 100%;
+				height: calc(100% - 50px);
+				position: absolute;
+				z-index: 1;
+				overflow: hidden scroll;
+				filter: blur(4px);
+			}
+			#mainbody.collapsed-left {
+				filter: none;
+			}
+			.modalprompt {
+				width: 100%;
+				height: 100%;
+				margin: auto;
+			}
+			.modalitem {
+				width: 20%;
+			}
+			.selectword {
+				display: none;
+			}
+		}
+
+		@media (min-width: 671px){
+			.headerimg {
+				margin-left: auto;
+				margin-right: auto;
+				display: block;
+			}
+			.headerimg-panel {
+				display: none;
+			}
+
+			#modalcontainer {
+				width: 540px;
+				background-color: var(--blur-overlay);
+				text-align: left;
+				overflow: hidden scroll;
+			}
+
+			.modalprompt {
+				width: 500px;
+				margin: auto;
+			}
+			.input-field {
+				margin-left: 30px;
+				margin-right: 30px;
+				width: 440px;
+			}
+			.modalitem {
+				margin-left: 30px;
+				margin-right: 30px;
+				width: 440px;
+			}
+		}
+
+		@media (min-width: 671px) and (max-width: 1249px) {
+			#heading.collapsed-left {
+				background-color: transparent;
+			}
+
+			#heading .button {
+				margin-top: 20px;
+				margin-left: 20px;
+			}
+			#modalcontainer {
+				left: 0px;
+				top: 80px;
+				height: calc(100% - 80px);
+				position: absolute;
+				z-index: 3;
+				border-right: 1px solid var(--accent-color);
+			}
+
+			#modalcontainer.collapsed-left {
+				left: -100% !important;
+			}
+
+			#modalclickhandler {
+				left: 0px;
+				top: 80px;
+				width: 100%;
+				height: calc(100% - 80px);
+				position: absolute;
+				z-index: 2;
+			}
+
+			#modalclickhandler.collapsed-left {
+				display: none;
+			}
+
+			#mainbody {
+				left: 0px;
+				top: 100px;
+				width: 100%;
+				height: calc(100% - 100px);
+				position: absolute;
+				z-index: 1;
+				overflow: hidden scroll;
+				filter: blur(4px);
+			}
+
+			#mainbody.collapsed-left {
+				filter: none;
+			}
+		}
+		@media (min-width: 1250px){
+			#heading .button {
+				visibility: hidden;
+			}
+			#modalcontainer {
+				height: calc(100% - 80px);
+				float: left;
+			}
+			#mainbody {
+				width: calc(100% - 550px);
+				height: calc(100% - 80px);
+				float: right;
+				overflow: hidden scroll;
+			}
+		}
+		nav {
+			text-align: left;
+		}
+		.nav-wrapper {
+			margin-left: 16px;
+		}
+
+		.guide li {
+			list-style-type: decimal;
+		}
+
+		.device {
+			display: none;
+		}
+
+		:root {
+			--win1011-gradient: linear-gradient(90deg, rgba(0,200,0, 0.7) 50%, rgba(0,200,0, 0.7) 50%);
+			--win10-gradient: linear-gradient(90deg, rgba(0,200,0, 0.7) 50%, rgba(200,0,0, 0.7) 50%);
+			--win11-gradient: linear-gradient(90deg, rgba(200,0,0, 0.7) 50%, rgba(0,200,0, 0.7) 50%);
+			--win10partial11-gradient: linear-gradient(90deg, rgba(0,200,0, 0.7) 50%, rgba(255, 153, 0, 0.7) 50%);
+			--win1011-experimental-gradient: linear-gradient(90deg, rgba(255, 153, 0, 0.7) 50%, rgba(255, 153, 0, 0.7) 50%);
+		}
+
+		#supportmatrix {
+			display: flex;
+		}
+		.supportmatrixos {
+			height: 50px;
+			vertical-align: middle;
+			margin: auto;
+		}
+		.supportmatrixos img {
+			float: left;
+			padding-right: 10px;
+			padding-left: 0px;
+		}
+		.supportmatrixos span {
+			float: right;
+			height: 50px;
+			line-height: 50px;
+			color: gray;
+			mix-blend-mode: difference;
+		}
+		</style>
+		<script type="text/javascript" src="cbmodels-data.js"></script>
+		<script type="text/javascript" data-cfasync="false">
+		var pageslist = ["manufacturer","cpu","model"];
+
+		function updateBreadCrumbs(pageName){
+			var breadcrumbs = {
+				"manufacturer":"<span class='selectword'>Select </span>Manufacturer",
+				"cpu":"<span class='selectword'>Select </span>CPU",
+				"model":"<span class='selectword'>Select </span>Model"
+			};
+			var breadcrumbitems = document.getElementById("breadcrumbitems");
+			breadcrumbitems.innerHTML="";
+			for (var key in breadcrumbs){
+				var breadcrumb = document.createElement("div");
+				breadcrumb.className="breadcrumb";
+				breadcrumb.innerHTML = breadcrumbs[key];
+				breadcrumb.setAttribute("onclick","changePage('"+key+"');");
+
+				breadcrumbitems.appendChild(breadcrumb);
+
+				if (pageName == key)
+					return;
+			}
+		}
+
+		function changePage(pageName){
+			var foundPage = false;
+			var pageIdx = 0;
+			for (var idx = 0;idx < pageslist.length;idx++){
+				var pageItemName = pageslist[idx];
+				var page = document.getElementById(pageItemName);
+				if (pageItemName == pageName){
+					foundPage = true;
+					pageIdx = idx;
+					page.style.opacity = "";
+					page.style.visibility = "";
+				} else if (foundPage){
+					page.style.opacity="0";
+					setTimeout(function(){
+						if (page.style.opacity == "0")
+							page.style.visibility = "hidden";
+					}, 250);
+				} else {
+					page.style.opacity="0";
+					setTimeout(function(){
+						if (page.style.opacity == "0")
+							page.style.visibility = "hidden";
+					}, 250);
+				}
+			}
+			var pageSlider = document.getElementById("modalslider");
+			pageSlider.style.left = (-(pageIdx * 100)) + "%";
+			updateBreadCrumbs(pageName);
+			if (pageName == "cpu")
+				loadCPUsForManufacturer();
+			if (pageName == "model")
+				loadModelsForCPUAndManufacturer();
+			scrollTo(0,200);
+		}
+
+		function chipsetForCPU(cpuName){
+			for (var chipset in chipsets){
+				for (var cpuIdx in chipsets[chipset]["cpus"]){
+					var cpu = chipsets[chipset]["cpus"][cpuIdx];
+					if (cpu == cpuName)
+						return chipset;
+				}
+			}
+		}
+
+		function loopVariants(callback){
+			for (var baseboardIdx in baseboards){
+				var baseboard = baseboards[baseboardIdx];
+
+				var variants = baseboard["variants"];
+				for (var variantIdx in variants){
+					var variant = variants[variantIdx];
+
+					if (callback(baseboard, variant) === false)
+						break;
+				}
+			}
+		}
+
+		function loopInfos(callback){
+			loopVariants(function(baseboard, variant){
+				var infos = variant["info"];
+				for (var infoIdx in infos){
+					var info = infos[infoIdx];
+
+					if (callback(baseboard, variant, info) === false)
+						return false;
+				}
+			});
+		}
+
+		function loadManufacturerNames(){
+			var manufacturerNames = [];
+
+			window.modelCodeNames = [];
+
+			loopInfos(function(baseboard, variant, info){
+				var codename = variant["codename"];
+
+				modelCodeNames.push(codename);
+
+				var manufacturer = info["manufacturer"];
+				if (manufacturerNames.indexOf(manufacturer) === -1){
+					manufacturerNames.push(manufacturer);
+				}
+			});
+
+			manufacturerNames.sort();
+			topManufacturers.sort();
+			manufacturerNames = manufacturerNames.filter(function(item){ return topManufacturers.indexOf(item) === -1; });
+			manufacturerNames = topManufacturers.concat(manufacturerNames);
+
+			manufacturerNames.push("white label");
+
+			var manufacturerForm = document.getElementById("manufacturerForm");
+			manufacturerForm.innerHTML = "";
+			for (var manufacturerIdx in manufacturerNames){
+				var manufacturer = manufacturerNames[manufacturerIdx];
+				var paragraph = document.createElement("p");
+
+				var label = document.createElement("label");
+				label.className = "checkboxLabel";
+
+				var input = document.createElement("input");
+				input.name = "manufacturer";
+				input.type = "radio";
+				input.id = manufacturer;
+
+				var span = document.createElement("span");
+				span.innerHTML = manufacturer.toProperCase();
+
+				label.appendChild(input);
+				label.appendChild(span);
+
+				if (!document.getElementById("showAllManufacturers").checked && topManufacturers.indexOf(manufacturer) === -1){
+					label.style.display = "none";
+				} else if (manufacturer == "white label"){
+					label.style.display = "none";
+				}
+
+				paragraph.appendChild(label);
+
+				manufacturerForm.appendChild(paragraph);
+			}
+		}
+
+		function generateManufacturers(){
+			loopInfos(function(baseboard, variant, info){
+				var codename = variant["codename"];
+
+				var manufacturer = info["manufacturer"].toLowerCase();
+				if (manufacturers[manufacturer] === undefined){
+					manufacturers[manufacturer] = [];
+				}
+
+				var chipset = chipsets[baseboard["family"]];
+				if (chipset["supported"] === false){
+					return;
+				}
+
+				var cpus = chipset["cpus"];
+				for (var cpuIdx in cpus){
+					var cpu = cpus[cpuIdx];
+					if (!manufacturers[manufacturer].includes(cpu)){
+						manufacturers[manufacturer].push(cpu);
+					}
+				}
+			});
+		}
+
+		function loadCPUsForManufacturer(){
+			var manufacturer = document.querySelector('input[name = "manufacturer"]:checked').id;
+			var cpus = [];
+			if (manufacturers[manufacturer] !== undefined){
+				cpus = manufacturers[manufacturer].slice().reverse();;
+			} else {
+				for (var chipsetName in chipsets){
+					var chipset = chipsets[chipsetName];
+
+					cpus = cpus.concat(chipset["cpus"]);
+				}
+				cpus = cpus.reverse();
+			}
+
+			document.getElementById("cpu").innerHTML="";
+
+			var cpusForm = document.createElement("form");
+
+			for (var idx = 0;idx < cpus.length;idx++){
+				var cpu = cpus[idx];
+
+				var paragraph = document.createElement("p");
+
+				var label = document.createElement("label");
+				label.className = "checkboxLabel";
+
+				var input = document.createElement("input");
+				input.name = "cpu";
+				input.type = "radio";
+				input.id = cpu;
+
+				var chipset = chipsetForCPU(cpu);
+				if (chipsets[chipset]["supported"] === false)
+					input.disabled = true;
+
+				var span = document.createElement("span");
+				span.innerHTML = cpu;
+
+				label.appendChild(input);
+				label.appendChild(span);
+
+				paragraph.appendChild(label);
+
+				cpusForm.appendChild(paragraph);
+			}
+
+			var formPanel = document.createElement("div");
+			formPanel.className = "child-panel child-panel-top";
+
+			var formPanelContent = document.createElement("div");
+			formPanelContent.className = "panel-content";
+
+			formPanel.appendChild(formPanelContent);
+
+			formPanelContent.appendChild(cpusForm);
+
+			document.getElementById("cpu").appendChild(formPanel);
+
+			var buttonPanel = document.createElement("div");;
+			buttonPanel.className = "child-panel";
+
+			var buttonPanelAccessory = document.createElement("div");
+			buttonPanelAccessory.className = "panel-accessory";
+			buttonPanel.appendChild(buttonPanelAccessory);
+
+			var nextbtn = document.createElement("button");
+			nextbtn.setAttribute("onclick","changePage('model');");
+			nextbtn.innerHTML="Next";
+
+			buttonPanelAccessory.appendChild(nextbtn);
+
+			document.getElementById("cpu").appendChild(buttonPanel);
+		}
+
+		function loadModelsForCPUAndManufacturer(){
+			var manufacturer = document.querySelector('input[name = "manufacturer"]:checked').id;
+			var chipset = null;
+			if (manufacturer !== "white label"){
+				var cpu = document.querySelector('input[name = "cpu"]:checked').id;
+				chipset = chipsetForCPU(cpu);
+			}
+
+			var infoList = [];
+
+			loopVariants(function(baseboard, variant){
+				var codename = variant["codename"];
+				var infos = variant["info"];
+				for (var infoIdx in infos){
+					var info = infos[infoIdx];
+					if (manufacturer === "white label" && infos.length > 1){
+						info["codename"] = codename;
+						if (baseboard["supported"] === false)
+							info["supported"] = false;
+
+						infoList.push(info);
+					} else if (info["manufacturer"] == manufacturer && baseboard["family"] == chipset){
+						info["codename"] = codename;
+						if (baseboard["supported"] === false)
+							info["supported"] = false;
+
+						infoList.push(info);
+					}
+				}
+			});
+
+			document.getElementById("model").innerHTML="";
+
+			var modelsForm = document.createElement("form");
+
+			for (var idx = 0;idx < infoList.length;idx++){
+				var info = infoList[idx];
+
+				var paragraph = document.createElement("p");
+
+				var label = document.createElement("label");
+				label.className = "checkboxLabel";
+
+				var input = document.createElement("input");
+				input.name = "model";
+				input.type = "radio";
+				input.id = info["codename"];
+				if (info["supported"] === false)
+					input.disabled = true;
+
+				var span = document.createElement("span");
+				span.innerHTML = info["manufacturer"].toProperCase() + " " + info["name"];
+
+				label.appendChild(input);
+				label.appendChild(span);
+
+				paragraph.appendChild(label);
+
+				modelsForm.appendChild(paragraph);
+			}
+
+			var formPanel = document.createElement("div");
+			formPanel.className = "child-panel child-panel-top";
+
+			var formPanelContent = document.createElement("div");
+			formPanelContent.className = "panel-content";
+
+			formPanel.appendChild(formPanelContent);
+
+			formPanelContent.appendChild(modelsForm);
+
+			document.getElementById("model").appendChild(formPanel);
+
+			var buttonPanel = document.createElement("div");;
+			buttonPanel.className = "child-panel";
+
+			var buttonPanelAccessory = document.createElement("div");
+			buttonPanelAccessory.className = "panel-accessory";
+			buttonPanel.appendChild(buttonPanelAccessory);
+
+			var nextbtn = document.createElement("button");
+			nextbtn.setAttribute("onclick","loadGuideForModel();");
+			nextbtn.innerHTML="Next";
+
+			buttonPanelAccessory.appendChild(nextbtn);
+
+			document.getElementById("model").appendChild(buttonPanel);
+		}
+
+		function generateModel(baseboard, variant, info){
+			var model = Object.create(baseboard);
+			model["codename"] = variant["codename"];
+
+			var devices = model["devices"].slice();
+			if (variant["devices"]){
+				for (var idx in variant["devices"]){
+					devices.push(variant["devices"][idx]);
+				}
+			}
+			if (variant["removeDevices"]){
+				var rmDevices = variant["removeDevices"];
+				for (var idx in rmDevices){
+					let rmDevice = rmDevices[idx];
+					devices = devices.filter(function(item){ return item !== rmDevice; });
+				}
+			}
+			model["devices"] = devices;
+
+			var warnings = [];
+			if (model["warnings"]){
+				for (var idx in model["warnings"]){
+					warnings.push(model["warnings"][idx]);
+				}
+			}
+			if (variant["warnings"]){
+				for (var idx in variant["warnings"]){
+					warnings.push(variant["warnings"][idx]);
+				}
+			}
+			model["warnings"] = warnings;
+
+			if (info != undefined){
+				model["name"] = info["name"];
+				model["manufacturer"] = info["manufacturer"];
+			} else {
+				model["name"] = baseboard["family"].toProperCase() + " Chromebook";
+				model["manufacturer"] = "white label";
+			}
+			return model;
+		}
+
+		function loadGuideForModel(){
+			var codename = null;
+			var manufacturer = null;
+			try {
+				codename = document.querySelector('input[name = "model"]:checked').id;
+				manufacturer = document.querySelector('input[name = "manufacturer"]:checked').id;
+			} catch (e) {
+
+			}
+			var model = null;
+
+			loopInfos(function(baseboard, variant, info){
+				if (variant["codename"] == codename){
+					if (variant["info"].count == 1){
+						manufacturer = info["manufacturer"];
+					}
+
+					var specificInfo = null;
+					if (manufacturer != null && info["manufacturer"] === manufacturer){
+						specificInfo = info;
+					}
+
+					model = generateModel(baseboard, variant, specificInfo);
+					return false;
+				}
+			});
+
+			var devices = [
+				"partition",
+				"rwlegacy",
+				"uefifwjumper",
+				"uefifwscrew",
+				"uefifwcr50",
+				"uefifwcr50jumper",
+				"uefifwti50",
+				"fwupdatewin",
+				"installuefi-win10",
+				"installuefi-win1011",
+				"installuefi-win11",
+				"installrefind",
+				"bypassWin11",
+				"vcredist",
+				"cr50",
+				"chromeec",
+				"inteltbt4",
+				"bayhubemmc",
+				"testsigning",
+				"hswrst",
+				"bytchip",
+				"bdwrst",
+				"cmlrst",
+				"gmbusi2c",
+				"ryzenchip",
+				"cmljsltgladlchip",
+				"stoneygpu",
+				"picassogpu",
+				"cezannegpu",
+				"mendocinogpu",
+				"jslgpu",
+				"tglgpu",
+				"adlwifi",
+				"celesWorkaround",
+				"wilcokeyboard",
+				"croskeyboard",
+				"touchpadCommon",
+				"touchscreenCommon",
+				"creativeCA0132",
+				"realtekALC269",
+				"realtekALC295",
+				"realtekALC5645",
+				"max98090Audio",
+				"max98090v2Audio",
+				"acp2x",
+				"acp3x",
+				"realtekALC5677",
+				"avsAudio",
+				"intelSofAudio",
+				"amdSofAudio",
+				"brcmsdcard",
+				"tinySolderedStorage",
+				"utcTime"
+			];
+
+			if (model == null && document.getElementById("guide").style.opacity != "0"){
+				return;
+			}
+
+			for (var idx in devices){
+				var device = devices[idx];
+				document.getElementById(device).style.display="none";
+			}
+
+			if (model == null){
+				return;
+			}
+
+
+			document.getElementById("supportmatrix").style.background = "";
+			document.getElementById("supporthelptext").innerHTML = "No Windows support.";
+
+			document.getElementById("vcredist").style.display = "block";
+
+			if (model["family"] == "sandybridge" ||
+				model["family"] == "ivybridge")
+			{
+				document.getElementById("uefifwjumper").style.display = "block";
+				document.getElementById("installuefi-win10").style.display = "block";
+				document.getElementById("supportmatrix").style.background = "var(--win10-gradient)";
+				document.getElementById("supporthelptext").innerHTML = "Only Windows 10 supported. No support for Windows 11.";
+			}
+
+			if (model["family"] == "haswell" ||
+				model["family"] == "baytrail" ||
+				model["family"] == "broadwell" ||
+				model["family"] == "braswell")
+			{
+				document.getElementById("uefifwscrew").style.display = "block";
+				document.getElementById("fwupdatewin").style.display = "block";
+				document.getElementById("installuefi-win10").style.display = "block";
+				document.getElementById("supportmatrix").style.background = "var(--win10-gradient)";
+				document.getElementById("supporthelptext").innerHTML = "Only Windows 10 supported. No support for Windows 11.";
+			}
+
+			if (codename == "Peppy" ||
+				codename == "Yuna" ||
+				codename == "Samus")
+			{
+				document.getElementById("supportmatrix").style.background = "var(--win10partial11-gradient)";
+				document.getElementById("supporthelptext").innerHTML = "Windows 10 supported. Windows 11 only supported on Core i3 or higher.";
+			}
+
+			if (model["family"] == "skylake"){
+				document.getElementById("uefifwscrew").style.display = "block";
+				document.getElementById("installuefi-win1011").style.display = "block";
+				document.getElementById("bypassWin11").style.display = "block";
+				document.getElementById("supportmatrix").style.background = "var(--win1011-gradient)";
+				document.getElementById("supporthelptext").innerHTML = "Windows 10 and Windows 11 supported.";
+			}
+
+			if (model["family"] == "apollolake" ||
+				model["family"] == "kabylake" ||
+				model["family"] == "geminilake" ||
+				model["family"] == "cometlake" ||
+				model["family"] == "picasso")
+			{
+				document.getElementById("uefifwcr50").style.display = "block";
+				document.getElementById("installuefi-win1011").style.display = "block";
+				document.getElementById("bypassWin11").style.display = "block";
+				document.getElementById("supportmatrix").style.background = "var(--win1011-gradient)";
+				document.getElementById("supporthelptext").innerHTML = "Windows 10 and Windows 11 supported.";
+			}
+
+			if (model["family"] == "tigerlake"){
+				document.getElementById("uefifwcr50").style.display = "block";
+				document.getElementById("installuefi-win11").style.display = "block";
+				document.getElementById("bypassWin11").style.display = "block";
+				document.getElementById("supportmatrix").style.background = "var(--win11-gradient)";
+				document.getElementById("supporthelptext").innerHTML = "Only Windows 11 supported. No support for Windows 10.";
+			}
+			if (model["family"] == "alderlake" ||
+				model["family"] == "jasperlake" ||
+				model["family"] == "cezanne")
+			{
+				document.getElementById("uefifwcr50jumper").style.display = "block";
+				document.getElementById("installuefi-win11").style.display = "block";
+				document.getElementById("bypassWin11").style.display = "block";
+				document.getElementById("supportmatrix").style.background = "var(--win11-gradient)";
+				document.getElementById("supporthelptext").innerHTML = "Only Windows 11 supported. No support for Windows 10.";
+			}
+
+			if (model["family"] == "mendocino" ||
+				model["family"] == "alderlake-n")
+			{
+				document.getElementById("uefifwti50").style.display = "block";
+				document.getElementById("installuefi-win11").style.display = "block";
+				document.getElementById("bypassWin11").style.display = "block";
+				document.getElementById("supportmatrix").style.background = "var(--win11-gradient)";
+				document.getElementById("supporthelptext").innerHTML = "Only Windows 11 supported. No support for Windows 10.";
+			}
+
+			if (model["family"] == "picasso-rwl")
+			{
+				document.getElementById("partition").style.display = "block";
+				document.getElementById("rwlegacy").style.display = "block";
+				document.getElementById("installrefind").style.display = "block";
+				document.getElementById("bypassWin11").style.display = "block";
+				document.getElementById("utcTime").style.display = "block";
+				document.getElementById("supportmatrix").style.background = "var(--win1011-gradient)";
+				document.getElementById("supporthelptext").innerHTML = "Windows 10 and Windows 11 supported.";
+			}
+
+			if (model["family"] == "stoney"){
+				document.getElementById("uefifwcr50").style.display = "block";
+				document.getElementById("installuefi-win1011").style.display = "block";
+				document.getElementById("bypassWin11").style.display = "block";
+				document.getElementById("supportmatrix").style.background = "var(--win1011-experimental-gradient)";
+				document.getElementById("supporthelptext").innerHTML = "Windows 10 and Windows 11 experimental support only.";
+			}
+
+			var devices = model["devices"];
+
+			for (var idx in devices){
+				var device = devices[idx];
+				try {
+					if (device == "cyapaTrackpad" || device == "cyapaSmbusTrackpad" ||
+					 "device" == "cyapaSmbusTrackpad" || device == "elanTrackpad" || device == "atmelTrackpad" || device == "synapticsTrackpad")
+						device="touchpadCommon";
+
+					if (device == "atmelTouchScreen" || device == "elanTouchScreen" ||
+					 "device" == "melfasTouchScreen" || "device" == "raydiumTouchScreen")
+						device="touchscreenCommon";
+
+					document.getElementById(device).style.display="block";
+				} catch (e){
+					
+				}
+			}
+
+			document.getElementById("modelName").innerHTML = model["manufacturer"].toProperCase() + " " + model["name"] + " (" + model["codename"] + ")";
+
+			document.getElementById("warnings").innerHTML = "";
+			var warnings = model["warnings"];
+			for (var idx in warnings){
+				var warning = warnings[idx];
+
+				var warningDiv = document.createElement("div");
+				var i = document.createElement("i");
+				i.className = "material-icons";
+				i.innerHTML = "warning";
+				warningDiv.appendChild(i);
+
+				var span = document.createElement("span");
+				span.innerHTML = "Warning: "+warning;
+				warningDiv.appendChild(span);
+
+				warningDiv.className = "warning";
+				document.getElementById("warnings").appendChild(warningDiv);
+			}
+
+			document.getElementById("guide").style.visibility = "";
+			document.getElementById("guide").style.opacity = "";
+			document.getElementById("guideplaceholder").style.display = "none";
+			document.getElementById("guideplaceholder").style.opacity = "0";
+			togglePanelCollapsed(false, true);
+		}
+
+		function getUrlVars() {
+			var vars = {};
+			var parts = location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,	
+			function(m,key,value) {
+				vars[key] = value;
+			});
+			return vars;
+		}
+
+		function togglePanelCollapsed(forceOpen = false, forceClose = false) {
+			var isOpen = document.getElementById("leftpanel").classList.contains("button-selected");
+			isOpen = !isOpen;
+			if (forceOpen){
+				isOpen = true;
+			} else if (forceClose){
+				isOpen = false;
+			}
+
+			if (isOpen){
+				document.getElementById("leftpanel").classList.add("button-selected");
+				document.getElementById("heading").classList.remove("collapsed-left");
+				document.getElementById("modalcontainer").classList.remove("collapsed-left");
+				document.getElementById("modalclickhandler").classList.remove("collapsed-left");
+				document.getElementById("mainbody").classList.remove("collapsed-left");
+			} else {
+				document.getElementById("leftpanel").classList.remove("button-selected");
+				document.getElementById("heading").classList.add("collapsed-left");
+				document.getElementById("modalcontainer").classList.add("collapsed-left");
+				document.getElementById("modalclickhandler").classList.add("collapsed-left");
+				document.getElementById("mainbody").classList.add("collapsed-left");
+			}
+		}
+
+		function initializeUI(){
+			togglePanelCollapsed();
+
+			$(document).keyup(function(e) {
+				var key = e.which;
+				if(key == 27)  // the escape key code
+				{
+					if (document.activeElement.tagName != "INPUT" || document.activeElement.type != "text")
+						togglePanelCollapsed();
+					return false;
+				}
+			});
+
+			$("#leftpanel").keypress(function(e) {
+				var key = e.which;
+				if(key == 13)  // the enter key code
+				{
+					$(this).click();
+					return false;
+				}
+			});
+
+			generateManufacturers();
+
+			loadManufacturerNames();
+
+			$("#modelsearch").autocomplete({
+				source: modelCodeNames,
+				select: function (event, ui){
+					var codename = ui.item.value;
+					var model = null;
+
+					loopInfos(function(baseboard, variant, info){
+						if (variant["codename"] == codename){
+							model = generateModel(baseboard, variant, variant["info"].length == 1 ? info : null);
+							return false;
+						}
+					});
+
+					var manufacturer = model["manufacturer"];
+
+					document.getElementById(manufacturer).checked = true;
+					changePage("cpu");
+
+					var cpus = chipsets[model["family"]]["cpus"];
+					for (var cpuIdx in cpus){
+						var cpu = cpus[cpuIdx];
+						if ($.inArray(cpu,manufacturers[manufacturer]) != -1){
+							document.getElementById(cpu).checked = true;
+							break;
+						}
+					}
+
+					changePage("model");
+					document.getElementById(codename).checked = true;
+					loadGuideForModel();
+				}
+			});
+
+			changePage("manufacturer");
+			loadGuideForModel();
+
+			var queryDevice = getUrlVars()["device"];
+			if (queryDevice !== undefined && queryDevice != null){
+				var codename = queryDevice.toProperCase();
+				var model = null;
+
+				loopInfos(function(baseboard, variant, info){
+					if (variant["codename"] == codename){
+						model = generateModel(baseboard, variant, variant["info"].length == 1 ? info : null);
+						return false;
+					}
+				});
+
+				if (model["supported"] === false)
+					return;
+
+				if (model == null)
+					return;
+
+				var manufacturer = model["manufacturer"];
+
+				document.getElementById(manufacturer).checked = true;
+				changePage("cpu");
+
+				var cpus = chipsets[model["family"]]["cpus"];
+				for (var cpuIdx in cpus){
+					var cpu = cpus[cpuIdx];
+					if ($.inArray(cpu,manufacturers[manufacturer]) != -1){
+						document.getElementById(cpu).checked = true;
+						break;
+					}
+				}
+
+				changePage("model");
+				document.getElementById(codename).checked = true;
+				loadGuideForModel();
+			}
+
+			document.getElementById("discordverify").onclick = function(){
+				var reactorgame = '' +
+				'<div class="reactorplaceholder">Please complete the Among Us task to verify you are human.</div>' +
+				'<div id="reactor_game">' +
+					'<div class="reactor_keypad game_keypad">' +
+						'<div class="reactor_background">' +
+						'</div>' +
+
+						'<div class="reactor_container">' +
+							'<div class="reactor_lights">' +
+								'<div class="reactor_light"></div>' +
+								'<div class="reactor_light"></div>' +
+								'<div class="reactor_light"></div>' +
+								'<div class="reactor_light"></div>' +
+								'<div class="reactor_light"></div>' +
+							'</div>' +
+
+							'<div class="reactor_input">' +
+							'</div>' +
+
+							'<div class="reactor_buttons"></div>' +
+							'</div>' +
+						'</div>' +
+
+						'<div class="reactor_keypad user_keypad">' +
+							'<div class="reactor_background">' +
+							'</div>' +
+
+						'<div class="reactor_container">' +
+							'<div class="reactor_lights">' +
+								'<div class="reactor_light"></div>' +
+								'<div class="reactor_light"></div>' +
+								'<div class="reactor_light"></div>' +
+								'<div class="reactor_light"></div>' +
+								'<div class="reactor_light"></div>' +
+							'</div>' +
+
+							'<div class="reactor_buttons disabled"></div>' +
+						'</div>' +
+					'</div>' +
+				'</div>';
+
+				createAlert(true, "Verify", reactorgame);
+				startReactorGame();
+			};
+		};
+		</script>
+	</head>
+	<body>
+		<div id="bg-image"></div>
+		<div id="heading">
+			<div id="leftpanel" class="button material-icons" style="float: left;" onclick="togglePanelCollapsed();" tabindex="0">menu</div>
+			<h3 style="text-align: center;">Windows for Chromebooks installation guide</h3>
+		</div>
+		<div id="modalcontainer">
+			<picture class="headerimg headerimg-panel" style="width: 100%;max-width: 570px;">
+				<source type="image/webp"
+					srcset="images/chromebooks-2024@3x.webp 3x, images/chromebooks-2024@2x.webp 2x, images/chromebooks-2024.webp 1x"
+				>
+				<img class="headerimg" src="chromebooks-2024.png" style="width: 100%;max-width: 570px;"
+					srcset="images/chromebooks-2024@3x.png 3x, images/chromebooks-2024@2x.png 2x, images/chromebooks-2024.png 1x" />
+			 </picture><br>
+			<div id="selectmodal" class="modalprompt">
+				<nav>
+					<div class="nav-wrapper">
+						<div id="breadcrumbitems">
+							<a href="#!" class="breadcrumb">Select Manufacturer</a>
+						</div>
+					</div>
+				</nav>
+				<div class="input-field" style="margin-bottom: 10px;">
+					<input type="text" id="modelsearch" style="width:100%" placeholder="Search by codename" />
+				</div>
+				<div class="modalitems">
+					<div class="modalslider" id="modalslider">
+						<div class="modalitem" id="manufacturer">
+							<div class="child-panel child-panel-top">
+								<div class="panel-content">
+									<form action="#" id="manufacturerForm">
+									</form>
+								</div>
+							</div>
+							<div class="child-panel">
+								<div class="panel-content">
+									Show all manufacturers
+								</div>
+								<div class="panel-accessory">
+									<label class="switch">
+										<input type="checkbox" id="showAllManufacturers" onChange="loadManufacturerNames();" />
+										<span class="slider"></span>
+									</label>
+								</div>
+							</div>
+							<div class="child-panel button-panel" onclick="location.href='windows.html';">
+								<div class="panel-content">
+									Device Compatibility Chart
+								</div>
+								<div class="panel-accessory">
+									<img src="icons/arrow-right.svg" class="glyph">
+								</div>
+							</div>
+							<div class="child-panel">
+								<div class="panel-accessory">
+									<button onclick="changePage('cpu');">Next</button>
+								</div>
+							</div>
+						</div>
+						<div class="modalitem" id="cpu" style="opacity: 0;visibility: hidden;">
+						</div>
+						<div class="modalitem" id="model" style="opacity: 0;visibility: hidden;">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="modalclickhandler" onclick="togglePanelCollapsed();">
+		</div>
+		<div id="mainbody">
+			<picture class="headerimg" style="width: 100%;max-width: 570px;">
+				<source type="image/webp"
+					srcset="images/chromebooks-2024@3x.webp 3x, images/chromebooks-2024@2x.webp 2x, images/chromebooks-2024.webp 1x"
+				>
+				<img class="headerimg" src="chromebooks-2024.png" style="width: 100%;max-width: 570px;"
+					srcset="images/chromebooks-2024@3x.png 3x, images/chromebooks-2024@2x.png 2x, images/chromebooks-2024.png 1x" />
+			 </picture><br>
+			<div id="guideplaceholder" style="text-align: center;">
+				<h4>Select a model on the left to view the installation guide.</h4>
+			</div>
+			<div id="guide" style="opacity: 0;visibility: hidden;">
+				<div id="modelName" style="text-align: center;"></div>
+				<div id="warnings"></div>
+				<div>
+					<div class="main-panel main-panel-opened" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">info</i>Supported OS's
+						</div>
+					</div>
+					<div>
+						<div class="child-panel">
+							<div class="panel-content" id="supportmatrix">
+								<div class="supportmatrixos"><img src="icons/win10.svg" width="50" height="50" /><span>Windows 10</span></div>
+								<div class="supportmatrixos"><img src="icons/win11.svg" width="50" height="50" /><span>Windows 11</span></div>
+							</div>
+						</div>
+						<div class="child-panel">
+							<div class="panel-content">
+								<span id="supporthelptext"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="partition">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">developer_mode</i>Developer Mode &amp; Partition
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								<ol class="guide">
+									<li>Press Esc + Refresh + Power</li>
+									<li>Press Ctrl + D and press Enter to enable developer mode</li>
+									<li>Press Ctrl + D to boot Chrome OS</li>
+									<li>Open a tab and press Ctrl + Alt + T</li>
+									<li>Type in "shell" and press Enter.</li>
+									<li>Paste the following into the shell and press enter<br><pre>curl https://chrx.org/ | sudo tar xzfC - /usr/local && chrx</pre></li>
+									<li>Follow the instructions to allocate storage space for Windows (Do not run chrx a second time to install Linux).</li>
+								</ol>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="rwlegacy">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">developer_mode</i>Update RW_LEGACY &amp; Setup UEFI
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								<ol class="guide">
+									<li>If you haven't rebooted already after partitioning with chrx, reboot and press Ctrl + D to let Chrome OS repair itself.</li>
+									<li>Press Ctrl + D to boot Chrome OS</li>
+									<li>Open a tab and press Ctrl + Alt + T</li>
+									<li>Type in "shell" and press Enter.</li>
+									<li>Paste the following into the shell and press enter<br><pre>cd; curl -LO mrchromebox.tech/firmware-util.sh && sudo bash firmware-util.sh</pre></li>
+									<li>Select "RW_LEGACY" from the options.</li>
+									<li>Paste the following into the shell and press enter<br><pre>cd; curl -LO https://coolstar.org/chromebook/windows-rwl/install-rwl.sh; sudo bash install-rwl.sh</pre></li>
+									<li>Follow the instructions to set up your partition for Windows and install OpenCore with patches</li>
+								</ol>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="uefifwjumper">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">developer_mode</i>Developer Mode &amp; Flash Firmware
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								<ol class="guide">
+									<li>Turn off your device, open the back and bridge the Write Protect Jumper.</li>
+									<li>Press Esc + Refresh + Power</li>
+									<li>Press Ctrl + D and press Enter to enable developer mode</li>
+									<li>Press Ctrl + D to boot Chrome OS</li>
+									<li>Open a tab and press Ctrl + Alt + T</li>
+									<li>Type in "shell" and press Enter.</li>
+									<li>Paste the following into the shell and press enter<br><pre>cd; curl -LO mrchromebox.tech/firmware-util.sh && sudo bash firmware-util.sh</pre></li>
+									<li>Select "Full UEFI Firmware" from the options.</li>
+								</ol>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="uefifwscrew">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">developer_mode</i>Developer Mode &amp; Flash Firmware
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								<ol class="guide">
+									<li>Turn off your device, open the back and remove the Write Protect Screw.</li>
+									<li>Press Esc + Refresh + Power</li>
+									<li>Press Ctrl + D and press Enter to enable developer mode</li>
+									<li>Press Ctrl + D to boot Chrome OS</li>
+									<li>Open a tab and press Ctrl + Alt + T</li>
+									<li>Type in "shell" and press Enter.</li>
+									<li>Paste the following into the shell and press enter<br><pre>cd; curl -LO mrchromebox.tech/firmware-util.sh && sudo bash firmware-util.sh</pre></li>
+									<li>Select "Full UEFI Firmware" from the options.</li>
+								</ol>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="uefifwcr50">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">developer_mode</i>Developer Mode &amp; Flash Firmware
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								<ol class="guide">
+									<li>Turn off your device, open the back and disconnect the battery.</li>
+									<li>Press Esc + Refresh + Power</li>
+									<li>Press Ctrl + D and press Enter to enable developer mode</li>
+									<li>Press Ctrl + D to boot Chrome OS</li>
+									<li>Press Ctrl + Alt + F2 (2nd button to the right of esc) to enter a shell</li>
+									<li>Paste the following into the shell and press enter<br><pre>cd; curl -LO mrchromebox.tech/firmware-util.sh && sudo bash firmware-util.sh</pre></li>
+									<li>Select "Full UEFI Firmware" from the options.</li>
+									<li>After successful flashing, turn off your device, open the back and connect the battery.</li>
+								</ol>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="uefifwcr50jumper">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">developer_mode</i>Developer Mode &amp; Flash Firmware
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								<ol class="guide">
+									<li>Turn off your device, open the back and bridge the Write Protect Jumpers (see <a href="https://mrchromebox.tech/#devices">here</a> for pictures).</li>
+									<li>Press Esc + Refresh + Power</li>
+									<li>Press Ctrl + D and press Enter to enable developer mode</li>
+									<li>Press Ctrl + D to boot Chrome OS</li>
+									<li>Press Ctrl + Alt + F2 (2nd button to the right of esc) to enter a shell</li>
+									<li>Paste the following into the shell and press enter<br><pre>cd; curl -LO mrchromebox.tech/firmware-util.sh && sudo bash firmware-util.sh</pre></li>
+									<li>Select "Full UEFI Firmware" from the options.</li>
+									<li>After successful flashing, turn off your device, open the back and connect the battery.</li>
+								</ol>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="uefifwti50">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">developer_mode</i>Developer Mode &amp; Flash Firmware
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								<ol class="guide">
+									<li>Press Esc + Refresh + Power</li>
+									<li>Press Ctrl + D and press Enter to enable developer mode</li>
+									<li>Press Ctrl + D to boot Chrome OS</li>
+									<li>Press Ctrl + Alt + F2 (2nd button to the right of esc) to enter a shell</li>
+									<li>Press the following into the shell and press enter<br><pre>sudo gsctool -a -o</pre></li>
+									<li>Follow the instructions (PP button = power button) to open CCD</li>
+									<li>After your device reboots, press Esc + Refresh + Power</li>
+									<li>Press Ctrl + D and press Enter to enable developer mode</li>
+									<li>Press Ctrl + D to boot Chrome OS</li>
+									<li>Press Ctrl + Alt + F2 (2nd button to the right of esc) to enter a shell</li>
+									<li>Paste the following into the shell and press enter<br><pre>sudo gsctool -a -I AllowUnverifiedRo:always</pre></li>
+									<li>Paste the following into the shell and press enter<br><pre>sudo gsctool -a -w disable</pre></li>
+									<li>Paste the following into the shell and press enter<br><pre>cd; curl -LO mrchromebox.tech/firmware-util.sh && sudo bash firmware-util.sh</pre></li>
+									<li>Select "Full UEFI Firmware" from the options.</li>
+								</ol>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="fwupdatewin">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">developer_mode</i>Update Firmware
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								<div class="panel-content">
+									Note: Does not need to be done if you just flashed firmware from Chrome OS or Linux!
+									To Update Firmware from Inside Windows, you may use this tool:
+									Download: <a href="https://coolstar.org/chromebook/downloads/firmwareutils/CBWinFlash.zip">Link</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="installuefi-win10">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">usb</i>Install Windows from USB
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								<ol class="guide">
+									<li>On another computer, create a Windows 10 installer with Rufus as "GPT for UEFI"</li>
+									<li>Plug the USB Drive into the chromebook</li>
+									<li>Plug a USB keyboard or mouse in for installation</li>
+									<li>Turn on the chromebook, and let it boot the USB drive</li>
+								</ol>
+								Note: If you need to select a different boot device, press any key in "Select Boot Option". Then select "Boot Manager" to select your boot drive.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="installuefi-win1011">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">usb</i>Install Windows from USB
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								<ol class="guide">
+									<li>On another computer, create a Windows 10 or 11 installer with Rufus as "GPT for UEFI"</li>
+									<li>Plug the USB Drive into the chromebook</li>
+									<li>Plug a USB keyboard or mouse in for installation</li>
+									<li>Turn on the chromebook, and let it boot the USB drive</li>
+								</ol>
+								Note: If you need to select a different boot device, press any key in "Select Boot Option". Then select "Boot Manager" to select your boot drive.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="installuefi-win11">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">usb</i>Install Windows from USB
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								<ol class="guide">
+									<li>On another computer, create a Windows 11 installer with Rufus as "GPT for UEFI"</li>
+									<li>Plug the USB Drive into the chromebook</li>
+									<li>Plug a USB keyboard or mouse in for installation</li>
+									<li>Turn on the chromebook, and let it boot the USB drive</li>
+								</ol>
+								Note: If you need to select a different boot device, press any key in "Select Boot Option". Then select "Boot Manager" to select your boot drive.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="installrefind">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">usb</i>Install Windows from USB
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								<ol class="guide">
+									<li>On another computer, create a Windows 10 or 11 installer with Rufus as "GPT for UEFI"</li>
+									<li>Plug the USB Drive into the chromebook</li>
+									<li>Plug a USB keyboard or mouse in for installation</li>
+									<li>Turn on the chromebook, and let it boot the USB drive</li>
+								</ol>
+								Note: If you need to select a different boot device, select it in rEFInd. Do not press esc on "Select Boot Option" as OpenCore must run patches on boot first.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="bypassWin11">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">check</i>Bypass Windows 11 installation check
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								<ol class="guide">
+									<li>At the Windows installer, press Shift + F10 (Volume Up) to open command prompt</li>
+									<li>Type in "regedit" and press enter</li>
+									<li>Navigate to HKEY_LOCAL_MACHINE\SYSTEM\Setup</li>
+									<li>Right click setup and create a new Key called "LabConfig"</li>
+									<li>Right click LabConfig and create new DWORD (32 bit) called "BypassSecureBootCheck" and set it to 1</li>
+									<li>Right click LabConfig and create new DWORD (32 bit) called "BypassTPMCheck" and set it to 1</li>
+									<li>Close regedit and command prompt and proceed with installation normally</li>
+								</ol>
+								Note: This step is not required for Windows 10.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="vcredist">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">code</i>Install Visual C++ Redistributable
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								<div class="panel-content">
+									Download: <a href="https://aka.ms/vs/17/release/vc_redist.x64.exe">Link</a>
+									<br>
+									Simply run the installer to install the libraries.
+									<br>
+									<b>Note: Several drivers listed below require this to be installed to work properly.</b>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="cr50">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">security</i>Install CR50 (I2C/SPI) TPM Driver
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Download: <a href="https://github.com/coolstar/driverinstallers/raw/master/cr50/cr50.1.0.1-installer.exe">Link</a>
+								<br>
+								Simply run the installer to install the driver.
+								<br>
+								<b>Note: If you are booting with RW_LEGACY, you MUST install this driver for working sleep/wake</b>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="chromeec">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">memory</i>Install Chrome EC Driver
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Download: <a href="https://github.com/coolstar/driverinstallers/raw/master/crosec/crosec.2.0.6-installer.exe">Link</a>
+								<br>
+								Simply run the installer to install the driver.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="wilcokeyboard">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">keyboard</i>Wilco Keyboard
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Download: <a href="https://github.com/coolstar/driverinstallers/raw/master/wilcoec/wilcoec.1.0.2-installer.exe">Link</a>
+								<br>
+								Simply run the installer to install the driver.<br><br>
+
+								The Wilco EC drivers contain remappings for your chromebook.<br>
+								Remappings guide:
+								
+								<ol class="guide">
+									<li>The top row on your keyboard by default does what is said on the label</li>
+									<li>LShift + Window List: Take Screenshot</li>
+									<li>LShift + Brightness Down: Keyboard Backlight Brightness Down</li>
+									<li>LShift + Brightness Up: Keyboard Backlight Brightness Up</li>
+									<li>Globe: Windows Key</li>
+									<li>Search: Caps Lock</li>
+								</ol>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="croskeyboard">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">keyboard</i>Keyboard Remappings
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								The Chrome EC drivers contain remappings for your chromebook.<br>
+								Remappings guide:<br>
+								
+								<ol class="guide">
+									<li>The top row on your keyboard (aside from Esc, and the lock button) by default does F1 through F12</li>
+									<li>LCtrl + &lt;Top Row Key&gt; does the action defined by the key (with some keys also having alternate actions with LShift or LAlt)</li>
+									<li>LCtrl + LShift + Full Screen: Project/Extend Screen</li>
+									<li>LCtrl + LShift + Window List: Take Screenshot</li>
+									<li>LCtrl + LAlt + Brightness Down: Keyboard Backlight Brightness Down</li>
+									<li>LCtrl + LAlt + Brightness Up: Keyboard Backlight Brightness Up</li>
+									<li>LCtrl + Left Arrow: Home</li>
+									<li>LCtrl + Right Arrow: End</li>
+									<li>LCtrl + Up Arrow: Page Up</li>
+									<li>LCtrl + Down Arrow: Down</li>
+									<li>LCtrl + Backspace: Delete</li>
+									<li>LCtrl + Alt + Backspace: Ctrl + Alt + Delete</li>
+									<li>LAlt + Delete: Numlock (On numberpads only)</li>
+								</ol>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="bayhubemmc">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">sd_storage</i>Install Bayhub eMMC Driver (Windows 10)
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Download: <a href="https://support.lenovo.com/us/en/downloads/ds541833-bayhub-tech-inegrated-emmc-driver-for-windows-10-64-bit-slim-1-11ast-05-slim-1-14ast-05">Link</a>
+								<br>
+								<b>Windows 10 users will need to use NTLite to slipstream this driver into the ISO before formatting the USB drive (to both boot.wim and install.wim)</b>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="testsigning">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">edit</i>Enable Testsigning
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<ol class="guide">
+								<li>Open Command Prompt as Administrator</li>
+								<li>Type in the following command: <br><pre>bcdedit -set testsigning on</pre></li>
+								<li>Press Enter</li>
+								<li>Restart Windows</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+				<div id="adlwifi">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">wifi</i>Install Intel AX211 Wi-Fi Driver
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Download: <a href="https://www.intel.com/content/www/us/en/products/sku/204837/intel-wifi-6e-ax211-gig/downloads.html">Link</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="hswrst">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">sd_storage</i>Install Rapid Storage Technology Driver
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Download: <a href="https://downloadcenter.intel.com/download/24501/RAID-Intel-Rapid-Storage-Technology-for-D54250WY-D34010WY">Link</a>
+								<br>
+								(The driver from Windows works, but the one linked on Intel's website is specialized and delivers better battery life).
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="bytchip">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">memory</i>Install Chipset Driver
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Download: <a href="https://coolstar.org/chromebook/downloads/drivers/BayTrailChipsetDriver-Lenovo.exe">Link</a>
+								<br>
+								The driver I2C from Windows Update does not work. Make sure to install this for working touchpad/touch screen.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="bdwrst">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">sd_storage</i>Install Rapid Storage Technology Driver
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Download: <a href="https://downloadcenter.intel.com/download/25910/Intel-Rapid-Storage-Technology-for-Intel-NUC?product=87570">Link</a>
+								<br>
+								(The driver from Windows works, but the one linked on Intel's website is specialized and delivers better battery life).
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="cmlrst">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">sd_storage</i>Install Rapid Storage Technology Driver
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Download: <a href="https://www.intel.com/content/www/us/en/download/19512/intel-rapid-storage-technology-driver-installation-software-with-intel-optane-memory-10th-and-11th-gen-platforms.html">Link</a>
+								<br>
+								(This driver may be necessary before installation if using a SATA drive).
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="gmbusi2c">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">memory</i>Install Intel Graphics I2C Bus Driver
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Download: <a href="https://github.com/coolstar/driverinstallers/raw/master/gmbusi2c/gmbusi2c.1.0-installer.exe">Link</a>
+								<br>
+								Simply run the installer to install the driver.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="ryzenchip">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">memory</i>Install AMD Ryzen Chipset Driver
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Download: <a href="https://www.amd.com/en/support/chipsets/socket-fp5-mobile/amd-ryzen-and-athlon-mobile-chipset">Link</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="cmljsltgladlchip">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">memory</i>Autoinstall Intel Chipset Drivers
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Download: <a href="https://raw.githubusercontent.com/coolstar/driverinstallers/master/autoinstall-intel.zip">Link</a> and Unzip to the <b>Downloads</b> folder <br><br>
+
+								Then open Command Prompt or PowerShell and enter the following command and press enter:
+								<pre>Powershell -ExecutionPolicy bypass -file .\Downloads\autoinstall-intel.ps1</pre><br><br>
+
+								Wait for the auto-installer to detect and install chipset drivers
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="inteltbt4">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">bolt</i>Install USB 4 / Thunderbolt 4 Driver
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Driver is available for purchase <a href="https://coolstar.org/chromebook/driverlicense/">here</a>.<br><br>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="jslgpu">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">monitor</i>Install Intel HD Graphics Driver
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Download: <a href="https://www.intel.com/content/www/us/en/download/715571/intel-graphics-dch-driver-for-intel-nuc11at-products.html">Link</a>
+								</div>
+						</div>
+					</div>
+				</div>
+				<div id="tglgpu">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">monitor</i>Install Intel Xe Graphics Driver
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Download: <a href="https://www.intel.com/content/www/us/en/download/726609/intel-arc-iris-xe-graphics-whql-windows.html">Link</a>
+								</div>
+						</div>
+					</div>
+				</div>
+				<div id="stoneygpu">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">monitor</i>Install AMD Stoneyridge GPU Driver
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								<ol class="guide">
+									<li>Download: <a href="https://www.amd.com/en/support/previous-drivers/apu/amd-series-processors/amd-a4-series-apu-for-laptops/7th-gen-a4-9120-apu">Link</a><br></li>
+									<b>Make sure to download version 21.5.2! But don't install yet!</b><br>
+									<li>Download Patch: <a href="https://coolstar.org/chromebook/downloads/drivers/stoney-amdkmdag-patch.zip">Link</a></li>
+									<li>Double click the exe and click the first install (with destination folder). But Don't click install on any further installation wizards.</li>
+									<li>Wait for the driver to extract</li>
+									<li>Extract and copy the patched amdkmdag.sys to<pre>C:\AMD\Radeon-Software-Adrenalin-2020-21.5.2-Win10-64Bit-LegacyASICs-June21-LEGACY\Packages\Drivers\Display\WT6A_INF\B367348\amdkmdag.sys</pre></li>
+									<li>Proceed with the driver installation. Windows may ask you about installing an unsigned driver. Click "Allow"</li>
+									<li>Reboot. So long as testsigning is enabled, GPU should work and start immediately</li>
+								</ol>
+								</div>
+						</div>
+					</div>
+				</div>
+				<div id="picassogpu">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">monitor</i>Install AMD Vega GPU Driver
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Download: <a href="https://www.amd.com/en/support/apu/amd-ryzen-processors/amd-ryzen-3-mobile-processors-radeon-vega-graphics/amd-ryzen-3-2">Link</a><br>
+								<b>Note: There is a bug that causes high CPU usage. To fix it, go to C:\Windows\System32 and rename clinfo.exe to clinfo2.exe</b><br>
+								Note: You may need to force install the "AMD Vega" driver from Device Manager on AMD 3015ce devices
+
+								Driver is in <pre>C:\AMD\AMD-Software-Installer\Packages\Drivers\Display\WT6A_INF</pre>.
+								</div>
+						</div>
+					</div>
+				</div>
+				<div id="cezannegpu">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">monitor</i>Install AMD Radeon GPU Driver
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Download: <a href="https://www.amd.com/en/support/apu/amd-ryzen-processors/amd-ryzen-3-mobile-processors-radeon-graphics/amd-ryzen-3-5425u">Link</a><br>
+								Note: You may need to force install the "AMD Radeon" driver from Device Manager.
+
+								Driver is in <pre>C:\AMD\AMD-Software-Installer\Packages\Drivers\Display\WT6A_INF</pre>.
+								</div>
+						</div>
+					</div>
+				</div>
+				<div id="mendocinogpu">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">monitor</i>Install AMD Radeon GPU Driver
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Download: <a href="https://www.amd.com/en/support/apu/amd-ryzen-processors/amd-ryzen-3-processors-radeon-graphics/amd-ryzen-3-7320u">Link</a><br>
+								Note: You may need to force install the "AMD Radeon 610M" driver from Device Manager
+
+								Driver is in <pre>C:\AMD\AMD-Software-Installer\Packages\Drivers\Display\WT6A_INF</pre>.
+								</div>
+						</div>
+					</div>
+				</div>
+				<div id="celesWorkaround">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">bug_report</i>Workaround Celes Issues
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								<ol class="guide">
+									<li>After Windows installation, boot to the installer again</li>
+									<li>Press Shift + F10 to open Command Prompt</li>
+									<li>Type in the following command: <br><pre>bcdedit /set {default} useplatformclock on</pre></li>
+									<li>Press Enter</li>
+									<li>Restart Windows into the installed copy</li>
+								</ol>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="touchpadCommon">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">mouse</i>Install Touchpad Driver
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Download: <a href="https://github.com/coolstar/driverinstallers/raw/master/crostouchpad/crostouchpad.4.1.6-installer.exe">Link</a>
+								<br>
+								Simply run the installer to install the driver.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="touchscreenCommon">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">touch_app</i>Install Touch Screen Driver
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Download: <a href="https://github.com/coolstar/driverinstallers/raw/master/crostouchscreen/crostouchscreen.2.9.5-installer.exe">Link</a>
+								<br>
+								Simply run the installer to install the driver.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="creativeCA0132">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">volume_up</i>Install Creative Recon3Di + Creative CA0132 fixup drivers
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Download Recon3Di driver: <a href="https://www.dell.com/support/home/en-us/drivers/DriversDetails?driverId=4t7p8">Link</a>
+								<br>
+								Download and run the installers.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="realtekALC269">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">volume_up</i>Install Realtek HD Audio Driver
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Download: <a href="http://www.realtek.com.tw/downloads/">Link</a>
+								<br>
+								Download and run the installer.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="realtekALC295">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">volume_up</i>Install Realtek HD Audio Driver
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Download: <a href="https://dl.dell.com/FOLDER08469300M/2/Realtek-High-Definition-Audio-Driver_266V7_WIN_6.0.9341.1_A13.EXE">Link</a>
+								<br>
+								Download and run the installer.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="realtekALC5645">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">volume_up</i>Install Realtek SST Audio Driver
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Download: <a href="https://coolstar.org/chromebook/downloads/drivers/alc5645%20audio.exe">Link</a>
+								<br>
+								Download and run the installer.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="max98090v2Audio">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">volume_up</i>Maxim 98090 (R11) Audio Driver
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Download: <a href="https://github.com/coolstar/driverinstallers/raw/master/max98090-r11/max98090-r11.1.0.0-installer.exe">Link</a>
+								<br>
+								Download and run the installer.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="max98090Audio">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">volume_up</i>Install Maxim 98090 Audio Driver
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Download: <a href="https://github.com/coolstar/driverinstallers/raw/master/max98090/max98090.1.0.4-installer.exe">Link</a>
+								<br>
+								Download and run the installer.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="acp2x">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">volume_up</i>CoolStar ACP Audio (STONEY)
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Download: <a href="https://github.com/coolstar/driverinstallers/raw/master/csaudioacp2x/csaudioacp2x.1.0.0-installer.exe">Link</a>
+								<br>
+								Download and run the installer.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="acp3x">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">volume_up</i>CoolStar ACP Audio (Ryzen 3000)
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Download: <a href="https://github.com/coolstar/driverinstallers/raw/master/csaudioacp3x/csaudioacp3x.1.0.4-installer.exe">Link</a>
+								<br>
+								Download and run the installer.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="realtekALC5677">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">volume_up</i>CoolStar SST (Broadwell) Audio
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Download: <a href="https://github.com/coolstar/driverinstallers/raw/master/csaudiosstcatpt/csaudiosstcatpt.1.0.1-installer.exe">Link</a>
+								<br>
+								Download and run the installer.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="avsAudio">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">volume_up</i>CoolStar SST (cAVS) Audio
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Driver is available for purchase <a href="https://coolstar.org/chromebook/driverlicense/">here</a>.<br><br>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="intelSofAudio">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">volume_up</i>CoolStar SOF (Intel) Audio
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Driver is available for purchase <a href="https://coolstar.org/chromebook/driverlicense/">here</a>.<br><br>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="amdSofAudio">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">volume_up</i>CoolStar SOF (AMD) Audio
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								Driver is available for purchase <a href="https://coolstar.org/chromebook/driverlicense/">here</a>.<br><br>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="brcmsdcard">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">sd_storage</i>SD Card Reader
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">Download the SD Card reader driver here: <a href="http://global-download.acer.com/GDFiles/Driver/CardReader/CardReader_Broadcom_16.0.2.8_W81x64_A.zip?acerid=635171441124450294&Step1=NETBOOK,%20CHROMEBOOK&Step2=ASPIRE%20ONE&Step3=AO756&OS=ALL&LC=en&BC=ACER&SC=AAP_1">Link</a></div>
+						</div>
+					</div>
+				</div>
+				<div id="utcTime">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">watch</i>Set UTC Time
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<ol class="guide">
+								<li>Search for and run "regedit"</li>
+								<li>Navigate to HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation</li>
+								<li>Right click TimeZoneInformation and create new DWORD (32 bit) called "RealTimeIsUniversal" and set it to 1</li>
+								<li>Reboot Windows</li>
+							</ol>
+							Note: This step is required to keep the clock in sync when dual booting Windows and Chrome OS
+						</div>
+					</div>
+				</div>
+				<div id="tinySolderedStorage">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">sd_storage</i>Compress Installation
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">To free up storage, compress Windows 10 / 11 by running the following in an Admin Command Prompt:<br><br>
+								<span>compact.exe /compactos:always</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--<div id="donate">
+					<div class="main-panel button-panel" tabindex="0"><i class="material-icons">payment</i>Donate</div>
+					<div class="child-panel">
+						<div class="panel-content">
+							If you like running Windows on your chromebook, please donate if you are able to do so. I have made these drivers and the BIOS available free of charge and am relying on donations to be able to get Windows running on more chromebooks (Pixel 2, Dell Chromebook 13).<br>
+							Please donate here: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=AR25GXJD45KBW&lc=US&item_name=CoolStar%20Chromebook%20Dev%2e&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted">Link</a>
+						</div>
+					</div>
+				</div>-->
+				<div id="support-chat">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">chat</i>Discord Discussion
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">Feel free to join our discord to discuss. Click the button to verify you are a human before continuing.</div>
+							<div class="panel-accessory">
+								<button id="discordverify">Verify</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="support" style="margin-bottom: 10px;">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">live_help</i>Support
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">For Support, please see: <a href="https://forum.chrultrabook.com/">https://forum.chrultrabook.com/</a></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="rootcontainer"></div>
+		<script type="text/javascript" data-cfasync="false">initializeUI();</script>
+	</body>
+</html>
