@@ -212,6 +212,7 @@
 		#heading {
 			height: 80px;
 			background-color: var(--blur-overlay);
+			backdrop-filter: blur(10px);
 		}
 
 		#heading .button {
@@ -239,6 +240,10 @@
 			left: calc(50% - 400px);
 		}
 
+		#modalcontainer {
+			backdrop-filter: blur(10px);
+		}
+
 		@media (max-width: 670px){
 			h3 {
 				font-size: 16pt;
@@ -250,10 +255,9 @@
 				position: fixed;
 				width: 100%;
 				z-index: 4;
-				backdrop-filter: blur(10px);
 			}
 			.heading-optional {
-				visibility: hidden;
+				display: none;
 			}
 			#heading .button {
 				margin-top: 5px;
@@ -284,7 +288,7 @@
 			#mainbody {
 				left: 5px;
 				top: 50px;
-				height: 300px;
+				height: 100%;
 				width: calc(100% - 10px);
 				position: absolute;
 				z-index: 1;
