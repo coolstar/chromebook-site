@@ -346,6 +346,12 @@
 			for (var baseboardIdx in baseboards){
 				var baseboard = baseboards[baseboardIdx];
 
+				if (!baseboard.supported)
+					continue;
+
+				if (!chipsets[baseboard.family].supported)
+					continue;
+
 				var variants = baseboard["variants"];
 				for (var variantIdx in variants){
 					var variant = variants[variantIdx];
