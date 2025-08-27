@@ -1855,15 +1855,51 @@ var baseboards = [
 	"codename": "Nissa",
 	"variants": [
 		{
+			"codename": "Anraggar",
+			"info": [
+				{ "manufacturer": "acer", "name": "CR12" }
+			]
+		},
+		{
+			"codename": "Anraggar360",
+			"info": [
+				{ "manufacturer": "acer", "name": "CR12 Flip" }
+			]
+		},
+		{
 			"codename": "Craask",
 			"info": [
 				{ "manufacturer": "acer", "name": "Spin 512" }
 			]
 		},
 		{
+			"codename": "Craaskana",
+			"info": [
+				{ "manufacturer": "acer", "name": "Spin 311" }
+			]
+		},
+		{
 			"codename": "Craaskbowl",
 			"info": [
 				{ "manufacturer": "acer", "name": "Spin 511" }
+			]
+		},
+		{
+			"codename": "Craaskov",
+			"info": [
+				{ "manufacturer": "acer", "name": "Spin 312" }
+			]
+		},
+		{
+			"codename": "Craaskino",
+			"info": [
+				{ "manufacturer": "acer", "name": "Chromebook 315" }
+			]
+		},
+		{
+			"codename": "Craaskov",
+			"info": [
+				{ "manufacturer": "acer", "name": "Spin 312" }
 			]
 		},
 		{
@@ -1876,6 +1912,18 @@ var baseboards = [
 			"codename": "Craasneto",
 			"info": [
 				{ "manufacturer": "acer", "name": "Chromebook 314" }
+			]
+		},
+		{
+			"codename": "Craaswell",
+			"info": [
+				{ "manufacturer": "acer", "name": "Spin 314" }
+			]
+		},
+		{
+			"codename": "Joxer",
+			"info": [
+				{ "manufacturer": "hp", "name": "Chromebook Plus x360" }
 			]
 		},
 		{
@@ -1909,9 +1957,57 @@ var baseboards = [
 			]
 		},
 		{
+			"codename": "Quandiso",
+			"info": [
+				{ "manufacturer": "ctl", "name": "NL73" }
+			]
+		},
+		{
+			"codename": "Quandiso360",
+			"info": [
+				{ "manufacturer": "ctl", "name": "NL73T" }
+			]
+		},
+		{
+			"codename": "Uldren",
+			"info": [
+				{ "manufacturer": "dell", "name": "3120" }
+			]
+		},
+		{
+			"codename": "Uldren360",
+			"info": [
+				{ "manufacturer": "dell", "name": "3120 2-in-1" }
+			]
+		},
+		{
 			"codename": "Xivu",
 			"info": [
-				{ "manufacturer": "acer", "name": "CR11 (CR1102C/CR1102F)" }
+				{ "manufacturer": "acer", "name": "CR11 CR1102C" }
+			]
+		},
+		{
+			"codename": "Xivu360",
+			"info": [
+				{ "manufacturer": "acer", "name": "CR11 CR1102F" }
+			]
+		},
+		{
+			"codename": "Yahiko",
+			"info": [
+				{ "manufacturer": "hp", "name": "Plus 14a" }
+			]
+		},
+		{
+			"codename": "Yavijo",
+			"info": [
+				{ "manufacturer": "hp", "name": "Fortis 14in G11" }
+			]
+		},
+		{
+			"codename": "Yaviks",
+			"info": [
+				{ "manufacturer": "hp", "name": "Chromebook 15.6" }
 			]
 		},
 		{
@@ -1924,12 +2020,6 @@ var baseboards = [
 			"codename": "Yavilly",
 			"info": [
 				{ "manufacturer": "hp", "name": "Fortis G5" }
-			]
-		},
-		{
-			"codename": "Yaviks",
-			"info": [
-				{ "manufacturer": "hp", "name": "Chromebook 15.6" }
 			]
 		}
 	],

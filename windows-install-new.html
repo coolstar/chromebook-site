@@ -212,6 +212,7 @@
 		#heading {
 			height: 80px;
 			background-color: var(--blur-overlay);
+			backdrop-filter: blur(10px);
 		}
 
 		#heading .button {
@@ -239,13 +240,24 @@
 			left: calc(50% - 400px);
 		}
 
+		#modalcontainer {
+			backdrop-filter: blur(10px);
+		}
+
 		@media (max-width: 670px){
 			h3 {
 				font-size: 16pt;
 				padding-top: 10px;
+				margin-top: 0px;
 			}
 			#heading {
 				height: 50px;
+				position: fixed;
+				width: 100%;
+				z-index: 4;
+			}
+			.heading-optional {
+				display: none;
 			}
 			#heading .button {
 				margin-top: 5px;
@@ -274,20 +286,21 @@
 			}
 
 			#mainbody {
-				left: 0px;
+				left: 5px;
 				top: 50px;
-				width: 100%;
-				height: calc(100% - 50px);
+				height: 100%;
+				width: calc(100% - 10px);
 				position: absolute;
 				z-index: 1;
-				overflow: hidden scroll;
+				overflow: hidden;
 				filter: blur(4px);
 			}
 			#mainbody.collapsed-left {
 				filter: none;
+				height: auto;
 			}
 			.modalprompt {
-				width: 100%;
+				width: calc(100% - 10px);
 				height: 100%;
 				margin: auto;
 			}
@@ -300,6 +313,10 @@
 		}
 
 		@media (min-width: 671px){
+			body {
+				overflow: hidden;
+			}
+
 			.headerimg {
 				margin-left: auto;
 				margin-right: auto;
@@ -514,6 +531,12 @@
 		function loopVariants(callback){
 			for (var baseboardIdx in baseboards){
 				var baseboard = baseboards[baseboardIdx];
+
+				if (!baseboard.supported)
+					continue;
+
+				if (!chipsets[baseboard.family].supported)
+					continue;
 
 				var variants = baseboard["variants"];
 				for (var variantIdx in variants){
@@ -1251,7 +1274,7 @@
 		<div id="bg-image"></div>
 		<div id="heading">
 			<div id="leftpanel" class="button material-icons" style="float: left;" onclick="togglePanelCollapsed();" tabindex="0">menu</div>
-			<h3 style="text-align: center;">Windows for Chromebooks installation guide</h3>
+			<h3 style="text-align: center;">Windows for Chromebooks<span class="heading-optional"> installation guide</span></h3>
 		</div>
 		<div id="modalcontainer">
 			<picture class="headerimg headerimg-panel" style="width: 100%;max-width: 570px;">
