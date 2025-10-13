@@ -137,14 +137,20 @@ var chipsets = {
 		"supported": true,
 		"cpus": [
 			"Intel Core i3-1215U/i5-1235U/i5-1245U/i7-1255U/i7-1265U",
-			"Intel Core i5-1240P/i7-1260P"
+			"Intel Core i5-1240P/i7-1260P",
+			"Intel Core i3-13xxU/i5-13xxU/i7-13xxU",
+			"Intel Core i5-1340P/i7-1360P",
+			"Intel Core i3-1x0U/i5-1x0U/i7-1x0U",
+			"Intel Core i3-2x0U/i5-2x0U/i7-2x0U"
 		]
 	},
 	"alderlake-n": {
 		"supported": true,
 		"cpus": [
 			"Intel N100/N200",
-			"Intel Core i3-N305"
+			"Intel Core i3-N305",
+			"Intel N150/N250",
+			"Intel Core 3 Processor N350/N355"
 		]
 	},
 	"cezanne": {
