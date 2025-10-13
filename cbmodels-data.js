@@ -137,14 +137,20 @@ var chipsets = {
 		"supported": true,
 		"cpus": [
 			"Intel Core i3-1215U/i5-1235U/i5-1245U/i7-1255U/i7-1265U",
-			"Intel Core i5-1240P/i7-1260P"
+			"Intel Core i5-1240P/i7-1260P",
+			"Intel Core i3-13xxU/i5-13xxU/i7-13xxU",
+			"Intel Core i5-1340P/i7-1360P",
+			"Intel Core i3-1x0U/i5-1x0U/i7-1x0U",
+			"Intel Core i3-2x0U/i5-2x0U/i7-2x0U"
 		]
 	},
 	"alderlake-n": {
 		"supported": true,
 		"cpus": [
 			"Intel N100/N200",
-			"Intel Core i3-N305"
+			"Intel Core i3-N305",
+			"Intel N150/N250",
+			"Intel Core 3 Processor N350/N355"
 		]
 	},
 	"cezanne": {
@@ -1746,6 +1752,12 @@ var baseboards = [
 			]
 		},
 		{
+			"codename": "Dochi",
+			"info": [
+				{ "manufacturer": "acer", "name": "Chromebook Plus Spin 514" }
+			]
+		},
+		{
 			"codename": "Felwinter",
 			"info": [
 				{ "manufacturer": "asus", "name": "Flip CX5601" }
@@ -1791,6 +1803,12 @@ var baseboards = [
 			]
 		},
 		{
+			"codename": "Omniknight",
+			"info": [
+				{ "manufacturer": "acer", "name": "Plus Enterprise 515" }
+			]
+		},
+		{
 			"codename": "Primus",
 			"info": [
 				{ "manufacturer": "lenovo", "name": "Thinkpad C14 Gen 1" }
@@ -1827,6 +1845,12 @@ var baseboards = [
 			"codename": "Volmar",
 			"info": [
 				{ "manufacturer": "acer", "name": "Vero 514" }
+			]
+		},
+		{
+			"codename": "Xol",
+			"info": [
+				{ "manufacturer": "samsung", "name": "Galaxy Chromebook Plus" }
 			]
 		},
 		{
@@ -1921,9 +1945,76 @@ var baseboards = [
 			]
 		},
 		{
+			"codename": "Domika",
+			"info": [
+				{ "manufacturer": "hp", "name": "Fortis G1i 11" }
+			]
+		},
+		{
+			"codename": "Domilly",
+			"info": [
+				{ "manufacturer": "hp", "name": "Fortis Flip G1i 11" }
+			]
+		},
+		{
+			"codename": "Domiso",
+			"info": [
+				{ "manufacturer": "hp", "name": "Fortis G1i 14" }
+			]
+		},
+		{
+			"codename": "Gallida",
+			"info": [
+				{ "manufacturer": "acer", "name": "Chromebook Spin 311" }
+			]
+		},
+		{
+			"codename": "Gana",
+			"info": [
+				{ "manufacturer": "ctl", "name": "Chromebook PX11E" }
+			]
+		},
+		{
+			"codename": "Glassway",
+			"info": [
+				{ "manufacturer": "ctl", "name": "Chromebook PX141" }
+			]
+		},
+		{
+			"codename": "Gothrax",
+			"info": [
+				{ "manufacturer": "centerm", "name": "M612B" },
+				{ "manufacturer": "aiwa", "name": "Chromebook S11" },
+				{ "manufacturer": "acer", "name": "Spin 311 (ROA732LTN)" },
+				{ "manufacturer": "positivo", "name": "Chromebook N2422" },
+				{ "manufacturer": "multi", "name": "M11HC-PC925" }
+			]
+		},
+		{
+			"codename": "Guren",
+			"info": [
+				{ "manufacturer": "ctl", "name": "Chromebook PX121E" },
+				{ "manufacturer": "pegatron", "name": "CA31T" },
+				{ "manufacturer": "poin2", "name": "Chromebook 12P" },
+				{ "manufacturer": "lg", "name": "Chromebook 2" }
+			]
+		},
+		{
+			"codename": "Hideo",
+			"info": [
+				{ "manufacturer": "centerm", "name": "Chromebook M621" }
+			]
+		},
+		{
 			"codename": "Joxer",
 			"info": [
 				{ "manufacturer": "hp", "name": "Chromebook Plus x360" }
+			]
+		},
+		{
+			"codename": "Meliks",
+			"info": [
+				{ "manufacturer": "samsung", "name": "Galaxy Chromebook 3 360" }
 			]
 		},
 		{
@@ -1939,9 +2030,27 @@ var baseboards = [
 			]
 		},
 		{
+			"codename": "Pujjoga",
+			"info": [
+				{ "manufacturer": "lenovo", "name": "500e Gen 4s" }
+			]
+		},
+		{
+			"codename": "Pujjogatwin",
+			"info": [
+				{ "manufacturer": "lenovo", "name": "500e Gen 4s (TWN)" }
+			]
+		},
+		{
 			"codename": "Pujjoflex",
 			"info": [
 				{ "manufacturer": "lenovo", "name": "Flex 3i" }
+			]
+		},
+		{
+			"codename": "Pujjoniru",
+			"info": [
+				{ "manufacturer": "lenovo", "name": "Chromebook Plus 2-in-1 14ITN10" }
 			]
 		},
 		{
@@ -1963,9 +2072,69 @@ var baseboards = [
 			]
 		},
 		{
-			"codename": "Quandiso360",
+			"codename": "Quandiso2",
 			"info": [
-				{ "manufacturer": "ctl", "name": "NL73T" }
+				{ "manufacturer": "ctl", "name": "NL73 Gen 2" }
+			]
+		},
+		{
+			"codename": "Riven",
+			"info": [
+				{ "manufacturer": "acer", "name": "Spin 511 (R757T)" }
+			]
+		},
+		{
+			"codename": "Roric",
+			"info": [
+				{ "manufacturer": "acer", "name": "Plus 514 (CB514-6H)" }
+			]
+		},
+		{
+			"codename": "Rudriks",
+			"info": [
+				{ "manufacturer": "acer", "name": "Spin 512 (R857T)" }
+			]
+		},
+		{
+			"codename": "Ruke",
+			"info": [
+				{ "manufacturer": "acer", "name": "315 (CB315-6H)" }
+			]
+		},
+		{
+			"codename": "Rull",
+			"info": [
+				{ "manufacturer": "acer", "name": "Chromebook 514 (C737)" }
+			]
+		},
+		{
+			"codename": "Rynax",
+			"info": [
+				{ "manufacturer": "acer", "name": "Chromebook 511 (C737)" }
+			]
+		},
+		{
+			"codename": "Sundance",
+			"info": [
+				{ "manufacturer": "nec", "name": "Chromebook Y4" }
+			]
+		},
+		{
+			"codename": "Teliks",
+			"info": [
+				{ "manufacturer": "asus", "name": "Chromebook CR11/CR12 (CR1104CTA/CR1204CTA)" }
+			]
+		},
+		{
+			"codename": "Telith",
+			"info": [
+				{ "manufacturer": "asus", "name": "Chromebook CX15 (CR1505CTA)" }
+			]
+		},
+		{
+			"codename": "Teltic",
+			"info": [
+				{ "manufacturer": "asus", "name": "Chromebook CX4 (CR1405CTA)" }
 			]
 		},
 		{
@@ -1975,9 +2144,9 @@ var baseboards = [
 			]
 		},
 		{
-			"codename": "Uldren360",
+			"codename": "Uldrenite",
 			"info": [
-				{ "manufacturer": "dell", "name": "3120 2-in-1" }
+				{ "manufacturer": "dell", "name": "Chromebook 11 CC11260" }
 			]
 		},
 		{
