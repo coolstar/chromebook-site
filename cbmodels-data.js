@@ -789,6 +789,11 @@ var baseboards = [
 				{ "manufacturer": "asus", "name": "Chromebook Flip C433/C434" }
 			]
 		},{
+			"codename": "Soraka",
+			"info": [
+				{ "manufacturer": "hp", "name": "Chromebook x2" }
+			]
+		},{
 			"codename": "Sona",
 			"info": [
 				{ "manufacturer": "hp", "name": "Chromebook x360 14" }
@@ -1839,6 +1844,16 @@ var baseboards = [
 			"codename": "Tarlo",
 			"info": [
 				{ "manufacturer": "lenovo", "name": "Ideapad 5i 16\"" }
+			]
+		},
+		{
+			"codename": "Vell",
+			"info": [
+				{ "manufacturer": "hp", "name": "Dragonfly Pro" }
+			],
+			"warnings": [
+				"The webcam does not work currently",
+				"The speakers do not work (ignore audio driver, it doesn't work)"
 			]
 		},
 		{
