@@ -878,6 +878,7 @@
 				"uefifwscrew",
 				"uefifwcr50",
 				"uefifwcr50jumper",
+				"uefifwcr50suzyq",
 				"uefifwti50",
 				"fwupdatewin",
 				"installuefi-win10",
@@ -1008,6 +1009,7 @@
 				model["family"] == "cezanne")
 			{
 				document.getElementById("uefifwcr50jumper").style.display = "block";
+				document.getElementById("uefifwcr50suzyq").style.display = "block";
 				document.getElementById("installuefi-win11").style.display = "block";
 				document.getElementById("bypassWin11").style.display = "block";
 				document.getElementById("supportmatrix").style.background = "var(--win11-gradient)";
@@ -1018,6 +1020,7 @@
 				model["family"] == "alderlake-n")
 			{
 				document.getElementById("uefifwti50").style.display = "block";
+				document.getElementById("uefifwcr50suzyq").style.display = "block";
 				document.getElementById("installuefi-win11").style.display = "block";
 				document.getElementById("bypassWin11").style.display = "block";
 				document.getElementById("supportmatrix").style.background = "var(--win11-gradient)";
@@ -1553,6 +1556,48 @@
 									<li>Press Ctrl + Alt + F2 (2nd button to the right of esc) to enter a shell</li>
 									<li>Paste the following into the shell and press enter<br><pre>sudo gsctool -a -I AllowUnverifiedRo:always</pre></li>
 									<li>Paste the following into the shell and press enter<br><pre>sudo gsctool -a -w disable</pre></li>
+									<li>Paste the following into the shell and press enter<br><pre>cd; curl -LO mrchromebox.tech/firmware-util.sh && sudo bash firmware-util.sh</pre></li>
+									<li>Select "Full UEFI Firmware" from the options.</li>
+								</ol>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="uefifwcr50suzyq">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">developer_mode</i>Developer Mode &amp; Flash Firmware (Alternate Instructions)
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">
+								<ol class="guide">
+									<li>Purchase a SuzyQ board from <a href="https://shop.fyralabs.com/products/suzyq-board">Fyra Labs</a>.
+									<li>Press Esc + Refresh + Power</li>
+									<li>Press Ctrl + D and press Enter to enable developer mode</li>
+									<li>Press Ctrl + D to boot Chrome OS</li>
+									<li>Press Ctrl + Alt + F2 (2nd button to the right of esc) to enter a shell</li>
+									<li>Press the following into the shell and press enter<br><pre>sudo gsctool -a -o</pre></li>
+									<li>Follow the instructions (PP button = power button) to open CCD</li>
+									<li>Press Ctrl + D and press Enter to enable developer mode</li>
+									<li>Press Ctrl + D to boot Chrome OS</li>
+									<li>Paste the following into the shell and press enter<br><pre>sudo gsctool -a -I AllowUnverifiedRo:always</pre></li>
+									<li>Plug in your SuzyQ - the USB-C end normally connects to the upper/left USB-C port.
+									<li>Verify the cable is connected properly: Run ls /dev/ttyUSB* The output of this command should output 3 items, ttyUSB0, ttyUSB1, and ttyUSB2. If the 3 ttyUSB devices are not listed, try reversing the orientation of the USB-C cable, and try another port. If there is still no result, there may be a problem with your cable/adapter, or your ChromeOS device may not support connecting the cable in loopback mode as is done here. In that case, connect the USB-A end of the cable to another device and run the command from there.</li>
+									<li>Run the following commands. This will disable hardware write protect.
+										<pre>echo "wp false" > /dev/ttyUSB0</pre>
+										<pre>echo "wp false atboot" > /dev/ttyUSB0</pre>
+									</li>
+									<li>Run the following commands. This ensures that you will be able to unbrick the device (if needed) using a SuzyQable. It also disables AP RO Firmware Verification, and is mantory if flashing the firmware on a device with a Gen2 CR50 chip (aka Ti50).
+										<pre>echo "ccd reset factory" > /dev/ttyUSB0</pre>
+									</li>
+									<li>Paste the following into the shell and press enter on the chromebook:<br><pre>gsctool -a -I</pre>Verify the CCD is opened, and that the factory values are set. The current value for all CCD flags should be set to Y/Always.
+									</li>
+									<li>Reboot Chrome OS back into developer mode</li>
 									<li>Paste the following into the shell and press enter<br><pre>cd; curl -LO mrchromebox.tech/firmware-util.sh && sudo bash firmware-util.sh</pre></li>
 									<li>Select "Full UEFI Firmware" from the options.</li>
 								</ol>
