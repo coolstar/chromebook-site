@@ -169,6 +169,13 @@ var chipsets = {
 			"AMD Ryzen 3 7320C",
 			"AMD Ryzen 5 7520C"
 		]
+	},
+	"meteorlake": {
+		"supported": false,
+		"cpus": [
+			"Intel Core Ultra 5 1x5U",
+			"Intel Core Ultra 7 1x5U"
+		]
 	}
 };
 
@@ -763,8 +770,8 @@ var baseboards = [
 			"info": [
 				{ "manufacturer": "samsung", "name": "Chromebook Plus V2" }
 			],
-			"warnings": [
-				"The webcam on the keyboard does not work."
+			"devices": [
+				"mipicamera"
 			]
 		},{
 			"codename": "Nocturne",
@@ -792,6 +799,12 @@ var baseboards = [
 			"codename": "Soraka",
 			"info": [
 				{ "manufacturer": "hp", "name": "Chromebook x2" }
+			],
+			"devices": [
+				"mipicamera"
+			],
+			"warnings": [
+				"The camera is untested. Let us know if it works!"
 			]
 		},{
 			"codename": "Sona",
@@ -1425,6 +1438,9 @@ var baseboards = [
 			"codename": "Bugzzy",
 			"info": [
 				{ "manufacturer": "samsung", "name": "Galaxy Chromebook 2 360" }
+			],
+			"devices": [
+				"mipicamera"
 			]
 		},
 		{
@@ -1437,6 +1453,9 @@ var baseboards = [
 			"codename": "Drawcia",
 			"info": [
 				{ "manufacturer": "hp", "name": "Chromebook x360 11 G4 EE" }
+			],
+			"devices": [
+				"mipicamera"
 			]
 		},
 		{
@@ -1510,6 +1529,9 @@ var baseboards = [
 			"codename": "Magister",
 			"info": [
 				{ "manufacturer": "acer", "name": "Spin 314" }
+			],
+			"devices": [
+				"mipicamera"
 			]
 		},
 		{
@@ -1544,6 +1566,9 @@ var baseboards = [
 			"codename": "Magolor",
 			"info": [
 				{ "manufacturer": "acer", "name": "Spin 511" }
+			],
+			"devices": [
+				"mipicamera"
 			]
 		},
 		{
@@ -1589,6 +1614,9 @@ var baseboards = [
 			"codename": "Storo",
 			"info": [
 				{ "manufacturer": "asus", "name": "(Flip) CR1100" }
+			],
+			"devices": [
+				"mipicamera"
 			]
 		}
 	],
@@ -1690,6 +1718,16 @@ var baseboards = [
 			]
 		},
 		{
+			"codename": "Voema",
+			"info": [
+				{ "manufacturer": "acer", "name": "Spin 514" }
+			],
+			"devices": [
+				"elanTrackpad",
+				"mipicamera"
+			]
+		},
+		{
 			"codename": "Volet",
 			"info": [
 				{ "manufacturer": "acer", "name": "CB515" }
@@ -1779,8 +1817,8 @@ var baseboards = [
 			"info": [
 				{ "manufacturer": "asus", "name": "Spin 714" }
 			],
-			"warnings": [
-				"The webcam does not work currently"
+			"devices": [
+				"mipicamera"
 			]
 		},
 		{
@@ -1824,8 +1862,8 @@ var baseboards = [
 			"info": [
 				{ "manufacturer": "hp", "name": "Elite Dragonfly" }
 			],
-			"warnings": [
-				"The webcam does not work currently"
+			"devices": [
+				"mipicamera"
 			]
 		},
 		{
@@ -1851,8 +1889,10 @@ var baseboards = [
 			"info": [
 				{ "manufacturer": "hp", "name": "Dragonfly Pro" }
 			],
+			"devices": [
+				"mipicamera"
+			],
 			"warnings": [
-				"The webcam does not work currently",
 				"The speakers do not work (ignore audio driver, it doesn't work)"
 			]
 		},
@@ -1879,7 +1919,6 @@ var baseboards = [
 		"cr50",
 		"cmljsltgladlchip",
 		"tglgpu",
-		"adlwifi",
 		"chromeec",
 		"croskeyboard",
 		"elanTrackpad",
@@ -2211,13 +2250,13 @@ var baseboards = [
 		"cr50",
 		"cmljsltgladlchip",
 		"tglgpu",
-		"adlwifi",
 		"chromeec",
 		"croskeyboard",
 		"elanTrackpad",
 		"elanTouchScreen",
 		"inteltbt4",
-		"intelSofAudio"
+		"intelSofAudio",
+		"mipicamera"
 	],
 	"warnings": [
 		"A discount is available for the USB4 driver. Make sure to get it!"
@@ -2282,5 +2321,44 @@ var baseboards = [
 		"elanTrackpad",
 		"synapticsTrackpad",
 		"amdSofAudio"
+	]
+},{
+	"supported": false,
+	"family": "meteorlake",
+	"name": "Meteorlake Reference",
+	"codename": "Rex",
+	"variants": [
+		{
+			"codename": "Kanix",
+			"info": [
+				{ "manufacturer": "acer", "name": "Plus 714" }
+			]
+		},
+		{
+			"codename": "Karis",
+			"info": [
+				{ "manufacturer": "acer", "name": "Plus Spin 714" }
+			]
+		},
+		{
+			"codename": "Screebo",
+			"info": [
+				{ "manufacturer": "asus", "name": "ExpertBook CX54" }
+			]
+		}
+	],
+	"devices": [
+		"cr50",
+		"cmljsltgladlchip",
+		"tglgpu",
+		"chromeec",
+		"croskeyboard",
+		"elanTrackpad",
+		"elanTouchScreen",
+		"inteltbt4",
+		"mipicamera"
+	],
+	"warnings": [
+		"Audio is not currently supported."
 	]
 }];
