@@ -922,6 +922,7 @@
 				"avsAudio",
 				"intelSofAudio",
 				"amdSofAudio",
+				"mipicamera",
 				"brcmsdcard",
 				"tinySolderedStorage",
 				"utcTime"
@@ -1016,7 +1017,8 @@
 			}
 
 			if (model["family"] == "mendocino" ||
-				model["family"] == "alderlake-n")
+				model["family"] == "alderlake-n" ||
+				model["family"] == "meteorlake")
 			{
 				document.getElementById("uefifwti50").style.display = "block";
 				document.getElementById("uefifwcr50suzyq").style.display = "block";
@@ -2085,7 +2087,7 @@
 					<div class="dropdown-children">
 						<div class="child-panel">
 							<div class="panel-content">
-								Download: <a href="https://www.intel.com/content/www/us/en/download/726609/intel-arc-iris-xe-graphics-whql-windows.html">Link</a>
+								Download: <a href="https://www.intel.com/content/www/us/en/download/864990/intel-11th-14th-gen-processor-graphics-windows.html">Link</a>
 								</div>
 						</div>
 					</div>
@@ -2456,6 +2458,26 @@
 						<div class="child-panel">
 							<div class="panel-content">
 								Driver is available for purchase <a href="https://coolstar.org/chromebook/driverlicense/">here</a>.<br><br>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="mipicamera">
+					<div class="main-panel button-panel" tabindex="0">
+						<div class="panel-content">
+							<i class="material-icons">photo_camera</i>Intel MIPI Camera
+						</div>
+						<div class="panel-accessory">
+							<img src="icons/arrow-left.svg" class="main-panel-arrow glyph"/>
+						</div>
+					</div>
+					<div class="dropdown-children">
+						<div class="child-panel">
+							<div class="panel-content">Download: <a href="https://github.com/vibecoder2001/IntelMipiCameraInstall/releases/download/v1.0.1/IntelMipiCamera.1.0.1-installer.exe">Link</a>
+								<br>
+								Simply run the installer to detect and install camera drivers.<br><br>
+
+								<b>Note: Only install this if webcams don't work. A lot of SKUs don't need this.</b>
 							</div>
 						</div>
 					</div>
