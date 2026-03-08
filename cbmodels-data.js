@@ -171,7 +171,7 @@ var chipsets = {
 		]
 	},
 	"meteorlake": {
-		"supported": false,
+		"supported": true,
 		"cpus": [
 			"Intel Core Ultra 5 1x5U",
 			"Intel Core Ultra 7 1x5U"
@@ -2323,7 +2323,7 @@ var baseboards = [
 		"amdSofAudio"
 	]
 },{
-	"supported": false,
+	"supported": true,
 	"family": "meteorlake",
 	"name": "Meteorlake Reference",
 	"codename": "Rex",
