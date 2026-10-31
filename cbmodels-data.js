@@ -2356,9 +2356,7 @@ var baseboards = [
 		"elanTrackpad",
 		"elanTouchScreen",
 		"inteltbt4",
+		"intelMTLSofAudio",
 		"mipicamera"
-	],
-	"warnings": [
-		"Audio is not currently supported."
 	]
 }];
