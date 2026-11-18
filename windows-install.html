@@ -149,6 +149,7 @@
 		.modalitem {
 			position: relative;
 			float: left;
+			flex-shrink: 0;
 			top: 10px;
 			transition: opacity 0.25s;
 			-webkit-transition: opacity 0.25s; /* Safari */
@@ -158,6 +159,9 @@
 		.modalslider {
 			position: relative;
 			width: 500%;
+			/* Flex (not floats) so collapsed, zero-height pages keep their slot */
+			display: flex;
+			align-items: flex-start;
 			transition: left 0.5s;
 			-webkit-transition: left 0.5s; /* Safari */
 			-moz-transition: left 0.5s; /* Firefox */
@@ -487,24 +491,25 @@
 			var foundPage = false;
 			var pageIdx = 0;
 			for (var idx = 0;idx < pageslist.length;idx++){
-				var pageItemName = pageslist[idx];
-				var page = document.getElementById(pageItemName);
+				let pageItemName = pageslist[idx];
+				let page = document.getElementById(pageItemName);
 				if (pageItemName == pageName){
 					foundPage = true;
 					pageIdx = idx;
 					page.style.opacity = "";
 					page.style.visibility = "";
-				} else if (foundPage){
-					page.style.opacity="0";
-					setTimeout(function(){
-						if (page.style.opacity == "0")
-							page.style.visibility = "hidden";
-					}, 250);
+					page.style.height = "";
+					page.style.overflow = "";
 				} else {
 					page.style.opacity="0";
+					// Once faded out, collapse the page so its content no longer
+					// contributes to the slider's height (and the panel's scrollbar).
 					setTimeout(function(){
-						if (page.style.opacity == "0")
+						if (page.style.opacity == "0"){
 							page.style.visibility = "hidden";
+							page.style.height = "0px";
+							page.style.overflow = "hidden";
+						}
 					}, 250);
 				}
 			}
@@ -1090,6 +1095,8 @@
 
 			document.getElementById("guide").style.visibility = "";
 			document.getElementById("guide").style.opacity = "";
+			document.getElementById("guide").style.height = "";
+			document.getElementById("guide").style.overflow = "";
 			document.getElementById("guideplaceholder").style.display = "none";
 			document.getElementById("guideplaceholder").style.opacity = "0";
 			togglePanelCollapsed(false, true);
@@ -1334,9 +1341,9 @@
 								</div>
 							</div>
 						</div>
-						<div class="modalitem" id="cpu" style="opacity: 0;visibility: hidden;">
+						<div class="modalitem" id="cpu" style="opacity: 0;visibility: hidden;height: 0px;overflow: hidden;">
 						</div>
-						<div class="modalitem" id="model" style="opacity: 0;visibility: hidden;">
+						<div class="modalitem" id="model" style="opacity: 0;visibility: hidden;height: 0px;overflow: hidden;">
 						</div>
 					</div>
 				</div>
@@ -1355,7 +1362,7 @@
 			<div id="guideplaceholder" style="text-align: center;">
 				<h4>Select a model on the left to view the installation guide.</h4>
 			</div>
-			<div id="guide" style="opacity: 0;visibility: hidden;">
+			<div id="guide" style="opacity: 0;visibility: hidden;height: 0px;overflow: hidden;">
 				<div id="modelName" style="text-align: center;"></div>
 				<div id="warnings"></div>
 				<div>
